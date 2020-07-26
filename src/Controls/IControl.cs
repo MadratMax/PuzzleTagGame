@@ -21,6 +21,8 @@ namespace PuzzleTag.Controls
 
         Size Size { get; set; }
 
+        Image Image { get; }
+
         string GetName();
 
         void SetName(string name);

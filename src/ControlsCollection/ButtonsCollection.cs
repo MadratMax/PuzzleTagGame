@@ -43,7 +43,7 @@ namespace PuzzleTag.Collection
 
         public void InitializeByButtonNameAttribute(string nameAttribute)
         {
-            int id = 0;
+            int id = 1;
 
             foreach (var button in controlMap.GetButtons())
             {

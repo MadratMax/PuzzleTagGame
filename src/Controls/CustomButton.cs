@@ -35,6 +35,8 @@ namespace PuzzleTag.Controls
 
         public Size Size { get => button.Size; set => button.Size = value; }
 
+        public Image Image => buttonImage;
+
         public string GetName()
         {
             return button.Name;
@@ -59,14 +61,12 @@ namespace PuzzleTag.Controls
         {
             button.Image = buttonImage;
             closed = false;
-            button.Text = string.Empty;
         }
 
         public void ShowClosedCardImage()
         {
             button.Image = closedCardImage;
             closed = true;
-            button.Text = string.Empty;
         }
 
         public void SetImage(Image image)

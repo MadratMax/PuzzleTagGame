@@ -9,5 +9,7 @@ namespace PuzzleTag.Configuration
         public static string WinnerImagePath = SettingsManager.GetSettingsValue("settings", "winner-image");
 
         public static string ClosedCardImagePath = SettingsManager.GetSettingsValue("settings", "closed-card-image");
+
+        public static string Delay = SettingsManager.GetSettingsValue("settings", "open-card-delay");
     }
 }

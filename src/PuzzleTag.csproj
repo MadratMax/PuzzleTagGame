@@ -101,10 +101,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collection\ButtonsCollection.cs" />
-    <Compile Include="Collection\CustomButtonsManager.cs" />
-    <Compile Include="Collection\ImageModel.cs" />
-    <Compile Include="Collection\ImageCollection.cs" />
+    <Compile Include="ControlsCollection\ButtonsCollection.cs" />
+    <Compile Include="ControlsCollection\CustomButtonsManager.cs" />
     <Compile Include="Configuration\GameState.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
@@ -114,14 +112,15 @@
     <Compile Include="Controls\IControl.cs" />
     <Compile Include="FileManager\FileManager.cs" />
     <Compile Include="FileManager\ImageLibraryManager.cs" />
-    <Compile Include="FileManager\Library\CustomImage.cs" />
-    <Compile Include="FileManager\Library\ImageLibrary.cs" />
+    <Compile Include="ImageCollection\Library\CustomImage.cs" />
+    <Compile Include="ImageCollection\Library\ImageLibrary.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Game\Ruler.cs" />
     <Compile Include="Generators\ButtonGenerator.cs" />
     <Compile Include="Notification\TimedPopUp.cs">
       <SubType>Form</SubType>

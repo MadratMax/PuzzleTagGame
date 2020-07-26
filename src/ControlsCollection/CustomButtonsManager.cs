@@ -66,7 +66,7 @@ namespace PuzzleTag.Collection
             {
                 foreach (var button in buttons)
                 {
-                    var customImage = collection[button.Value.Id];
+                    var customImage = collection[button.Value.Id - 1];
                     button.Value.SetImage(customImage.Image);
                 }
             }
@@ -85,13 +85,17 @@ namespace PuzzleTag.Collection
         public void HideButtonImages()
         {
             var buttons = buttonsCollection.GetAllButtons();
-            var closedImage = libManager.GetClosedCardImage();
 
             foreach (var button in buttons)
             {
                 button.Value.HideImage();
                 button.Value.ShowClosedCardImage();
             }
+        }
+
+        public void RemoveButton(CustomButton button)
+        {
+            button.Visible = false;
         }
     }
 }

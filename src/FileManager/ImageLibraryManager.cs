@@ -22,6 +22,7 @@ namespace PuzzleTag.FileManager
 
         public ImageLibraryManager()
         {
+            this.imageCollection = new List<CustomImage>();
             this.libraryPath = Settings.LibraryPath;
             this.winnerImagePath = Settings.WinnerImagePath;
             this.closedCardImagePath = Settings.ClosedCardImagePath;
@@ -84,7 +85,13 @@ namespace PuzzleTag.FileManager
             SetClosedCardImage();
             InitializeCategories();
 
-            this.imageCollection = imageLib.GetCollection();
+            var collection = imageLib.GetCollection();
+
+            for (int i = 0; i < 16; i++)
+            {
+                this.imageCollection.Add(collection[i]);
+                this.imageCollection.Add(collection[i]);
+            }
         }
 
         private void InitializeCategories()

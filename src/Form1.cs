@@ -5,6 +5,7 @@ using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
 using PuzzleTag.FileManager;
+using PuzzleTag.Game;
 
 namespace PuzzleTag
 {
@@ -16,10 +17,19 @@ namespace PuzzleTag
         private ButtonsCollection customButtonsCollection;
         private CustomButtonsManager buttonManager;
         private ImageLibraryManager libManager;
+        private Ruler ruler;
 
         public PuzzleTag()
         {
             InitializeComponent();
+        }
+
+        private void InitGameRules()
+        {
+            this.ruler = new Ruler(buttonManager, customButtonsCollection, libManager);
+            
+            // TODO remove
+            ruler.StartGame();
         }
 
         private void InitializeLibrary()
@@ -39,9 +49,36 @@ namespace PuzzleTag
 
         private void PuzzleTag_Load(object sender, EventArgs e)
         {
+            SetupClickEvents(this);
             InitializeControls(this);
             SetupConfiguration();
+            InitGameRules();
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
+        }
+
+        private void SetupClickEvents(Control container)
+        {
+            foreach (Control control in container.Controls)
+            {
+                control.Click += HandleClicks;
+            }
+        }
+        private void HandleClicks(object sender, EventArgs e)
+        {
+            Control control = (Control)sender;
+
+            if (control.Name.Contains("CustomButton"))
+            {
+                ruler.OpenCard(control.Name);
+                if (ruler.RoundWin)
+                {
+                    InfoLabel.Text = "Win!";
+                }
+                else
+                {
+                    InfoLabel.Text = "";
+                }
+            }
         }
 
         private void SetupConfiguration()
@@ -85,6 +122,7 @@ namespace PuzzleTag
                 InitializeLibrary();
                 buttonManager.AssignImages(GameState.Category);
                 buttonManager.SetClosedCardImages();
+                buttonManager.HideButtonImages();
             }).Start();
         }
 
@@ -101,25 +139,6 @@ namespace PuzzleTag
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             GameState.Category = CategoryComboBox.Text;
-        }
-
-        private void CustomButton7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CustomButton1_Click(object sender, EventArgs e)
-        {
-            var button = customButtonsCollection.GetCustomButtonByName("CustomButton1");
-
-            if (button.Closed)
-            {
-                button.ShowImage();
-            }
-            else
-            {
-                button.ShowClosedCardImage();
-            }
         }
     }
 }
