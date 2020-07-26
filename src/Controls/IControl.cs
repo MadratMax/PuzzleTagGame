@@ -15,6 +15,10 @@ namespace PuzzleTag.Controls
 
         string Text { get; set; }
 
+        bool Closed { get; set; }
+
+        int Id { get; set; }
+
         Size Size { get; set; }
 
         string GetName();
@@ -28,5 +32,7 @@ namespace PuzzleTag.Controls
         void ShowImage();
 
         void SetImage(Image image);
+
+        void SetClosedCardImage(Image image);
     }
 }
