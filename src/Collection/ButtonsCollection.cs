@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Forms;
 using PuzzleTag.Controls;
+using PuzzleTag.FileManager;
 using PuzzleTag.RandomGenerator;
 
 namespace PuzzleTag.Collection
@@ -42,11 +43,13 @@ namespace PuzzleTag.Collection
 
         public void InitializeByButtonNameAttribute(string nameAttribute)
         {
+            int id = 0;
+
             foreach (var button in controlMap.GetButtons())
             {
                 if (button.Name.ToLower().Contains(nameAttribute.ToLower()))
                 {
-                    AddButton(button);
+                    AddButton(id++, button);
                 }
             }
         }
@@ -54,21 +57,18 @@ namespace PuzzleTag.Collection
         public void Shuffle()
         {
             var range = NumberGenerator.GetRandomRange(1, collection.Count);
-            int i;
 
             foreach (var button in collection)
             {
-                button.Value.Text = NumberGenerator.GetRandomFromRange().ToString();
+                button.Value.Id = NumberGenerator.GetRandomFromRange();
             }
         }
 
-        private void AddButton(Button button)
+        private void AddButton(int id, Button button)
         {
             var newCustomButton = new CustomButton(button);
-            int index;
-            var isInt = int.TryParse(button.Text, out index);
-            
-            if(isInt) collection.Add(index, newCustomButton);
+            newCustomButton.Id = id;
+            collection.Add(id, newCustomButton);
         }
     }
 }

@@ -64,6 +64,10 @@
             this.CustomButton25 = new System.Windows.Forms.Button();
             this.QuitButton = new System.Windows.Forms.Button();
             this.SetImageButton = new System.Windows.Forms.Button();
+            this.ShowImageButton = new System.Windows.Forms.Button();
+            this.HideImagesButton = new System.Windows.Forms.Button();
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // CustomButton1
@@ -75,6 +79,7 @@
             this.CustomButton1.TabIndex = 0;
             this.CustomButton1.Text = "1";
             this.CustomButton1.UseVisualStyleBackColor = false;
+            this.CustomButton1.Click += new System.EventHandler(this.CustomButton1_Click);
             // 
             // CustomButton2
             // 
@@ -255,6 +260,7 @@
             this.CustomButton7.TabIndex = 19;
             this.CustomButton7.Text = "7";
             this.CustomButton7.UseVisualStyleBackColor = false;
+            this.CustomButton7.Click += new System.EventHandler(this.CustomButton7_Click);
             // 
             // CustomButton23
             // 
@@ -416,6 +422,43 @@
             this.SetImageButton.UseVisualStyleBackColor = true;
             this.SetImageButton.Click += new System.EventHandler(this.SetImageButton_Click);
             // 
+            // ShowImageButton
+            // 
+            this.ShowImageButton.Location = new System.Drawing.Point(1896, 147);
+            this.ShowImageButton.Name = "ShowImageButton";
+            this.ShowImageButton.Size = new System.Drawing.Size(34, 23);
+            this.ShowImageButton.TabIndex = 37;
+            this.ShowImageButton.Text = "ShowImage";
+            this.ShowImageButton.UseVisualStyleBackColor = true;
+            this.ShowImageButton.Click += new System.EventHandler(this.ShowImageButton_Click);
+            // 
+            // HideImagesButton
+            // 
+            this.HideImagesButton.Location = new System.Drawing.Point(1896, 185);
+            this.HideImagesButton.Name = "HideImagesButton";
+            this.HideImagesButton.Size = new System.Drawing.Size(34, 23);
+            this.HideImagesButton.TabIndex = 38;
+            this.HideImagesButton.Text = "HideImage";
+            this.HideImagesButton.UseVisualStyleBackColor = true;
+            this.HideImagesButton.Click += new System.EventHandler(this.HideImagesButton_Click);
+            // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.Location = new System.Drawing.Point(13, 0);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(0, 17);
+            this.InfoLabel.TabIndex = 39;
+            // 
+            // CategoryComboBox
+            // 
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(1683, 0);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(172, 24);
+            this.CategoryComboBox.TabIndex = 40;
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
+            // 
             // PuzzleTag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -423,6 +466,10 @@
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.ControlBox = false;
+            this.Controls.Add(this.CategoryComboBox);
+            this.Controls.Add(this.InfoLabel);
+            this.Controls.Add(this.HideImagesButton);
+            this.Controls.Add(this.ShowImageButton);
             this.Controls.Add(this.SetImageButton);
             this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.CustomButton32);
@@ -465,6 +512,7 @@
             this.Load += new System.EventHandler(this.PuzzleTag_Load);
             this.ResizeEnd += new System.EventHandler(this.PuzzleTag_ResizeEnd);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -505,6 +553,10 @@
         private System.Windows.Forms.Button CustomButton25;
         private System.Windows.Forms.Button QuitButton;
         private System.Windows.Forms.Button SetImageButton;
+        private System.Windows.Forms.Button ShowImageButton;
+        private System.Windows.Forms.Button HideImagesButton;
+        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
     }
 }
 

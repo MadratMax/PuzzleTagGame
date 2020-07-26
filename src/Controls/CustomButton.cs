@@ -7,6 +7,8 @@ namespace PuzzleTag.Controls
     {
         private Button button;
         private Image buttonImage;
+        private Image closedCardImage;
+        private bool closed;
 
         public CustomButton(Button button)
         {
@@ -17,6 +19,8 @@ namespace PuzzleTag.Controls
 
         public bool Visible { get => button.Visible; set => button.Visible = value; }
 
+        public bool Closed { get => closed; set => closed = value; }
+
         public string Text
         {
             get => button.Text;
@@ -26,6 +30,8 @@ namespace PuzzleTag.Controls
                 this.HideImage();
             }
         }
+
+        public int Id { get; set; }
 
         public Size Size { get => button.Size; set => button.Size = value; }
 
@@ -52,12 +58,25 @@ namespace PuzzleTag.Controls
         public void ShowImage()
         {
             button.Image = buttonImage;
+            closed = false;
+            button.Text = string.Empty;
+        }
+
+        public void ShowClosedCardImage()
+        {
+            button.Image = closedCardImage;
+            closed = true;
             button.Text = string.Empty;
         }
 
         public void SetImage(Image image)
         {
             buttonImage = image;
+        }
+
+        public void SetClosedCardImage(Image image)
+        {
+            closedCardImage = image;
         }
     }
 }
