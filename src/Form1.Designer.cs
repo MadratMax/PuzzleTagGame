@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PuzzleTag));
             this.CustomButton1 = new System.Windows.Forms.Button();
             this.CustomButton2 = new System.Windows.Forms.Button();
             this.CustomButton3 = new System.Windows.Forms.Button();
@@ -39,7 +38,6 @@
             this.CustomButton11 = new System.Windows.Forms.Button();
             this.CustomButton12 = new System.Windows.Forms.Button();
             this.CustomButton9 = new System.Windows.Forms.Button();
-            this.reloadButton = new System.Windows.Forms.Button();
             this.CustomButton15 = new System.Windows.Forms.Button();
             this.CustomButton18 = new System.Windows.Forms.Button();
             this.CustomButton17 = new System.Windows.Forms.Button();
@@ -62,17 +60,13 @@
             this.CustomButton27 = new System.Windows.Forms.Button();
             this.CustomButton26 = new System.Windows.Forms.Button();
             this.CustomButton25 = new System.Windows.Forms.Button();
-            this.QuitButton = new System.Windows.Forms.Button();
-            this.SetImageButton = new System.Windows.Forms.Button();
-            this.ShowImageButton = new System.Windows.Forms.Button();
-            this.HideImagesButton = new System.Windows.Forms.Button();
             this.InfoLabel = new System.Windows.Forms.Label();
-            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // CustomButton1
             // 
-            this.CustomButton1.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton1.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton1.Location = new System.Drawing.Point(8, 23);
             this.CustomButton1.Name = "CustomButton1";
             this.CustomButton1.Size = new System.Drawing.Size(230, 230);
@@ -81,7 +75,7 @@
             // 
             // CustomButton2
             // 
-            this.CustomButton2.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton2.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton2.Location = new System.Drawing.Point(244, 23);
             this.CustomButton2.Name = "CustomButton2";
             this.CustomButton2.Size = new System.Drawing.Size(230, 230);
@@ -90,7 +84,7 @@
             // 
             // CustomButton3
             // 
-            this.CustomButton3.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton3.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton3.Location = new System.Drawing.Point(480, 23);
             this.CustomButton3.Name = "CustomButton3";
             this.CustomButton3.Size = new System.Drawing.Size(230, 230);
@@ -99,7 +93,7 @@
             // 
             // CustomButton4
             // 
-            this.CustomButton4.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton4.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton4.Location = new System.Drawing.Point(716, 23);
             this.CustomButton4.Name = "CustomButton4";
             this.CustomButton4.Size = new System.Drawing.Size(230, 230);
@@ -108,7 +102,7 @@
             // 
             // CustomButton5
             // 
-            this.CustomButton5.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton5.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton5.Location = new System.Drawing.Point(952, 23);
             this.CustomButton5.Name = "CustomButton5";
             this.CustomButton5.Size = new System.Drawing.Size(230, 230);
@@ -117,7 +111,7 @@
             // 
             // CustomButton6
             // 
-            this.CustomButton6.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton6.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton6.Location = new System.Drawing.Point(1188, 23);
             this.CustomButton6.Name = "CustomButton6";
             this.CustomButton6.Size = new System.Drawing.Size(230, 230);
@@ -126,7 +120,7 @@
             // 
             // CustomButton10
             // 
-            this.CustomButton10.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton10.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton10.Location = new System.Drawing.Point(244, 259);
             this.CustomButton10.Name = "CustomButton10";
             this.CustomButton10.Size = new System.Drawing.Size(230, 230);
@@ -135,7 +129,7 @@
             // 
             // CustomButton11
             // 
-            this.CustomButton11.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton11.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton11.Location = new System.Drawing.Point(480, 259);
             this.CustomButton11.Name = "CustomButton11";
             this.CustomButton11.Size = new System.Drawing.Size(230, 230);
@@ -144,7 +138,7 @@
             // 
             // CustomButton12
             // 
-            this.CustomButton12.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton12.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton12.Location = new System.Drawing.Point(716, 259);
             this.CustomButton12.Name = "CustomButton12";
             this.CustomButton12.Size = new System.Drawing.Size(230, 230);
@@ -153,26 +147,16 @@
             // 
             // CustomButton9
             // 
-            this.CustomButton9.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton9.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton9.Location = new System.Drawing.Point(8, 259);
             this.CustomButton9.Name = "CustomButton9";
             this.CustomButton9.Size = new System.Drawing.Size(230, 230);
             this.CustomButton9.TabIndex = 11;
             this.CustomButton9.UseVisualStyleBackColor = false;
             // 
-            // reloadButton
-            // 
-            this.reloadButton.Image = ((System.Drawing.Image)(resources.GetObject("reloadButton.Image")));
-            this.reloadButton.Location = new System.Drawing.Point(1904, 23);
-            this.reloadButton.Name = "reloadButton";
-            this.reloadButton.Size = new System.Drawing.Size(26, 23);
-            this.reloadButton.TabIndex = 12;
-            this.reloadButton.UseVisualStyleBackColor = true;
-            this.reloadButton.Click += new System.EventHandler(this.reloadButton_Click);
-            // 
             // CustomButton15
             // 
-            this.CustomButton15.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton15.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton15.Location = new System.Drawing.Point(1424, 259);
             this.CustomButton15.Name = "CustomButton15";
             this.CustomButton15.Size = new System.Drawing.Size(230, 230);
@@ -181,7 +165,7 @@
             // 
             // CustomButton18
             // 
-            this.CustomButton18.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton18.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton18.Location = new System.Drawing.Point(244, 495);
             this.CustomButton18.Name = "CustomButton18";
             this.CustomButton18.Size = new System.Drawing.Size(230, 230);
@@ -190,7 +174,7 @@
             // 
             // CustomButton17
             // 
-            this.CustomButton17.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton17.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton17.Location = new System.Drawing.Point(8, 495);
             this.CustomButton17.Name = "CustomButton17";
             this.CustomButton17.Size = new System.Drawing.Size(230, 230);
@@ -199,7 +183,7 @@
             // 
             // CustomButton16
             // 
-            this.CustomButton16.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton16.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton16.Location = new System.Drawing.Point(1660, 259);
             this.CustomButton16.Name = "CustomButton16";
             this.CustomButton16.Size = new System.Drawing.Size(230, 230);
@@ -208,7 +192,7 @@
             // 
             // CustomButton14
             // 
-            this.CustomButton14.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton14.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton14.Location = new System.Drawing.Point(1188, 259);
             this.CustomButton14.Name = "CustomButton14";
             this.CustomButton14.Size = new System.Drawing.Size(230, 230);
@@ -217,7 +201,7 @@
             // 
             // CustomButton13
             // 
-            this.CustomButton13.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton13.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton13.Location = new System.Drawing.Point(952, 259);
             this.CustomButton13.Name = "CustomButton13";
             this.CustomButton13.Size = new System.Drawing.Size(230, 230);
@@ -226,7 +210,7 @@
             // 
             // CustomButton8
             // 
-            this.CustomButton8.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton8.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton8.Location = new System.Drawing.Point(1660, 23);
             this.CustomButton8.Name = "CustomButton8";
             this.CustomButton8.Size = new System.Drawing.Size(230, 230);
@@ -235,7 +219,7 @@
             // 
             // CustomButton7
             // 
-            this.CustomButton7.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton7.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton7.Location = new System.Drawing.Point(1424, 23);
             this.CustomButton7.Name = "CustomButton7";
             this.CustomButton7.Size = new System.Drawing.Size(230, 230);
@@ -244,7 +228,7 @@
             // 
             // CustomButton23
             // 
-            this.CustomButton23.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton23.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton23.Location = new System.Drawing.Point(1424, 495);
             this.CustomButton23.Name = "CustomButton23";
             this.CustomButton23.Size = new System.Drawing.Size(230, 230);
@@ -253,7 +237,7 @@
             // 
             // CustomButton22
             // 
-            this.CustomButton22.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton22.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton22.Location = new System.Drawing.Point(1188, 495);
             this.CustomButton22.Name = "CustomButton22";
             this.CustomButton22.Size = new System.Drawing.Size(230, 230);
@@ -262,7 +246,7 @@
             // 
             // CustomButton21
             // 
-            this.CustomButton21.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton21.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton21.Location = new System.Drawing.Point(952, 495);
             this.CustomButton21.Name = "CustomButton21";
             this.CustomButton21.Size = new System.Drawing.Size(230, 230);
@@ -271,7 +255,7 @@
             // 
             // CustomButton20
             // 
-            this.CustomButton20.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton20.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton20.Location = new System.Drawing.Point(716, 495);
             this.CustomButton20.Name = "CustomButton20";
             this.CustomButton20.Size = new System.Drawing.Size(230, 230);
@@ -280,7 +264,7 @@
             // 
             // CustomButton19
             // 
-            this.CustomButton19.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton19.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton19.Location = new System.Drawing.Point(480, 495);
             this.CustomButton19.Name = "CustomButton19";
             this.CustomButton19.Size = new System.Drawing.Size(230, 230);
@@ -289,7 +273,7 @@
             // 
             // CustomButton24
             // 
-            this.CustomButton24.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton24.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton24.Location = new System.Drawing.Point(1660, 495);
             this.CustomButton24.Name = "CustomButton24";
             this.CustomButton24.Size = new System.Drawing.Size(230, 230);
@@ -298,7 +282,7 @@
             // 
             // CustomButton32
             // 
-            this.CustomButton32.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton32.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton32.Location = new System.Drawing.Point(1660, 731);
             this.CustomButton32.Name = "CustomButton32";
             this.CustomButton32.Size = new System.Drawing.Size(230, 230);
@@ -307,7 +291,7 @@
             // 
             // CustomButton31
             // 
-            this.CustomButton31.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton31.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton31.Location = new System.Drawing.Point(1424, 731);
             this.CustomButton31.Name = "CustomButton31";
             this.CustomButton31.Size = new System.Drawing.Size(230, 230);
@@ -316,7 +300,7 @@
             // 
             // CustomButton30
             // 
-            this.CustomButton30.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton30.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton30.Location = new System.Drawing.Point(1188, 731);
             this.CustomButton30.Name = "CustomButton30";
             this.CustomButton30.Size = new System.Drawing.Size(230, 230);
@@ -325,7 +309,7 @@
             // 
             // CustomButton29
             // 
-            this.CustomButton29.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton29.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton29.Location = new System.Drawing.Point(952, 731);
             this.CustomButton29.Name = "CustomButton29";
             this.CustomButton29.Size = new System.Drawing.Size(230, 230);
@@ -334,7 +318,7 @@
             // 
             // CustomButton28
             // 
-            this.CustomButton28.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton28.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton28.Location = new System.Drawing.Point(716, 731);
             this.CustomButton28.Name = "CustomButton28";
             this.CustomButton28.Size = new System.Drawing.Size(230, 230);
@@ -343,7 +327,7 @@
             // 
             // CustomButton27
             // 
-            this.CustomButton27.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton27.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton27.Location = new System.Drawing.Point(480, 731);
             this.CustomButton27.Name = "CustomButton27";
             this.CustomButton27.Size = new System.Drawing.Size(230, 230);
@@ -352,7 +336,7 @@
             // 
             // CustomButton26
             // 
-            this.CustomButton26.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton26.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton26.Location = new System.Drawing.Point(244, 731);
             this.CustomButton26.Name = "CustomButton26";
             this.CustomButton26.Size = new System.Drawing.Size(230, 230);
@@ -361,84 +345,41 @@
             // 
             // CustomButton25
             // 
-            this.CustomButton25.BackColor = System.Drawing.Color.SeaGreen;
+            this.CustomButton25.BackColor = System.Drawing.Color.PaleTurquoise;
             this.CustomButton25.Location = new System.Drawing.Point(8, 731);
             this.CustomButton25.Name = "CustomButton25";
             this.CustomButton25.Size = new System.Drawing.Size(230, 230);
             this.CustomButton25.TabIndex = 27;
             this.CustomButton25.UseVisualStyleBackColor = false;
             // 
-            // QuitButton
-            // 
-            this.QuitButton.Image = ((System.Drawing.Image)(resources.GetObject("QuitButton.Image")));
-            this.QuitButton.Location = new System.Drawing.Point(1904, 52);
-            this.QuitButton.Name = "QuitButton";
-            this.QuitButton.Size = new System.Drawing.Size(26, 23);
-            this.QuitButton.TabIndex = 35;
-            this.QuitButton.UseVisualStyleBackColor = true;
-            this.QuitButton.Click += new System.EventHandler(this.QuitButton_Click);
-            // 
-            // SetImageButton
-            // 
-            this.SetImageButton.Location = new System.Drawing.Point(1896, 105);
-            this.SetImageButton.Name = "SetImageButton";
-            this.SetImageButton.Size = new System.Drawing.Size(34, 23);
-            this.SetImageButton.TabIndex = 36;
-            this.SetImageButton.Text = "SetImage";
-            this.SetImageButton.UseVisualStyleBackColor = true;
-            this.SetImageButton.Click += new System.EventHandler(this.SetImageButton_Click);
-            // 
-            // ShowImageButton
-            // 
-            this.ShowImageButton.Location = new System.Drawing.Point(1896, 147);
-            this.ShowImageButton.Name = "ShowImageButton";
-            this.ShowImageButton.Size = new System.Drawing.Size(34, 23);
-            this.ShowImageButton.TabIndex = 37;
-            this.ShowImageButton.Text = "ShowImage";
-            this.ShowImageButton.UseVisualStyleBackColor = true;
-            this.ShowImageButton.Click += new System.EventHandler(this.ShowImageButton_Click);
-            // 
-            // HideImagesButton
-            // 
-            this.HideImagesButton.Location = new System.Drawing.Point(1896, 185);
-            this.HideImagesButton.Name = "HideImagesButton";
-            this.HideImagesButton.Size = new System.Drawing.Size(34, 23);
-            this.HideImagesButton.TabIndex = 38;
-            this.HideImagesButton.Text = "HideImage";
-            this.HideImagesButton.UseVisualStyleBackColor = true;
-            this.HideImagesButton.Click += new System.EventHandler(this.HideImagesButton_Click);
-            // 
             // InfoLabel
             // 
             this.InfoLabel.AutoSize = true;
-            this.InfoLabel.BackColor = System.Drawing.Color.SeaGreen;
+            this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
             this.InfoLabel.Location = new System.Drawing.Point(13, 0);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(0, 17);
             this.InfoLabel.TabIndex = 39;
             // 
-            // CategoryComboBox
+            // SettingsButton
             // 
-            this.CategoryComboBox.FormattingEnabled = true;
-            this.CategoryComboBox.Location = new System.Drawing.Point(1683, 0);
-            this.CategoryComboBox.Name = "CategoryComboBox";
-            this.CategoryComboBox.Size = new System.Drawing.Size(172, 24);
-            this.CategoryComboBox.TabIndex = 40;
-            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
+            this.SettingsButton.Location = new System.Drawing.Point(1896, 23);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(75, 23);
+            this.SettingsButton.TabIndex = 41;
+            this.SettingsButton.Text = "settings";
+            this.SettingsButton.UseVisualStyleBackColor = true;
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // PuzzleTag
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightBlue;
+            this.BackColor = System.Drawing.Color.LightSlateGray;
             this.ClientSize = new System.Drawing.Size(1924, 1055);
             this.ControlBox = false;
-            this.Controls.Add(this.CategoryComboBox);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.InfoLabel);
-            this.Controls.Add(this.HideImagesButton);
-            this.Controls.Add(this.ShowImageButton);
-            this.Controls.Add(this.SetImageButton);
-            this.Controls.Add(this.QuitButton);
             this.Controls.Add(this.CustomButton32);
             this.Controls.Add(this.CustomButton31);
             this.Controls.Add(this.CustomButton30);
@@ -461,7 +402,6 @@
             this.Controls.Add(this.CustomButton16);
             this.Controls.Add(this.CustomButton14);
             this.Controls.Add(this.CustomButton13);
-            this.Controls.Add(this.reloadButton);
             this.Controls.Add(this.CustomButton9);
             this.Controls.Add(this.CustomButton12);
             this.Controls.Add(this.CustomButton11);
@@ -495,7 +435,6 @@
         private System.Windows.Forms.Button CustomButton11;
         private System.Windows.Forms.Button CustomButton12;
         private System.Windows.Forms.Button CustomButton9;
-        private System.Windows.Forms.Button reloadButton;
         private System.Windows.Forms.Button CustomButton15;
         private System.Windows.Forms.Button CustomButton18;
         private System.Windows.Forms.Button CustomButton17;
@@ -518,12 +457,8 @@
         private System.Windows.Forms.Button CustomButton27;
         private System.Windows.Forms.Button CustomButton26;
         private System.Windows.Forms.Button CustomButton25;
-        private System.Windows.Forms.Button QuitButton;
-        private System.Windows.Forms.Button SetImageButton;
-        private System.Windows.Forms.Button ShowImageButton;
-        private System.Windows.Forms.Button HideImagesButton;
-        private System.Windows.Forms.Label InfoLabel;
-        private System.Windows.Forms.ComboBox CategoryComboBox;
+        public System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Button SettingsButton;
     }
 }
 

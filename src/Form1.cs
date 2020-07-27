@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
@@ -18,25 +19,39 @@ namespace PuzzleTag
         private CustomButtonsManager buttonManager;
         private ImageLibraryManager libManager;
         private Ruler ruler;
+        private Players players;
+        private SettingsForm gameSettings;
 
         public PuzzleTag()
         {
             InitializeComponent();
         }
 
-        private void InitGameRules()
+        private void PuzzleTag_Load(object sender, EventArgs e)
         {
-            this.ruler = new Ruler(buttonManager, customButtonsCollection, libManager);
-            
-            // TODO remove
-            ruler.StartGame();
+            SetupClickEvents(this);
+            InitializeControls(this);
+            SetupConfiguration();
+            InitGameRules();
+            InitializeGameData();
+            InitPlayers();
+            this.appSize = new int[] {this.Size.Width, this.Size.Height};
         }
 
-        private void InitializeLibrary()
+        private void InitPlayers()
         {
-            libManager.InitializeLibrary();
-            this.Invoke((Action)(() => InfoLabel.Text = ""));
-            this.Invoke((Action)(() => CategoryComboBox.DataSource = GameState.Categories));
+            players = new Players();
+            players.AddPlayer(Settings.Player1Name, Settings.Player1AvaImage);
+            players.AddPlayer(Settings.Player2Name, Settings.Player2AvaImage);
+            players.AddPlayer(Settings.Player3Name, Settings.Player3AvaImage);
+        }
+
+        private void SetupClickEvents(Control container)
+        {
+            foreach (Control control in container.Controls)
+            {
+                control.Click += HandleClicks;
+            }
         }
 
         private void InitializeControls(PuzzleTag form)
@@ -47,22 +62,35 @@ namespace PuzzleTag
             customButtonsCollection.InitializeByButtonNameAttribute("custom");
         }
 
-        private void PuzzleTag_Load(object sender, EventArgs e)
+        private void SetupConfiguration()
         {
-            SetupClickEvents(this);
-            InitializeControls(this);
-            SetupConfiguration();
-            InitGameRules();
-            this.appSize = new int[] {this.Size.Width, this.Size.Height};
+            this.libManager = new ImageLibraryManager();
+            this.buttonManager = new CustomButtonsManager(customButtonsCollection, libManager);
+        }
+        private void InitGameRules()
+        {
+            this.ruler = new Ruler(buttonManager, customButtonsCollection, libManager);
         }
 
-        private void SetupClickEvents(Control container)
+        private void InitializeGameData()
         {
-            foreach (Control control in container.Controls)
+            new Thread(() =>
             {
-                control.Click += HandleClicks;
-            }
+                Thread.CurrentThread.IsBackground = false;
+                this.Invoke((Action)(() => InfoLabel.Text = "Initializing..."));
+                InitializeLibrary();
+                buttonManager.AssignImages(GameState.Category);
+                buttonManager.SetClosedCardImages();
+                buttonManager.HideButtonImages();
+            }).Start();
         }
+
+        private void InitializeLibrary()
+        {
+            libManager.InitializeLibrary();
+            this.Invoke((Action)(() => InfoLabel.Text = ""));
+        }
+
         private void HandleClicks(object sender, EventArgs e)
         {
             Control control = (Control)sender;
@@ -81,23 +109,6 @@ namespace PuzzleTag
             }
         }
 
-        private void SetupConfiguration()
-        {
-            this.libManager = new ImageLibraryManager();
-            this.buttonManager = new CustomButtonsManager(customButtonsCollection, libManager);
-        }
-
-        private void reloadButton_Click(object sender, EventArgs e)
-        {
-            this.Invoke((Action)(() => customButtonsCollection.Shuffle()));
-
-            if (buttonManager != null)
-            {
-                this.Invoke((Action)(() => HideImagesButton.PerformClick()));
-                buttonManager.AssignImages(GameState.Category);
-            }
-        }
-
         private void PuzzleTag_ResizeEnd(object sender, EventArgs e)
         {
             var newSize = new int[] { this.Size.Width, this.Size.Height };
@@ -108,37 +119,17 @@ namespace PuzzleTag
             this.appSize = newSize;
         }
 
-        private void QuitButton_Click(object sender, EventArgs e)
+        private void SettingsButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
-        }
-
-        private void SetImageButton_Click(object sender, EventArgs e)
-        {
-            new Thread(() =>
+            if (gameSettings == null)
             {
-                Thread.CurrentThread.IsBackground = false;
-                this.Invoke((Action)(() => InfoLabel.Text = "Initializing..."));
-                InitializeLibrary();
-                buttonManager.AssignImages(GameState.Category);
-                buttonManager.SetClosedCardImages();
-                buttonManager.HideButtonImages();
-            }).Start();
-        }
+                gameSettings = new SettingsForm(ruler, players, buttonManager, libManager, this);
+            }
 
-        private void ShowImageButton_Click(object sender, EventArgs e)
-        {
-            buttonManager.ShowButtonImages();
-        }
-
-        private void HideImagesButton_Click(object sender, EventArgs e)
-        {
-            buttonManager.HideButtonImages();
-        }
-
-        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            GameState.Category = CategoryComboBox.Text;
+            gameSettings.StartPosition = FormStartPosition.Manual;
+            gameSettings.Location = this.Location;
+            gameSettings.StartPosition = FormStartPosition.CenterParent;
+            gameSettings.ShowDialog(this);
         }
     }
 }

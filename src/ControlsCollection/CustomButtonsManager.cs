@@ -53,25 +53,6 @@ namespace PuzzleTag.Collection
             }
         }
 
-        private void ValidateAndSet(List<CustomImage> collection, IDictionary<int, CustomButton> buttons)
-        {
-            if (collection.Count < buttons.Count)
-            {
-                var message = $"Insufficient images with category {GameState.Category}";
-                var popUpMessage = new TimedPopUp();
-                popUpMessage.Set(message);
-                popUpMessage.Show(2500);
-            }
-            else
-            {
-                foreach (var button in buttons)
-                {
-                    var customImage = collection[button.Value.Id - 1];
-                    button.Value.SetImage(customImage.Image);
-                }
-            }
-        }
-
         public void ShowButtonImages()
         {
             var buttons = buttonsCollection.GetAllButtons();
@@ -96,6 +77,35 @@ namespace PuzzleTag.Collection
         public void RemoveButton(CustomButton button)
         {
             button.Visible = false;
+        }
+
+        public ButtonsCollection ButtonsCollection()
+        {
+            return buttonsCollection;
+        }
+
+        public List<CustomButton> GetAllButtons()
+        {
+            return buttonsCollection.GetAllButtons().Values.ToList();
+        }
+
+        private void ValidateAndSet(List<CustomImage> collection, IDictionary<int, CustomButton> buttons)
+        {
+            if (collection.Count < buttons.Count)
+            {
+                var message = $"Insufficient images with category {GameState.Category}";
+                var popUpMessage = new TimedPopUp();
+                popUpMessage.Set(message);
+                popUpMessage.Show(2500);
+            }
+            else
+            {
+                foreach (var button in buttons)
+                {
+                    var customImage = collection[button.Value.Id - 1];
+                    button.Value.SetImage(customImage.Image);
+                }
+            }
         }
     }
 }
