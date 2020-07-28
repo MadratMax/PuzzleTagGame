@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
@@ -30,13 +32,22 @@ namespace PuzzleTag
         {
             this.BackgroundImageLayout = ImageLayout.Stretch;
             SetupClickEvents(this);
+            SetupKeyDownEvents(this);
             InitializeControls(this);
             SetupConfiguration();
-            InitGameRules();
             InitializeGameData();
             InitPlayers();
+            InitGameRules();
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
             UI.Update.MainFormUI = this;
+        }
+
+        private void SetupKeyDownEvents(PuzzleTag puzzleTag)
+        {
+            foreach (Control control in puzzleTag.Controls)
+            {
+                control.KeyDown += HandleKeyDown;
+            }
         }
 
         private void InitPlayers()
@@ -47,9 +58,9 @@ namespace PuzzleTag
             players.AddPlayer(Settings.Player3Name, Settings.Player3AvaImage);
         }
 
-        private void SetupClickEvents(Control container)
+        private void SetupClickEvents(Control puzzleTag)
         {
-            foreach (Control control in container.Controls)
+            foreach (Control control in puzzleTag.Controls)
             {
                 control.Click += HandleClicks;
             }
@@ -79,10 +90,10 @@ namespace PuzzleTag
             {
                 Thread.CurrentThread.IsBackground = false;
                 this.Invoke((Action)(() => InfoLabel.Text = "Initializing..."));
-                InitializeLibrary();
-                buttonManager.AssignImages(GameState.Category);
-                buttonManager.SetClosedCardImages();
-                buttonManager.HideButtonImages();
+                this.Invoke((Action)(InitializeLibrary));
+                this.Invoke((Action)(() => buttonManager.AssignImages(GameState.Category)));
+                this.Invoke((Action)(() => buttonManager.SetClosedCardImages()));
+                this.Invoke((Action)(() => buttonManager.HideButtonImages()));
             }).Start();
         }
 
@@ -102,6 +113,14 @@ namespace PuzzleTag
                 {
                     ruler.OpenCard(control.Name);
                 }
+            }
+        }
+
+        private void HandleKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                SettingsButton.PerformClick();
             }
         }
 

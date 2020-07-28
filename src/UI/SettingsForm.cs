@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -6,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
+using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
 using PuzzleTag.UI;
@@ -19,11 +21,19 @@ namespace PuzzleTag
         private CustomButtonsManager buttonManager;
         private ImageLibraryManager libManager;
         private PuzzleTag baseForm;
+        private List<Control> player1PrizeImagesList;
+        private List<Control> player2PrizeImagesList;
+        private List<Control> player3PrizeImagesList;
+        private PlayersScoreStorage scoreStorage;
+        private Player player1;
+        private Player player2;
+        private Player player3;
 
         public SettingsForm(Ruler ruler, Players players, CustomButtonsManager buttonManager, ImageLibraryManager libManager, PuzzleTag baseForm)
         {
             this.ruler = ruler;
             this.players = players;
+            this.scoreStorage = new PlayersScoreStorage();
             this.buttonManager = buttonManager;
             this.libManager = libManager;
             this.baseForm = baseForm;
@@ -44,6 +54,7 @@ namespace PuzzleTag
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            SetupKeyDownEvents(this);
             Player1ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Player2ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Player3ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -61,15 +72,100 @@ namespace PuzzleTag
             {
                 Shuffle();
                 AddPlayersToGame();
+                InitPlayerScores();
                 InitAvatars();
                 var moveQueue = new MoveQueue(players);
                 var totalScore = new TotalScore(players);
-                ruler.StartGame(moveQueue, totalScore);
+                ruler.StartGame(moveQueue, totalScore, scoreStorage);
                 BlockSettings();
                 BackToMain();
-
-                UI.Update.UpdateInfoLabel($"{ruler.CurrentPlayer.Name.ToUpper()} is moving. Score: {ruler.CurrentPlayer.DiscoveredCards}");
+                UI.Update.UpdateInfoLabel($"{ruler.CurrentPlayer.Name.ToUpper()} ходит");
             }
+        }
+
+        private void InitPlayerScores()
+        {
+            InitPl1ScoreList();
+            InitPl2ScoreList();
+            InitPl3ScoreList();
+        }
+
+        private void InitPl3ScoreList()
+        {
+            player3PrizeImagesList = new List<Control>
+            {
+                baseForm.Pl3p1,
+                baseForm.Pl3p2,
+                baseForm.Pl3p3,
+                baseForm.Pl3p4,
+                baseForm.Pl3p5,
+                baseForm.Pl3p6,
+                baseForm.Pl3p7,
+                baseForm.Pl3p8,
+                baseForm.Pl3p9,
+                baseForm.Pl3p10,
+                baseForm.Pl3p11,
+                baseForm.Pl3p12,
+                baseForm.Pl3p13,
+                baseForm.Pl3p14,
+                baseForm.Pl3p15,
+                baseForm.Pl3p16,
+            };
+
+            var player = players.GetPlayerByIndex(3);
+            scoreStorage.Add(player3PrizeImagesList, player);
+        }
+
+        private void InitPl2ScoreList()
+        {
+            player2PrizeImagesList = new List<Control>
+            {
+                baseForm.Pl2p1,
+                baseForm.Pl2p2,
+                baseForm.Pl2p3,
+                baseForm.Pl2p4,
+                baseForm.Pl2p5,
+                baseForm.Pl2p6,
+                baseForm.Pl2p7,
+                baseForm.Pl2p8,
+                baseForm.Pl2p9,
+                baseForm.Pl2p10,
+                baseForm.Pl2p11,
+                baseForm.Pl2p12,
+                baseForm.Pl2p13,
+                baseForm.Pl2p14,
+                baseForm.Pl2p15,
+                baseForm.Pl2p16,
+            };
+
+            var player = players.GetPlayerByIndex(2);
+            scoreStorage.Add(player2PrizeImagesList, player);
+        }
+
+        private void InitPl1ScoreList()
+        {
+            player1PrizeImagesList = new List<Control>
+            {
+                baseForm.Pl1p1,
+                baseForm.Pl1p2,
+                baseForm.Pl1p3,
+                baseForm.Pl1p4,
+                baseForm.Pl1p5,
+                baseForm.Pl1p6,
+                baseForm.Pl1p7,
+                baseForm.Pl1p8,
+                baseForm.Pl1p9,
+                baseForm.Pl1p10,
+                baseForm.Pl1p11,
+                baseForm.Pl1p12,
+                baseForm.Pl1p13,
+                baseForm.Pl1p14,
+                baseForm.Pl1p15,
+                baseForm.Pl1p16,
+            };
+
+            var player = players.GetPlayerByIndex(1);
+            scoreStorage.Add(player1PrizeImagesList, player);
         }
 
         private void InitAvatars()
@@ -85,16 +181,23 @@ namespace PuzzleTag
 
         private void AddPlayersToGame()
         {
-            var pl1 = players.GetPlayerByName(Player1ComboBox.Text);
-            var pl2 = players.GetPlayerByName(Player2ComboBox.Text);
-            var pl3 = players.GetPlayerByName(Player3ComboBox.Text);
-            players.AddPlayerToGame(pl1, 1);
-            players.AddPlayerToGame(pl2, 2);
-            players.AddPlayerToGame(pl3, 3);
+            player1 = players.GetPlayerByName(Player1ComboBox.Text);
+            player2 = players.GetPlayerByName(Player2ComboBox.Text);
+            player3 = players.GetPlayerByName(Player3ComboBox.Text);
+            players.AddPlayerToGame(player1, 1);
+            players.AddPlayerToGame(player2, 2);
+            players.AddPlayerToGame(player3, 3);
         }
 
         private void RemovePlayersFromGame()
         {
+            scoreStorage.DisposeScore(player1);
+            scoreStorage.DisposeScore(player2);
+            scoreStorage.DisposeScore(player3);
+            scoreStorage.DisposeData();
+            player1PrizeImagesList = null;
+            player2PrizeImagesList = null;
+            player3PrizeImagesList = null;
             players.RemovePlayersFromGame();
         }
 
@@ -211,9 +314,20 @@ namespace PuzzleTag
             }
         }
 
-        private void Player1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void SetupKeyDownEvents(SettingsForm settingsForm)
         {
+            foreach (Control control in settingsForm.Controls)
+            {
+                control.KeyDown += HandleKeyDown;
+            }
+        }
 
+        private void HandleKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                BackToMainButton.PerformClick();
+            }
         }
     }
 }

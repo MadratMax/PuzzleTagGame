@@ -103,6 +103,9 @@
   <ItemGroup>
     <Compile Include="ControlsCollection\ButtonsCollection.cs" />
     <Compile Include="ControlsCollection\CustomButtonsManager.cs" />
+    <Compile Include="DataManager\PlayersScoreStorage.cs" />
+    <Compile Include="DataManager\ScoreImageManager.cs" />
+    <Compile Include="DataManager\ScoreModel.cs" />
     <Compile Include="Game\GameState.cs" />
     <Compile Include="Configuration\Settings.cs" />
     <Compile Include="Configuration\SettingsManager.cs" />
@@ -110,8 +113,8 @@
     <Compile Include="Controls\ControlMap.cs" />
     <Compile Include="Controls\CustomButton.cs" />
     <Compile Include="Controls\IControl.cs" />
-    <Compile Include="FileManager\FileManager.cs" />
-    <Compile Include="FileManager\ImageLibraryManager.cs" />
+    <Compile Include="DataManager\FileManager.cs" />
+    <Compile Include="DataManager\ImageLibraryManager.cs" />
     <Compile Include="Game\MoveQueue.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\Players.cs" />

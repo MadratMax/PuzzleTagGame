@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
+using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
 using PuzzleTag.UI;
 
@@ -18,6 +19,7 @@ namespace PuzzleTag.Game
         private ButtonsCollection buttonsCollection;
         private MoveQueue moveQueue;
         private TotalScore totalScore;
+        private PlayersScoreStorage scoreStorage;
         private Player currentPlayer;
         private bool isGameStarted;
         private int moveCount;
@@ -36,9 +38,10 @@ namespace PuzzleTag.Game
 
         public bool IsGameStarted;
 
-        public void StartGame(MoveQueue moveQueue, TotalScore totalScore)
+        public void StartGame(MoveQueue moveQueue, TotalScore totalScore, PlayersScoreStorage scoreStorage)
         {
             IsGameStarted = true;
+            this.scoreStorage = scoreStorage;
             this.moveQueue = moveQueue;
             this.currentPlayer = this.moveQueue.NextPlayer();
             this.totalScore?.ResetScore();
@@ -51,6 +54,7 @@ namespace PuzzleTag.Game
             IsGameStarted = false;
             totalScore.UpdateScore();
             this.currentPlayer = null;
+            this.scoreStorage = null;
             UI.Update.ClearInfoLabel();
         }
 
@@ -162,6 +166,7 @@ namespace PuzzleTag.Game
             if (FirstCard.Image == SecondCard.Image)
             {
                 currentPlayer.DiscoveredCards++;
+                scoreStorage.UpdateScoreItem(currentPlayer, currentPlayer.DiscoveredCards-1, true);
                 return true;
             }
 
