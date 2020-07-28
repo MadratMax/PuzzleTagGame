@@ -45,6 +45,11 @@ namespace PuzzleTag.FileManager
             return imageLib.GetClosedCardImage();
         }
 
+        public CustomImage GetWinnerImage()
+        {
+            return imageLib.GetWinnerImage();
+        }
+
         public List<CustomImage> GetImageCollectionByCategory(string category)
         {
             var categorizedCollection = new List<CustomImage>();
@@ -105,6 +110,7 @@ namespace PuzzleTag.FileManager
             var newCustomImage = new CustomImage
             {
                 Name = fileManager.GetFileName(winnerImage),
+                SpecialName = "WinnerImage",
                 Category = fileManager.GetDirName(winnerImage),
                 Image = Image.FromFile(winnerImage)
             };

@@ -41,6 +41,11 @@ namespace PuzzleTag.FileManager.Library
             winnerImage = image;
         }
 
+        public CustomImage GetWinnerImage()
+        {
+            return winnerImage;
+        }
+
         public void SetClosedCardImage(CustomImage image)
         {
             closedCardImage = image;

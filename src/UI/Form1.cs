@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
@@ -29,6 +28,7 @@ namespace PuzzleTag
 
         private void PuzzleTag_Load(object sender, EventArgs e)
         {
+            this.BackgroundImageLayout = ImageLayout.Stretch;
             SetupClickEvents(this);
             InitializeControls(this);
             SetupConfiguration();
@@ -36,6 +36,7 @@ namespace PuzzleTag
             InitializeGameData();
             InitPlayers();
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
+            UI.Update.MainFormUI = this;
         }
 
         private void InitPlayers()
@@ -97,14 +98,9 @@ namespace PuzzleTag
 
             if (control.Name.Contains("CustomButton"))
             {
-                ruler.OpenCard(control.Name);
-                if (ruler.RoundWin)
+                if (ruler.IsGameStarted)
                 {
-                    InfoLabel.Text = "Win!";
-                }
-                else
-                {
-                    InfoLabel.Text = "";
+                    ruler.OpenCard(control.Name);
                 }
             }
         }
@@ -129,6 +125,7 @@ namespace PuzzleTag
             gameSettings.StartPosition = FormStartPosition.Manual;
             gameSettings.Location = this.Location;
             gameSettings.StartPosition = FormStartPosition.CenterParent;
+            gameSettings.BackgroundImageLayout = ImageLayout.Stretch;
             gameSettings.ShowDialog(this);
         }
     }

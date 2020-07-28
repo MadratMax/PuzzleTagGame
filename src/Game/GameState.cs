@@ -17,10 +17,16 @@ namespace PuzzleTag.Configuration
 
         public static List<Player> Players;
 
+        public static List<Player> PlayersInGame = new List<Player>(3);
+
         public static Player Player1;
 
         public static Player Player2;
 
         public static Player Player3;
+
+        public static MoveQueue MoveQueue;
+
+        public static Player CurrentPlayer;
     }
 }

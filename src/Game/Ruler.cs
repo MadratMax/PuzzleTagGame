@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Drawing;
+using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
 using PuzzleTag.FileManager;
+using PuzzleTag.UI;
 
 namespace PuzzleTag.Game
 {
@@ -12,6 +16,9 @@ namespace PuzzleTag.Game
         private CustomButtonsManager buttonManager;
         private ImageLibraryManager libManager;
         private ButtonsCollection buttonsCollection;
+        private MoveQueue moveQueue;
+        private TotalScore totalScore;
+        private Player currentPlayer;
         private bool isGameStarted;
         private int moveCount;
         private int openCardDelay;
@@ -27,10 +34,27 @@ namespace PuzzleTag.Game
             openCardDelay = Convert.ToInt32(Settings.Delay) * 1000;
         }
 
-        public void StartGame()
+        public bool IsGameStarted;
+
+        public void StartGame(MoveQueue moveQueue, TotalScore totalScore)
         {
             IsGameStarted = true;
+            this.moveQueue = moveQueue;
+            this.currentPlayer = this.moveQueue.NextPlayer();
+            this.totalScore?.ResetScore();
+            this.totalScore = totalScore;
+            GameFinished = false;
         }
+
+        public void StopGame()
+        {
+            IsGameStarted = false;
+            totalScore.UpdateScore();
+            this.currentPlayer = null;
+            UI.Update.ClearInfoLabel();
+        }
+
+        public Player CurrentPlayer => currentPlayer;
 
         public bool RoundWin;
 
@@ -62,10 +86,23 @@ namespace PuzzleTag.Game
                     if (MovesCount == 2)
                     {
                         WaitNextMove = true;
-                        DelayAndClose();
+                        var successMove = Result();
+                        UI.Update.UpdateInfoLabel($"{CurrentPlayer.Name.ToUpper()} ходит");
+                        UpdateScore();
+                        DelayAndClose(successMove);
                     }
                 }
             }
+        }
+
+        private void UpdateScore()
+        {
+            totalScore.UpdateScore(CurrentPlayer);
+        }
+
+        public void CloseCard(CustomButton button)
+        {
+            button.ShowClosedCardImage();
         }
 
         private void ClearMove()
@@ -75,38 +112,63 @@ namespace PuzzleTag.Game
             SecondCard = null;
         }
 
-        public void CloseCard(CustomButton button)
-        {
-            button.ShowClosedCardImage();
-        }
-
-        private async void DelayAndClose()
+        private async void DelayAndClose(bool isSuccessMove)
         {
             WaitNextMove = true;
+            currentPlayer = this.moveQueue.NextPlayer();
             await Task.Delay(openCardDelay);
-            Result();
-            CloseCard(FirstCard);
-            CloseCard(SecondCard);
+
+            if (isSuccessMove)
+            {
+                buttonManager.RemoveButton(FirstCard);
+                buttonManager.RemoveButton(SecondCard);
+                CheckGameStatus();
+            }
+            else
+            {
+                CloseCard(FirstCard);
+                CloseCard(SecondCard);
+            }
+
+            if (!GameFinished)
+            {
+                UI.Update.UpdateInfoLabel($"{CurrentPlayer?.Name.ToUpper()} ходит");
+            }
+            
             ClearMove();
             WaitNextMove = false;
         }
 
-        private void Result()
+        private void CheckGameStatus()
+        {
+            if (buttonManager.ExistingButtonsOnBoard() == 0)
+            {
+                GameFinished = true;
+                StopGame();
+                ShowWinnerScreen();
+            }
+        }
+
+        private void ShowWinnerScreen()
+        {
+            var winForm = new WinnerForm();
+            var winnerImage = libManager.GetImageCollection().FirstOrDefault(n => n.SpecialName == "WinnerImage");
+            winForm.BackgroundImage = winnerImage?.Image;
+            winForm.ShowDialog();
+        }
+
+        private bool Result()
         {
             if (FirstCard.Image == SecondCard.Image)
             {
-                buttonManager.RemoveButton(FirstCard);
-                buttonManager.RemoveButton(SecondCard);
-
-                RoundWin = true;
+                currentPlayer.DiscoveredCards++;
+                return true;
             }
 
-            RoundWin = false;
+            return false;
         }
 
         private CustomButton CurrentCard;
-
-        private bool IsGameStarted;
 
         private int MovesCount
         {
@@ -132,5 +194,7 @@ namespace PuzzleTag.Game
         private CustomButton SecondCard;
 
         private bool WaitNextMove;
+
+        private bool GameFinished;
     }
 }

@@ -11,6 +11,8 @@ namespace PuzzleTag.FileManager.Library
     {
         public string Name;
 
+        public string SpecialName;
+
         public int Id;
 
         public string Category;

@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
+using PuzzleTag.UI;
 
 namespace PuzzleTag
 {
@@ -26,7 +29,6 @@ namespace PuzzleTag
             this.baseForm = baseForm;
             InitializeComponent();
             InitSettings();
-            InitPlayers();
         }
 
         private void InitSettings()
@@ -40,17 +42,12 @@ namespace PuzzleTag
             Player3ComboBox.SelectedIndex = -1;
         }
 
-        private void InitPlayers()
-        {
-            //Player1ComboBox.Text = players.GetPlayerByIndex(1)?.Name ?? "";
-            //Player2ComboBox.Text = players.GetPlayerByIndex(2)?.Name ?? "";
-            //Player3ComboBox.Text = players.GetPlayerByIndex(3)?.Name ?? "";
-        }
-
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            Player1ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Player2ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            Player3ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             this.Invoke((Action)(() => CategoryComboBox.DataSource = GameState.Categories));
-            InitPlayers();
         }
 
         private void BackToMainButton_Click(object sender, EventArgs e)
@@ -64,10 +61,26 @@ namespace PuzzleTag
             {
                 Shuffle();
                 AddPlayersToGame();
-                ruler.StartGame();
+                InitAvatars();
+                var moveQueue = new MoveQueue(players);
+                var totalScore = new TotalScore(players);
+                ruler.StartGame(moveQueue, totalScore);
                 BlockSettings();
                 BackToMain();
+
+                UI.Update.UpdateInfoLabel($"{ruler.CurrentPlayer.Name.ToUpper()} is moving. Score: {ruler.CurrentPlayer.DiscoveredCards}");
             }
+        }
+
+        private void InitAvatars()
+        {
+            var player1 = players.GetPlayerByIndex(1);
+            var player2 = players.GetPlayerByIndex(2);
+            var player3 = players.GetPlayerByIndex(3);
+
+            baseForm.Player1Avatar.BackgroundImage = player1?.Avatar;
+            baseForm.Player2Avatar.BackgroundImage = player2?.Avatar;
+            baseForm.Player3Avatar.BackgroundImage = player3?.Avatar;
         }
 
         private void AddPlayersToGame()
@@ -91,6 +104,9 @@ namespace PuzzleTag
             Player2ComboBox.Enabled = false;
             Player3ComboBox.Enabled = false;
             CategoryComboBox.Enabled = false;
+            RemovePlayer1Button.Enabled = false;
+            RemovePlayer2Button.Enabled = false;
+            RemovePlayer3Button.Enabled = false;
             NewGameButton.Enabled = false;
         }
 
@@ -99,6 +115,9 @@ namespace PuzzleTag
             Player1ComboBox.Enabled = true;
             Player2ComboBox.Enabled = true;
             Player3ComboBox.Enabled = true;
+            RemovePlayer1Button.Enabled = true;
+            RemovePlayer2Button.Enabled = true;
+            RemovePlayer3Button.Enabled = true;
             CategoryComboBox.Enabled = true;
             NewGameButton.Enabled = true;
         }
@@ -128,9 +147,11 @@ namespace PuzzleTag
 
         private void ShuffleCards_Click(object sender, EventArgs e)
         {
+            ruler?.StopGame();
             RemovePlayersFromGame();
             Shuffle();
             UnblockSettings();
+            UI.Update.ClearInfoLabel();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -156,6 +177,43 @@ namespace PuzzleTag
             }).Start();
 
             this.Invoke((Action)(() => baseForm.InfoLabel.Text = ""));
+        }
+
+        private void RemovePlayer1Button_Click(object sender, EventArgs e)
+        {
+            Player1ComboBox.SelectedIndex = -1;
+        }
+
+        private void RemovePlayer2Button_Click(object sender, EventArgs e)
+        {
+            Player2ComboBox.SelectedIndex = -1;
+        }
+
+        private void RemovePlayer3Button_Click(object sender, EventArgs e)
+        {
+            Player3ComboBox.SelectedIndex = -1;
+        }
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+
+        private void SettingsForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void Player1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

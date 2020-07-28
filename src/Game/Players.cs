@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using PuzzleTag.Configuration;
 
 namespace PuzzleTag.Game
 {
@@ -28,10 +29,11 @@ namespace PuzzleTag.Game
         public void AddPlayer(string name, string avatar)
         {
             Image avaImage = null;
+            var file = Directory.GetFiles(avatar).FirstOrDefault();
 
-            if (File.Exists(avatar))
+            if (file != null)
             {
-                avaImage = Image.FromFile(avatar);
+                avaImage = Image.FromFile(file);
             }
 
             var newPlayer = new Player
@@ -82,6 +84,9 @@ namespace PuzzleTag.Game
             {
                 player.InGame = false;
                 player.Index = 0;
+                player.DiscoveredCards = 0;
+                player.IsMoving = false;
+                player.Steps = 0;
             }
         }
     }

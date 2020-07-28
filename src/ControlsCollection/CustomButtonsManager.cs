@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
 using PuzzleTag.FileManager;
@@ -87,6 +88,11 @@ namespace PuzzleTag.Collection
         public List<CustomButton> GetAllButtons()
         {
             return buttonsCollection.GetAllButtons().Values.ToList();
+        }
+
+        public int ExistingButtonsOnBoard()
+        {
+            return buttonsCollection.GetAllButtons().Count(n => n.Value.Visible);
         }
 
         private void ValidateAndSet(List<CustomImage> collection, IDictionary<int, CustomButton> buttons)

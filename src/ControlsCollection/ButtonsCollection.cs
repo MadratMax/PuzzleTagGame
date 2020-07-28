@@ -61,6 +61,7 @@ namespace PuzzleTag.Collection
             foreach (var button in collection)
             {
                 button.Value.Id = NumberGenerator.GetRandomFromRange();
+                button.Value.Visible = true;
             }
         }
 

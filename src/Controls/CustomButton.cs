@@ -78,5 +78,10 @@ namespace PuzzleTag.Controls
         {
             closedCardImage = image;
         }
+
+        public Button Element()
+        {
+            return this.button;
+        }
     }
 }
