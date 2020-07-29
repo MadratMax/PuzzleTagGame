@@ -10,6 +10,7 @@ using PuzzleTag.Configuration;
 using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
+using PuzzleTag.SoundMaster;
 using PuzzleTag.UI;
 
 namespace PuzzleTag
@@ -70,6 +71,7 @@ namespace PuzzleTag
         {
             if (Player1ComboBox.Text != string.Empty)
             {
+                SoundPlayer.PlayStartGameSound();
                 Shuffle();
                 AddPlayersToGame();
                 InitPlayerScores();
@@ -260,16 +262,19 @@ namespace PuzzleTag
 
         private void ShowCardsButton_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayOpenCloseCardsSound();
             buttonManager.ShowButtonImages();
         }
 
         private void HideCardsButton_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayOpenCloseCardsSound();
             buttonManager.HideButtonImages();
         }
 
         private void ShuffleCards_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayShuffleSound();
             ruler?.StopGame();
             RemovePlayersFromGame();
             Shuffle();
@@ -300,6 +305,7 @@ namespace PuzzleTag
 
         private void RemovePlayer1Button_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayRemovePlayerSound();
             Player1ComboBox.SelectedIndex = -1;
             Player2ComboBox.SelectedIndex = -1;
             Player3ComboBox.SelectedIndex = -1;
@@ -307,12 +313,14 @@ namespace PuzzleTag
 
         private void RemovePlayer2Button_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayRemovePlayerSound();
             Player2ComboBox.SelectedIndex = -1;
             Player3ComboBox.SelectedIndex = -1;
         }
 
         private void RemovePlayer3Button_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayRemovePlayerSound();
             Player3ComboBox.SelectedIndex = -1;
         }
 
@@ -375,7 +383,20 @@ namespace PuzzleTag
 
         private void Player3ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (Player1ComboBox.SelectedIndex == -1 || Player2ComboBox.SelectedIndex == -1)
+            {
+                Player3ComboBox.Enabled = false;
+            }
+        }
 
+        private void ShowCardsButton_MouseEnter(object sender, EventArgs e)
+        {
+            SoundPlayer.PlaySelectItemSound();
+        }
+
+        private void Player3ComboBox_MouseClick(object sender, MouseEventArgs e)
+        {
+            SoundPlayer.PlaySelectItemSound();
         }
     }
 }

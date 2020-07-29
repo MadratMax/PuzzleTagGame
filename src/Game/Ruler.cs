@@ -10,6 +10,7 @@ using PuzzleTag.Controls;
 using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
 using PuzzleTag.Notification;
+using PuzzleTag.SoundMaster;
 using PuzzleTag.UI;
 
 namespace PuzzleTag.Game
@@ -59,6 +60,11 @@ namespace PuzzleTag.Game
             IsGameStarted = false;
             totalScore?.UpdateScore();
 
+            foreach (var player in players.GetPlayers().Where(n => n.InGame))
+            {
+                player.AvaButton.FlatAppearance.BorderSize = 0;
+            }
+
             if (currentPlayer != null)
             {
                 currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
@@ -95,17 +101,21 @@ namespace PuzzleTag.Game
 
                 if (IsGameStarted && CurrentCard.Closed)
                 {
+                    SoundPlayer.PlayButtonSound();
                     CurrentCard.ShowImage();
 
                     if (MovesCount == 2)
                     {
                         WaitNextMove = true;
                         var successMove = Result();
-                        //UI.Update.UpdateInfoLabel($"{CurrentPlayer.Name.ToUpper()} ходит");
                         UpdateScore();
                         DelayAndClose(successMove);
                     }
                 }
+            }
+            else
+            {
+                SoundPlayer.PlayCannotOpenCardSound();
             }
         }
 
@@ -143,6 +153,7 @@ namespace PuzzleTag.Game
             else
             {
                 CloseCard(FirstCard);
+                SoundPlayer.PlayCloseCardSound();
                 CloseCard(SecondCard);
             }
 
@@ -164,7 +175,6 @@ namespace PuzzleTag.Game
             {
                 var inGamePlayers = players.GetPlayers().Where(n => n.InGame).ToList();
 
-                //Player first = inGamePlayers[0];
                 Player winner = inGamePlayers[0];
                 bool drawn = false;
 
@@ -191,14 +201,15 @@ namespace PuzzleTag.Game
                 else
                 {
                     var popUp = new TimedPopUp();
-                    popUp.Set("Ничья !");
-                    popUp.Show();
+                    popUp.Set("НИЧЬЯ !");
+                    popUp.Show(waitTime: 4500, autoHide: true);
                 }
             }
         }
 
         public void ShowWinnerScreen(Player winner)
         {
+            SoundPlayer.PlayWinSound();
             var winForm = new WinnerForm();
             var winnerImage = libManager.GetWinnerImage();
             winForm.BackgroundImage = winnerImage?.Image;
@@ -211,6 +222,7 @@ namespace PuzzleTag.Game
         {
             if (FirstCard.Image == SecondCard.Image)
             {
+                SoundPlayer.PlayScoreSound();
                 currentPlayer.DiscoveredCards++;
                 scoreStorage.UpdateScoreItem(currentPlayer, currentPlayer.DiscoveredCards-1, true);
                 return true;

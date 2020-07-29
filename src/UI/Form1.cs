@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
@@ -7,6 +8,7 @@ using PuzzleTag.Controls;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
 using PuzzleTag.Notification;
+using PuzzleTag.SoundMaster;
 
 namespace PuzzleTag
 {
@@ -22,15 +24,17 @@ namespace PuzzleTag
         private Players players;
         private SettingsForm gameSettings;
         private TimedPopUp messageBar;
+        private FileManager.FileManager fileManager;
 
         public PuzzleTag()
         {
             InitializeComponent();
+            InitSounds();
         }
 
         private void PuzzleTag_Load(object sender, EventArgs e)
         {
-            ShowStatusMessage("Загрузка...");
+            ShowStatusMessage("ЗАГРУЗКА...");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             SetupClickEvents(this);
             SetupKeyDownEvents(this);
@@ -39,8 +43,37 @@ namespace PuzzleTag
             InitializeGameData();
             InitPlayers();
             InitGameRules();
+            
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
             UI.Update.MainFormUI = this;
+        }
+
+        private void InitSounds()
+        {
+            fileManager = new FileManager.FileManager();
+            var buttonSoundFile = fileManager.GetFiles(Settings.ButtonSound).FirstOrDefault();
+            var settingSoundFile = fileManager.GetFiles(Settings.SettingsSound).FirstOrDefault();
+            var winSoundFile = fileManager.GetFiles(Settings.WinSound).FirstOrDefault();
+            var selectItemSoundFile = fileManager.GetFiles(Settings.SelectSound).FirstOrDefault();
+            var startGameSoundFile = fileManager.GetFiles(Settings.StartGameSound).FirstOrDefault();
+            var closeCardSoundFile = fileManager.GetFiles(Settings.CloseCardSound).FirstOrDefault();
+            var scoreSoundFile = fileManager.GetFiles(Settings.ScoreSound).FirstOrDefault();
+            var shuffleSoundFile = fileManager.GetFiles(Settings.ShuffleSound).FirstOrDefault();
+            var openCloseCardsSoundFile = fileManager.GetFiles(Settings.OpenCloseCardsSound).FirstOrDefault();
+            var removePlayerSoundFile = fileManager.GetFiles(Settings.RemovePlayerSound).FirstOrDefault();
+            var cannotOpenCardSoundFile = fileManager.GetFiles(Settings.CannotOpenCardSound).FirstOrDefault();
+
+            SoundPlayer.ButtonSound = buttonSoundFile;
+            SoundPlayer.SettingsSound = settingSoundFile;
+            SoundPlayer.WinSound = winSoundFile;
+            SoundPlayer.SelectSound = selectItemSoundFile;
+            SoundPlayer.StartGameSound = startGameSoundFile;
+            SoundPlayer.CloseCardSound = closeCardSoundFile;
+            SoundPlayer.ScoreSound = scoreSoundFile;
+            SoundPlayer.ShuffleSound = shuffleSoundFile;
+            SoundPlayer.OpenCloseCardsSound = openCloseCardsSoundFile;
+            SoundPlayer.RemovePlayerSound = removePlayerSoundFile;
+            SoundPlayer.CannotOpenCardSound = cannotOpenCardSoundFile;
         }
 
         private void ShowStatusMessage(string message)
@@ -126,6 +159,12 @@ namespace PuzzleTag
                 {
                     ruler.OpenCard(control.Name);
                 }
+                else
+                {
+                    SoundPlayer.PlayCannotOpenCardSound();
+                    messageBar.Set("Нажмите ESC чтобы войти в меню");
+                    messageBar.Show(3000, true);
+                }
             }
         }
 
@@ -154,6 +193,7 @@ namespace PuzzleTag
                 gameSettings = new SettingsForm(ruler, players, buttonManager, libManager, this);
             }
 
+            SoundPlayer.PlaySettingsSound();
             gameSettings.StartPosition = FormStartPosition.Manual;
             gameSettings.Location = this.Location;
             gameSettings.StartPosition = FormStartPosition.CenterParent;

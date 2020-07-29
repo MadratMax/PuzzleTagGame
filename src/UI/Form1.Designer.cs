@@ -463,9 +463,9 @@
             this.SettingsButton.BackColor = System.Drawing.Color.Transparent;
             this.SettingsButton.FlatAppearance.BorderSize = 0;
             this.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SettingsButton.Location = new System.Drawing.Point(1921, 1013);
+            this.SettingsButton.Location = new System.Drawing.Point(1921, 1048);
             this.SettingsButton.Name = "SettingsButton";
-            this.SettingsButton.Size = new System.Drawing.Size(41, 35);
+            this.SettingsButton.Size = new System.Drawing.Size(5, 5);
             this.SettingsButton.TabIndex = 41;
             this.SettingsButton.UseVisualStyleBackColor = false;
             this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
@@ -1345,10 +1345,10 @@
             this.Controls.Add(this.CustomButton2);
             this.Controls.Add(this.CustomButton1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "PuzzleTag";
-            this.ShowIcon = false;
             this.Text = "PuzzleTag";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.PuzzleTag_Load);

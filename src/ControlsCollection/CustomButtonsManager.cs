@@ -40,7 +40,10 @@ namespace PuzzleTag.Collection
             var categorizedImageCollection = libManager.GetImageCollectionByCategory(categoryName);
             int imageIndex = 0;
 
-            ValidateAndSet(categorizedImageCollection, buttons);
+            if (categorizedImageCollection != null)
+            {
+                ValidateAndSet(categorizedImageCollection, categoryName, buttons);
+            }
         }
 
         public void SetClosedCardImages()
@@ -95,14 +98,17 @@ namespace PuzzleTag.Collection
             return buttonsCollection.GetAllButtons().Count(n => n.Value.Visible);
         }
 
-        private void ValidateAndSet(List<CustomImage> collection, IDictionary<int, CustomButton> buttons)
+        private void ValidateAndSet(List<CustomImage> collection, string category, IDictionary<int, CustomButton> buttons)
         {
             if (collection.Count < buttons.Count)
             {
-                var message = $"Insufficient images with category {GameState.Category}";
-                var popUpMessage = new TimedPopUp();
-                popUpMessage.Set(message);
-                popUpMessage.Show(2500);
+                if (category != null)
+                {
+                    var message = $"Insufficient images with category {category}";
+                    var popUpMessage = new TimedPopUp();
+                    popUpMessage.Set(message);
+                    popUpMessage.Show(3500);
+                }
             }
             else
             {

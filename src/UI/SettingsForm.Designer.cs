@@ -65,13 +65,14 @@
             this.toolTip1.SetToolTip(this.NewGameButton, "Начать игру");
             this.NewGameButton.UseVisualStyleBackColor = false;
             this.NewGameButton.Click += new System.EventHandler(this.NewGameButton_Click);
+            this.NewGameButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // ExitButton
             // 
             this.ExitButton.FlatAppearance.BorderSize = 0;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(611, 229);
+            this.ExitButton.Location = new System.Drawing.Point(614, 229);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(177, 35);
             this.ExitButton.TabIndex = 2;
@@ -79,13 +80,14 @@
             this.ExitButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ExitButton.UseVisualStyleBackColor = true;
             this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
+            this.ExitButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // ShowCardsButton
             // 
             this.ShowCardsButton.FlatAppearance.BorderSize = 0;
             this.ShowCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShowCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShowCardsButton.Location = new System.Drawing.Point(611, 108);
+            this.ShowCardsButton.Location = new System.Drawing.Point(614, 108);
             this.ShowCardsButton.Name = "ShowCardsButton";
             this.ShowCardsButton.Size = new System.Drawing.Size(177, 35);
             this.ShowCardsButton.TabIndex = 3;
@@ -93,13 +95,14 @@
             this.ShowCardsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ShowCardsButton.UseVisualStyleBackColor = true;
             this.ShowCardsButton.Click += new System.EventHandler(this.ShowCardsButton_Click);
+            this.ShowCardsButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // HideCardsButton
             // 
             this.HideCardsButton.FlatAppearance.BorderSize = 0;
             this.HideCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HideCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HideCardsButton.Location = new System.Drawing.Point(611, 149);
+            this.HideCardsButton.Location = new System.Drawing.Point(614, 149);
             this.HideCardsButton.Name = "HideCardsButton";
             this.HideCardsButton.Size = new System.Drawing.Size(177, 35);
             this.HideCardsButton.TabIndex = 4;
@@ -107,13 +110,14 @@
             this.HideCardsButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.HideCardsButton.UseVisualStyleBackColor = true;
             this.HideCardsButton.Click += new System.EventHandler(this.HideCardsButton_Click);
+            this.HideCardsButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // ShuffleCards
             // 
             this.ShuffleCards.FlatAppearance.BorderSize = 0;
             this.ShuffleCards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShuffleCards.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShuffleCards.Location = new System.Drawing.Point(611, 190);
+            this.ShuffleCards.Location = new System.Drawing.Point(614, 190);
             this.ShuffleCards.Name = "ShuffleCards";
             this.ShuffleCards.Size = new System.Drawing.Size(177, 35);
             this.ShuffleCards.TabIndex = 5;
@@ -121,6 +125,7 @@
             this.ShuffleCards.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ShuffleCards.UseVisualStyleBackColor = true;
             this.ShuffleCards.Click += new System.EventHandler(this.ShuffleCards_Click);
+            this.ShuffleCards.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // BackToMainButton
             // 
@@ -129,15 +134,16 @@
             this.BackToMainButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BackToMainButton.Image = ((System.Drawing.Image)(resources.GetObject("BackToMainButton.Image")));
             this.BackToMainButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BackToMainButton.Location = new System.Drawing.Point(611, 403);
+            this.BackToMainButton.Location = new System.Drawing.Point(614, 403);
             this.BackToMainButton.Name = "BackToMainButton";
             this.BackToMainButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BackToMainButton.Size = new System.Drawing.Size(136, 35);
+            this.BackToMainButton.Size = new System.Drawing.Size(99, 35);
             this.BackToMainButton.TabIndex = 6;
             this.BackToMainButton.Text = "назад";
             this.BackToMainButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BackToMainButton.UseVisualStyleBackColor = true;
             this.BackToMainButton.Click += new System.EventHandler(this.BackToMainButton_Click);
+            this.BackToMainButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // CategoryComboBox
             // 
@@ -151,6 +157,7 @@
             this.CategoryComboBox.Size = new System.Drawing.Size(177, 32);
             this.CategoryComboBox.TabIndex = 41;
             this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
+            this.CategoryComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
             // 
             // FirstPlayerLabel
             // 
@@ -194,6 +201,7 @@
             this.Player1ComboBox.Size = new System.Drawing.Size(121, 32);
             this.Player1ComboBox.TabIndex = 45;
             this.Player1ComboBox.SelectedIndexChanged += new System.EventHandler(this.Player1ComboBox_SelectedIndexChanged);
+            this.Player1ComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
             // 
             // Player2ComboBox
             // 
@@ -207,6 +215,7 @@
             this.Player2ComboBox.Size = new System.Drawing.Size(121, 32);
             this.Player2ComboBox.TabIndex = 46;
             this.Player2ComboBox.SelectedIndexChanged += new System.EventHandler(this.Player2ComboBox_SelectedIndexChanged);
+            this.Player2ComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
             // 
             // Player3ComboBox
             // 
@@ -220,6 +229,7 @@
             this.Player3ComboBox.Size = new System.Drawing.Size(121, 32);
             this.Player3ComboBox.TabIndex = 47;
             this.Player3ComboBox.SelectedIndexChanged += new System.EventHandler(this.Player3ComboBox_SelectedIndexChanged);
+            this.Player3ComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
             // 
             // RemovePlayer1Button
             // 

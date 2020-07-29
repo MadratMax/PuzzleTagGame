@@ -14,6 +14,28 @@ namespace PuzzleTag.Configuration
 
         public static string Delay = SettingsManager.GetSettingsValue("settings", "open-card-delay");
 
+        public static string ButtonSound = SettingsManager.GetSettingsValue("settings", "sounds", "button-sound");
+
+        public static string SettingsSound = SettingsManager.GetSettingsValue("settings", "sounds", "settings-sound");
+
+        public static string WinSound = SettingsManager.GetSettingsValue("settings", "sounds", "win-game-sound");
+
+        public static string SelectSound = SettingsManager.GetSettingsValue("settings", "sounds", "select-item-sound");
+
+        public static string StartGameSound = SettingsManager.GetSettingsValue("settings", "sounds", "start-game-sound");
+
+        public static string CloseCardSound = SettingsManager.GetSettingsValue("settings", "sounds", "close-card-sound");
+
+        public static string CannotOpenCardSound = SettingsManager.GetSettingsValue("settings", "sounds", "cannot-open-card-sound");
+
+        public static string ScoreSound = SettingsManager.GetSettingsValue("settings", "sounds", "score-sound");
+
+        public static string ShuffleSound = SettingsManager.GetSettingsValue("settings", "sounds", "shuffle-sound");
+
+        public static string OpenCloseCardsSound = SettingsManager.GetSettingsValue("settings", "sounds", "open-close-sound");
+
+        public static string RemovePlayerSound = SettingsManager.GetSettingsValue("settings", "sounds", "remove-player-sound");
+
         public static string Player1Name = SettingsManager.GetSettingsValue("settings", "player1", "name");
 
         public static string Player1AvaImage = SettingsManager.GetSettingsValue("settings", "player1", "ava");
