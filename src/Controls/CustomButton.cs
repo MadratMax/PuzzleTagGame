@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PuzzleTag.Controls
@@ -65,8 +66,15 @@ namespace PuzzleTag.Controls
 
         public void ShowClosedCardImage()
         {
-            button.Image = closedCardImage;
-            closed = true;
+            try
+            {
+                button.Image = closedCardImage;
+                closed = true;
+            }
+            catch
+            {
+                
+            }
         }
 
         public void SetImage(Image image)

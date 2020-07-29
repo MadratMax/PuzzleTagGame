@@ -14,7 +14,7 @@ namespace PuzzleTag.UI
         {
             if (MainFormUI != null)
             {
-                MainFormUI.InfoLabel.Text = text;
+                //MainFormUI.InfoLabel.Text = text;
             }
         }
 
@@ -30,7 +30,7 @@ namespace PuzzleTag.UI
         {
             if (MainFormUI != null)
             {
-                MainFormUI.InfoLabel.Text = string.Empty;
+                //MainFormUI.InfoLabel.Text = string.Empty;
             }
         }
 

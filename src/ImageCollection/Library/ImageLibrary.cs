@@ -10,6 +10,7 @@ namespace PuzzleTag.FileManager.Library
     class ImageLibrary
     {
         private List<CustomImage> imageCollection;
+        private CustomImage mainImage;
         private CustomImage winnerImage;
         private CustomImage closedCardImage;
         private List<string> categories;
@@ -41,9 +42,19 @@ namespace PuzzleTag.FileManager.Library
             winnerImage = image;
         }
 
+        public void SetMainImage(CustomImage image)
+        {
+            mainImage = image;
+        }
+
         public CustomImage GetWinnerImage()
         {
             return winnerImage;
+        }
+
+        public CustomImage GetMainImage()
+        {
+            return mainImage;
         }
 
         public void SetClosedCardImage(CustomImage image)

@@ -79,7 +79,9 @@ namespace PuzzleTag
                 ruler.StartGame(moveQueue, totalScore, scoreStorage);
                 BlockSettings();
                 BackToMain();
-                UI.Update.UpdateInfoLabel($"{ruler.CurrentPlayer.Name.ToUpper()} ходит");
+
+                baseForm.Player1Avatar.FlatAppearance.BorderColor = Color.DarkOrange;
+                baseForm.Player1Avatar.FlatAppearance.BorderSize = 4;
             }
         }
 
@@ -113,6 +115,12 @@ namespace PuzzleTag
             };
 
             var player = players.GetPlayerByIndex(3);
+
+            if (player != null)
+            {
+                player.AvaButton = baseForm.Player3Avatar;
+            }
+            
             scoreStorage.Add(player3PrizeImagesList, player);
         }
 
@@ -139,6 +147,12 @@ namespace PuzzleTag
             };
 
             var player = players.GetPlayerByIndex(2);
+
+            if (player != null)
+            {
+                player.AvaButton = baseForm.Player2Avatar;
+            }
+
             scoreStorage.Add(player2PrizeImagesList, player);
         }
 
@@ -165,6 +179,12 @@ namespace PuzzleTag
             };
 
             var player = players.GetPlayerByIndex(1);
+
+            if (player != null)
+            {
+                player.AvaButton = baseForm.Player1Avatar;
+            }
+            
             scoreStorage.Add(player1PrizeImagesList, player);
         }
 
@@ -254,7 +274,6 @@ namespace PuzzleTag
             RemovePlayersFromGame();
             Shuffle();
             UnblockSettings();
-            UI.Update.ClearInfoLabel();
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -266,30 +285,30 @@ namespace PuzzleTag
         {
             GameState.Category = CategoryComboBox.Text;
 
-            this.Invoke((Action)(() => baseForm.InfoLabel.Text = "Initializing..."));
+            //this.Invoke((Action)(() => baseForm.InfoLabel.Text = "Initializing..."));
             ChangeGameCategory();
         }
 
         private void ChangeGameCategory()
         {
-            new Thread(() =>
-            {
-                Thread.CurrentThread.IsBackground = false;
-                buttonManager.AssignImages(GameState.Category);
-                buttonManager.HideButtonImages();
-            }).Start();
+            Thread.CurrentThread.IsBackground = false;
+            buttonManager.AssignImages(GameState.Category);
+            buttonManager.HideButtonImages();
 
-            this.Invoke((Action)(() => baseForm.InfoLabel.Text = ""));
+            //this.Invoke((Action)(() => baseForm.InfoLabel.Text = ""));
         }
 
         private void RemovePlayer1Button_Click(object sender, EventArgs e)
         {
             Player1ComboBox.SelectedIndex = -1;
+            Player2ComboBox.SelectedIndex = -1;
+            Player3ComboBox.SelectedIndex = -1;
         }
 
         private void RemovePlayer2Button_Click(object sender, EventArgs e)
         {
             Player2ComboBox.SelectedIndex = -1;
+            Player3ComboBox.SelectedIndex = -1;
         }
 
         private void RemovePlayer3Button_Click(object sender, EventArgs e)
@@ -328,6 +347,35 @@ namespace PuzzleTag
             {
                 BackToMainButton.PerformClick();
             }
+        }
+
+        private void Player1ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Player1ComboBox.SelectedIndex != -1)
+            {
+                Player2ComboBox.Enabled = true;
+            }
+            else
+            {
+                Player2ComboBox.Enabled = false;
+            }
+        }
+
+        private void Player2ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Player2ComboBox.SelectedIndex != -1)
+            {
+                Player3ComboBox.Enabled = true;
+            }
+            else
+            {
+                Player3ComboBox.Enabled = false;
+            }
+        }
+
+        private void Player3ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

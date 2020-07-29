@@ -50,6 +50,11 @@ namespace PuzzleTag.FileManager
             return imageLib.GetWinnerImage();
         }
 
+        public CustomImage GetMainImage()
+        {
+            return imageLib.GetMainImage();
+        }
+
         public List<CustomImage> GetImageCollectionByCategory(string category)
         {
             var categorizedCollection = new List<CustomImage>();
@@ -86,17 +91,32 @@ namespace PuzzleTag.FileManager
                 }
             }
 
+            SetMainScreenImage();
             SetWinnerImage();
             SetClosedCardImage();
             InitializeCategories();
 
             var collection = imageLib.GetCollection();
 
-            for (int i = 0; i < 16; i++)
+            for (int i = 0; i < collection.Count; i++)
             {
                 this.imageCollection.Add(collection[i]);
                 this.imageCollection.Add(collection[i]);
             }
+        }
+
+        private void SetMainScreenImage()
+        {
+            var mainImage = fileManager.GetFiles(Settings.MainImagePath).FirstOrDefault();
+            var newCustomImage = new CustomImage
+            {
+                Name = fileManager.GetFileName(mainImage),
+                SpecialName = "MainImage",
+                Category = fileManager.GetDirName(mainImage),
+                Image = Image.FromFile(mainImage)
+            };
+
+            imageLib.SetMainImage(newCustomImage);
         }
 
         private void InitializeCategories()

@@ -34,14 +34,11 @@ namespace PuzzleTag.Game
                  prizeList.Add(Image.FromFile(@"C:\Users\mgaydideev\Downloads\prize-icon.png"));
                  prizeList.Add(Image.FromFile(@"C:\Users\mgaydideev\Downloads\prize-icon.png"));
             }
-            
-            UI.Update.UpdateTotalScoreLabel(string.Join("\n", totalScoreList));
         }
 
         public void ResetScore()
         {
             this.totalScoreList = null;
-            UI.Update.ClearTotalScoreLabel();
         }
     }
 }

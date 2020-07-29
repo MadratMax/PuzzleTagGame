@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 using PuzzleTag.Collection;
@@ -8,6 +6,7 @@ using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
+using PuzzleTag.Notification;
 
 namespace PuzzleTag
 {
@@ -22,6 +21,7 @@ namespace PuzzleTag
         private Ruler ruler;
         private Players players;
         private SettingsForm gameSettings;
+        private TimedPopUp messageBar;
 
         public PuzzleTag()
         {
@@ -30,6 +30,7 @@ namespace PuzzleTag
 
         private void PuzzleTag_Load(object sender, EventArgs e)
         {
+            ShowStatusMessage("Загрузка...");
             this.BackgroundImageLayout = ImageLayout.Stretch;
             SetupClickEvents(this);
             SetupKeyDownEvents(this);
@@ -40,6 +41,18 @@ namespace PuzzleTag
             InitGameRules();
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
             UI.Update.MainFormUI = this;
+        }
+
+        private void ShowStatusMessage(string message)
+        {
+            messageBar = new TimedPopUp();
+            messageBar.Set(message, FormStartPosition.CenterScreen);
+            messageBar.Show(autoHide:false);
+        }
+
+        private void HideStatusMessage()
+        {
+            messageBar?.HideForm();
         }
 
         private void SetupKeyDownEvents(PuzzleTag puzzleTag)
@@ -81,7 +94,7 @@ namespace PuzzleTag
         }
         private void InitGameRules()
         {
-            this.ruler = new Ruler(buttonManager, customButtonsCollection, libManager);
+            this.ruler = new Ruler(buttonManager, customButtonsCollection, libManager, players);
         }
 
         private void InitializeGameData()
@@ -89,18 +102,18 @@ namespace PuzzleTag
             new Thread(() =>
             {
                 Thread.CurrentThread.IsBackground = false;
-                this.Invoke((Action)(() => InfoLabel.Text = "Initializing..."));
                 this.Invoke((Action)(InitializeLibrary));
                 this.Invoke((Action)(() => buttonManager.AssignImages(GameState.Category)));
                 this.Invoke((Action)(() => buttonManager.SetClosedCardImages()));
                 this.Invoke((Action)(() => buttonManager.HideButtonImages()));
+                this.Invoke((Action)(HideStatusMessage));
             }).Start();
         }
 
         private void InitializeLibrary()
         {
             libManager.InitializeLibrary();
-            this.Invoke((Action)(() => InfoLabel.Text = ""));
+            this.BackgroundImage = libManager.GetMainImage().Image;
         }
 
         private void HandleClicks(object sender, EventArgs e)

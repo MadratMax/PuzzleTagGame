@@ -11,8 +11,10 @@ namespace PuzzleTag.Notification
 
         public void Set(
             string msg,
+            FormStartPosition position = FormStartPosition.CenterScreen,
             int width = 600,
-            int height = 0)
+            int height = 0
+            )
         {
             this.Size = new Size(width, height);
             this.Text = msg;
@@ -20,13 +22,22 @@ namespace PuzzleTag.Notification
             this.MaximizeBox = false;
             this.ShowIcon = false;
             this.ControlBox = false;
-            this.StartPosition = FormStartPosition.CenterParent;
+            this.StartPosition = position;
         }
 
-        async new public void Show(int waitTime = 2000)
+        async new public void Show(int waitTime = 2000, bool autoHide = true)
         {
             base.Show();
-            await Task.Delay(waitTime);
+
+            if (autoHide)
+            {
+                await Task.Delay(waitTime);
+                this.Hide();
+            }
+        }
+
+        public void HideForm()
+        {
             this.Hide();
         }
 

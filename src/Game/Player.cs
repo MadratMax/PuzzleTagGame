@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace PuzzleTag.Game
 {
@@ -15,6 +16,8 @@ namespace PuzzleTag.Game
         public int Steps;
 
         public Image Avatar;
+
+        public Button AvaButton;
 
         public int DiscoveredCards;
     }

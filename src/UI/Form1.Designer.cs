@@ -450,10 +450,10 @@
             // InfoLabel
             // 
             this.InfoLabel.AutoSize = true;
-            this.InfoLabel.BackColor = System.Drawing.Color.Transparent;
+            this.InfoLabel.BackColor = System.Drawing.Color.Black;
             this.InfoLabel.Font = new System.Drawing.Font("Comic Sans MS", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.InfoLabel.ForeColor = System.Drawing.Color.MidnightBlue;
-            this.InfoLabel.Location = new System.Drawing.Point(78, -6);
+            this.InfoLabel.Location = new System.Drawing.Point(613, 1012);
             this.InfoLabel.Name = "InfoLabel";
             this.InfoLabel.Size = new System.Drawing.Size(0, 29);
             this.InfoLabel.TabIndex = 39;
@@ -463,7 +463,6 @@
             this.SettingsButton.BackColor = System.Drawing.Color.Transparent;
             this.SettingsButton.FlatAppearance.BorderSize = 0;
             this.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SettingsButton.Image = ((System.Drawing.Image)(resources.GetObject("SettingsButton.Image")));
             this.SettingsButton.Location = new System.Drawing.Point(1921, 1013);
             this.SettingsButton.Name = "SettingsButton";
             this.SettingsButton.Size = new System.Drawing.Size(41, 35);
@@ -489,7 +488,7 @@
             this.Player1Avatar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Player1Avatar.Location = new System.Drawing.Point(80, 971);
             this.Player1Avatar.Name = "Player1Avatar";
-            this.Player1Avatar.Size = new System.Drawing.Size(100, 75);
+            this.Player1Avatar.Size = new System.Drawing.Size(90, 75);
             this.Player1Avatar.TabIndex = 43;
             this.Player1Avatar.UseVisualStyleBackColor = false;
             // 
@@ -502,7 +501,7 @@
             this.Player2Avatar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Player2Avatar.Location = new System.Drawing.Point(788, 971);
             this.Player2Avatar.Name = "Player2Avatar";
-            this.Player2Avatar.Size = new System.Drawing.Size(100, 75);
+            this.Player2Avatar.Size = new System.Drawing.Size(90, 75);
             this.Player2Avatar.TabIndex = 44;
             this.Player2Avatar.UseVisualStyleBackColor = false;
             // 
@@ -515,7 +514,7 @@
             this.Player3Avatar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Player3Avatar.Location = new System.Drawing.Point(1496, 971);
             this.Player3Avatar.Name = "Player3Avatar";
-            this.Player3Avatar.Size = new System.Drawing.Size(100, 75);
+            this.Player3Avatar.Size = new System.Drawing.Size(90, 75);
             this.Player3Avatar.TabIndex = 45;
             this.Player3Avatar.UseVisualStyleBackColor = false;
             // 
@@ -580,7 +579,7 @@
             this.Pl1p1.FlatAppearance.BorderSize = 0;
             this.Pl1p1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p1.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p1.Image")));
-            this.Pl1p1.Location = new System.Drawing.Point(205, 971);
+            this.Pl1p1.Location = new System.Drawing.Point(199, 971);
             this.Pl1p1.Name = "Pl1p1";
             this.Pl1p1.Size = new System.Drawing.Size(30, 23);
             this.Pl1p1.TabIndex = 52;
@@ -594,7 +593,7 @@
             this.Pl1p2.FlatAppearance.BorderSize = 0;
             this.Pl1p2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p2.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p2.Image")));
-            this.Pl1p2.Location = new System.Drawing.Point(231, 971);
+            this.Pl1p2.Location = new System.Drawing.Point(225, 971);
             this.Pl1p2.Name = "Pl1p2";
             this.Pl1p2.Size = new System.Drawing.Size(30, 23);
             this.Pl1p2.TabIndex = 53;
@@ -608,7 +607,7 @@
             this.Pl1p3.FlatAppearance.BorderSize = 0;
             this.Pl1p3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p3.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p3.Image")));
-            this.Pl1p3.Location = new System.Drawing.Point(258, 971);
+            this.Pl1p3.Location = new System.Drawing.Point(252, 971);
             this.Pl1p3.Name = "Pl1p3";
             this.Pl1p3.Size = new System.Drawing.Size(30, 23);
             this.Pl1p3.TabIndex = 54;
@@ -622,7 +621,7 @@
             this.Pl1p4.FlatAppearance.BorderSize = 0;
             this.Pl1p4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p4.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p4.Image")));
-            this.Pl1p4.Location = new System.Drawing.Point(284, 971);
+            this.Pl1p4.Location = new System.Drawing.Point(278, 971);
             this.Pl1p4.Name = "Pl1p4";
             this.Pl1p4.Size = new System.Drawing.Size(30, 23);
             this.Pl1p4.TabIndex = 55;
@@ -636,7 +635,7 @@
             this.Pl1p5.FlatAppearance.BorderSize = 0;
             this.Pl1p5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p5.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p5.Image")));
-            this.Pl1p5.Location = new System.Drawing.Point(309, 971);
+            this.Pl1p5.Location = new System.Drawing.Point(303, 971);
             this.Pl1p5.Name = "Pl1p5";
             this.Pl1p5.Size = new System.Drawing.Size(30, 23);
             this.Pl1p5.TabIndex = 56;
@@ -650,7 +649,7 @@
             this.Pl1p6.FlatAppearance.BorderSize = 0;
             this.Pl1p6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p6.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p6.Image")));
-            this.Pl1p6.Location = new System.Drawing.Point(336, 971);
+            this.Pl1p6.Location = new System.Drawing.Point(330, 971);
             this.Pl1p6.Name = "Pl1p6";
             this.Pl1p6.Size = new System.Drawing.Size(30, 23);
             this.Pl1p6.TabIndex = 57;
@@ -664,7 +663,7 @@
             this.Pl1p7.FlatAppearance.BorderSize = 0;
             this.Pl1p7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p7.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p7.Image")));
-            this.Pl1p7.Location = new System.Drawing.Point(362, 971);
+            this.Pl1p7.Location = new System.Drawing.Point(356, 971);
             this.Pl1p7.Name = "Pl1p7";
             this.Pl1p7.Size = new System.Drawing.Size(30, 23);
             this.Pl1p7.TabIndex = 58;
@@ -678,7 +677,7 @@
             this.Pl1p8.FlatAppearance.BorderSize = 0;
             this.Pl1p8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p8.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p8.Image")));
-            this.Pl1p8.Location = new System.Drawing.Point(389, 971);
+            this.Pl1p8.Location = new System.Drawing.Point(383, 971);
             this.Pl1p8.Name = "Pl1p8";
             this.Pl1p8.Size = new System.Drawing.Size(30, 23);
             this.Pl1p8.TabIndex = 59;
@@ -692,7 +691,7 @@
             this.Pl1p9.FlatAppearance.BorderSize = 0;
             this.Pl1p9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p9.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p9.Image")));
-            this.Pl1p9.Location = new System.Drawing.Point(414, 971);
+            this.Pl1p9.Location = new System.Drawing.Point(408, 971);
             this.Pl1p9.Name = "Pl1p9";
             this.Pl1p9.Size = new System.Drawing.Size(30, 23);
             this.Pl1p9.TabIndex = 60;
@@ -706,7 +705,7 @@
             this.Pl1p10.FlatAppearance.BorderSize = 0;
             this.Pl1p10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p10.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p10.Image")));
-            this.Pl1p10.Location = new System.Drawing.Point(441, 971);
+            this.Pl1p10.Location = new System.Drawing.Point(435, 971);
             this.Pl1p10.Name = "Pl1p10";
             this.Pl1p10.Size = new System.Drawing.Size(30, 23);
             this.Pl1p10.TabIndex = 61;
@@ -720,7 +719,7 @@
             this.Pl1p11.FlatAppearance.BorderSize = 0;
             this.Pl1p11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p11.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p11.Image")));
-            this.Pl1p11.Location = new System.Drawing.Point(465, 971);
+            this.Pl1p11.Location = new System.Drawing.Point(459, 971);
             this.Pl1p11.Name = "Pl1p11";
             this.Pl1p11.Size = new System.Drawing.Size(30, 23);
             this.Pl1p11.TabIndex = 62;
@@ -734,7 +733,7 @@
             this.Pl1p12.FlatAppearance.BorderSize = 0;
             this.Pl1p12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p12.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p12.Image")));
-            this.Pl1p12.Location = new System.Drawing.Point(490, 971);
+            this.Pl1p12.Location = new System.Drawing.Point(484, 971);
             this.Pl1p12.Name = "Pl1p12";
             this.Pl1p12.Size = new System.Drawing.Size(30, 23);
             this.Pl1p12.TabIndex = 63;
@@ -748,7 +747,7 @@
             this.Pl1p13.FlatAppearance.BorderSize = 0;
             this.Pl1p13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p13.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p13.Image")));
-            this.Pl1p13.Location = new System.Drawing.Point(205, 997);
+            this.Pl1p13.Location = new System.Drawing.Point(199, 997);
             this.Pl1p13.Name = "Pl1p13";
             this.Pl1p13.Size = new System.Drawing.Size(30, 23);
             this.Pl1p13.TabIndex = 64;
@@ -762,7 +761,7 @@
             this.Pl1p14.FlatAppearance.BorderSize = 0;
             this.Pl1p14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p14.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p14.Image")));
-            this.Pl1p14.Location = new System.Drawing.Point(231, 997);
+            this.Pl1p14.Location = new System.Drawing.Point(225, 997);
             this.Pl1p14.Name = "Pl1p14";
             this.Pl1p14.Size = new System.Drawing.Size(30, 23);
             this.Pl1p14.TabIndex = 65;
@@ -776,7 +775,7 @@
             this.Pl1p15.FlatAppearance.BorderSize = 0;
             this.Pl1p15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p15.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p15.Image")));
-            this.Pl1p15.Location = new System.Drawing.Point(258, 997);
+            this.Pl1p15.Location = new System.Drawing.Point(252, 997);
             this.Pl1p15.Name = "Pl1p15";
             this.Pl1p15.Size = new System.Drawing.Size(30, 23);
             this.Pl1p15.TabIndex = 66;
@@ -790,7 +789,7 @@
             this.Pl1p16.FlatAppearance.BorderSize = 0;
             this.Pl1p16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl1p16.Image = ((System.Drawing.Image)(resources.GetObject("Pl1p16.Image")));
-            this.Pl1p16.Location = new System.Drawing.Point(284, 997);
+            this.Pl1p16.Location = new System.Drawing.Point(278, 997);
             this.Pl1p16.Name = "Pl1p16";
             this.Pl1p16.Size = new System.Drawing.Size(30, 23);
             this.Pl1p16.TabIndex = 67;
@@ -804,7 +803,7 @@
             this.Pl2p16.FlatAppearance.BorderSize = 0;
             this.Pl2p16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p16.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p16.Image")));
-            this.Pl2p16.Location = new System.Drawing.Point(987, 997);
+            this.Pl2p16.Location = new System.Drawing.Point(981, 997);
             this.Pl2p16.Name = "Pl2p16";
             this.Pl2p16.Size = new System.Drawing.Size(30, 23);
             this.Pl2p16.TabIndex = 83;
@@ -818,7 +817,7 @@
             this.Pl2p15.FlatAppearance.BorderSize = 0;
             this.Pl2p15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p15.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p15.Image")));
-            this.Pl2p15.Location = new System.Drawing.Point(961, 997);
+            this.Pl2p15.Location = new System.Drawing.Point(955, 997);
             this.Pl2p15.Name = "Pl2p15";
             this.Pl2p15.Size = new System.Drawing.Size(30, 23);
             this.Pl2p15.TabIndex = 82;
@@ -832,7 +831,7 @@
             this.Pl2p14.FlatAppearance.BorderSize = 0;
             this.Pl2p14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p14.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p14.Image")));
-            this.Pl2p14.Location = new System.Drawing.Point(934, 997);
+            this.Pl2p14.Location = new System.Drawing.Point(928, 997);
             this.Pl2p14.Name = "Pl2p14";
             this.Pl2p14.Size = new System.Drawing.Size(30, 23);
             this.Pl2p14.TabIndex = 81;
@@ -846,7 +845,7 @@
             this.Pl2p13.FlatAppearance.BorderSize = 0;
             this.Pl2p13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p13.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p13.Image")));
-            this.Pl2p13.Location = new System.Drawing.Point(908, 997);
+            this.Pl2p13.Location = new System.Drawing.Point(902, 997);
             this.Pl2p13.Name = "Pl2p13";
             this.Pl2p13.Size = new System.Drawing.Size(30, 23);
             this.Pl2p13.TabIndex = 80;
@@ -860,7 +859,7 @@
             this.Pl2p12.FlatAppearance.BorderSize = 0;
             this.Pl2p12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p12.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p12.Image")));
-            this.Pl2p12.Location = new System.Drawing.Point(1193, 971);
+            this.Pl2p12.Location = new System.Drawing.Point(1187, 971);
             this.Pl2p12.Name = "Pl2p12";
             this.Pl2p12.Size = new System.Drawing.Size(30, 23);
             this.Pl2p12.TabIndex = 79;
@@ -874,7 +873,7 @@
             this.Pl2p11.FlatAppearance.BorderSize = 0;
             this.Pl2p11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p11.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p11.Image")));
-            this.Pl2p11.Location = new System.Drawing.Point(1168, 971);
+            this.Pl2p11.Location = new System.Drawing.Point(1162, 971);
             this.Pl2p11.Name = "Pl2p11";
             this.Pl2p11.Size = new System.Drawing.Size(30, 23);
             this.Pl2p11.TabIndex = 78;
@@ -888,7 +887,7 @@
             this.Pl2p10.FlatAppearance.BorderSize = 0;
             this.Pl2p10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p10.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p10.Image")));
-            this.Pl2p10.Location = new System.Drawing.Point(1144, 971);
+            this.Pl2p10.Location = new System.Drawing.Point(1138, 971);
             this.Pl2p10.Name = "Pl2p10";
             this.Pl2p10.Size = new System.Drawing.Size(30, 23);
             this.Pl2p10.TabIndex = 77;
@@ -902,7 +901,7 @@
             this.Pl2p9.FlatAppearance.BorderSize = 0;
             this.Pl2p9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p9.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p9.Image")));
-            this.Pl2p9.Location = new System.Drawing.Point(1117, 971);
+            this.Pl2p9.Location = new System.Drawing.Point(1111, 971);
             this.Pl2p9.Name = "Pl2p9";
             this.Pl2p9.Size = new System.Drawing.Size(30, 23);
             this.Pl2p9.TabIndex = 76;
@@ -916,7 +915,7 @@
             this.Pl2p8.FlatAppearance.BorderSize = 0;
             this.Pl2p8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p8.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p8.Image")));
-            this.Pl2p8.Location = new System.Drawing.Point(1092, 971);
+            this.Pl2p8.Location = new System.Drawing.Point(1086, 971);
             this.Pl2p8.Name = "Pl2p8";
             this.Pl2p8.Size = new System.Drawing.Size(30, 23);
             this.Pl2p8.TabIndex = 75;
@@ -930,7 +929,7 @@
             this.Pl2p7.FlatAppearance.BorderSize = 0;
             this.Pl2p7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p7.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p7.Image")));
-            this.Pl2p7.Location = new System.Drawing.Point(1065, 971);
+            this.Pl2p7.Location = new System.Drawing.Point(1059, 971);
             this.Pl2p7.Name = "Pl2p7";
             this.Pl2p7.Size = new System.Drawing.Size(30, 23);
             this.Pl2p7.TabIndex = 74;
@@ -944,7 +943,7 @@
             this.Pl2p6.FlatAppearance.BorderSize = 0;
             this.Pl2p6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p6.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p6.Image")));
-            this.Pl2p6.Location = new System.Drawing.Point(1039, 971);
+            this.Pl2p6.Location = new System.Drawing.Point(1033, 971);
             this.Pl2p6.Name = "Pl2p6";
             this.Pl2p6.Size = new System.Drawing.Size(30, 23);
             this.Pl2p6.TabIndex = 73;
@@ -958,7 +957,7 @@
             this.Pl2p5.FlatAppearance.BorderSize = 0;
             this.Pl2p5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p5.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p5.Image")));
-            this.Pl2p5.Location = new System.Drawing.Point(1012, 971);
+            this.Pl2p5.Location = new System.Drawing.Point(1006, 971);
             this.Pl2p5.Name = "Pl2p5";
             this.Pl2p5.Size = new System.Drawing.Size(30, 23);
             this.Pl2p5.TabIndex = 72;
@@ -972,7 +971,7 @@
             this.Pl2p4.FlatAppearance.BorderSize = 0;
             this.Pl2p4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p4.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p4.Image")));
-            this.Pl2p4.Location = new System.Drawing.Point(987, 971);
+            this.Pl2p4.Location = new System.Drawing.Point(981, 971);
             this.Pl2p4.Name = "Pl2p4";
             this.Pl2p4.Size = new System.Drawing.Size(30, 23);
             this.Pl2p4.TabIndex = 71;
@@ -986,7 +985,7 @@
             this.Pl2p3.FlatAppearance.BorderSize = 0;
             this.Pl2p3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p3.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p3.Image")));
-            this.Pl2p3.Location = new System.Drawing.Point(961, 971);
+            this.Pl2p3.Location = new System.Drawing.Point(955, 971);
             this.Pl2p3.Name = "Pl2p3";
             this.Pl2p3.Size = new System.Drawing.Size(30, 23);
             this.Pl2p3.TabIndex = 70;
@@ -1000,7 +999,7 @@
             this.Pl2p2.FlatAppearance.BorderSize = 0;
             this.Pl2p2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p2.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p2.Image")));
-            this.Pl2p2.Location = new System.Drawing.Point(934, 971);
+            this.Pl2p2.Location = new System.Drawing.Point(928, 971);
             this.Pl2p2.Name = "Pl2p2";
             this.Pl2p2.Size = new System.Drawing.Size(30, 23);
             this.Pl2p2.TabIndex = 69;
@@ -1014,7 +1013,7 @@
             this.Pl2p1.FlatAppearance.BorderSize = 0;
             this.Pl2p1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl2p1.Image = ((System.Drawing.Image)(resources.GetObject("Pl2p1.Image")));
-            this.Pl2p1.Location = new System.Drawing.Point(908, 971);
+            this.Pl2p1.Location = new System.Drawing.Point(902, 971);
             this.Pl2p1.Name = "Pl2p1";
             this.Pl2p1.Size = new System.Drawing.Size(30, 23);
             this.Pl2p1.TabIndex = 68;
@@ -1028,7 +1027,7 @@
             this.Pl3p16.FlatAppearance.BorderSize = 0;
             this.Pl3p16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p16.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p16.Image")));
-            this.Pl3p16.Location = new System.Drawing.Point(1696, 997);
+            this.Pl3p16.Location = new System.Drawing.Point(1690, 997);
             this.Pl3p16.Name = "Pl3p16";
             this.Pl3p16.Size = new System.Drawing.Size(30, 23);
             this.Pl3p16.TabIndex = 99;
@@ -1042,7 +1041,7 @@
             this.Pl3p15.FlatAppearance.BorderSize = 0;
             this.Pl3p15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p15.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p15.Image")));
-            this.Pl3p15.Location = new System.Drawing.Point(1670, 997);
+            this.Pl3p15.Location = new System.Drawing.Point(1664, 997);
             this.Pl3p15.Name = "Pl3p15";
             this.Pl3p15.Size = new System.Drawing.Size(30, 23);
             this.Pl3p15.TabIndex = 98;
@@ -1056,7 +1055,7 @@
             this.Pl3p14.FlatAppearance.BorderSize = 0;
             this.Pl3p14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p14.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p14.Image")));
-            this.Pl3p14.Location = new System.Drawing.Point(1643, 997);
+            this.Pl3p14.Location = new System.Drawing.Point(1637, 997);
             this.Pl3p14.Name = "Pl3p14";
             this.Pl3p14.Size = new System.Drawing.Size(30, 23);
             this.Pl3p14.TabIndex = 97;
@@ -1070,7 +1069,7 @@
             this.Pl3p13.FlatAppearance.BorderSize = 0;
             this.Pl3p13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p13.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p13.Image")));
-            this.Pl3p13.Location = new System.Drawing.Point(1617, 997);
+            this.Pl3p13.Location = new System.Drawing.Point(1611, 997);
             this.Pl3p13.Name = "Pl3p13";
             this.Pl3p13.Size = new System.Drawing.Size(30, 23);
             this.Pl3p13.TabIndex = 96;
@@ -1084,7 +1083,7 @@
             this.Pl3p12.FlatAppearance.BorderSize = 0;
             this.Pl3p12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p12.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p12.Image")));
-            this.Pl3p12.Location = new System.Drawing.Point(1902, 971);
+            this.Pl3p12.Location = new System.Drawing.Point(1896, 971);
             this.Pl3p12.Name = "Pl3p12";
             this.Pl3p12.Size = new System.Drawing.Size(30, 23);
             this.Pl3p12.TabIndex = 95;
@@ -1098,7 +1097,7 @@
             this.Pl3p11.FlatAppearance.BorderSize = 0;
             this.Pl3p11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p11.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p11.Image")));
-            this.Pl3p11.Location = new System.Drawing.Point(1877, 971);
+            this.Pl3p11.Location = new System.Drawing.Point(1871, 971);
             this.Pl3p11.Name = "Pl3p11";
             this.Pl3p11.Size = new System.Drawing.Size(30, 23);
             this.Pl3p11.TabIndex = 94;
@@ -1112,7 +1111,7 @@
             this.Pl3p10.FlatAppearance.BorderSize = 0;
             this.Pl3p10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p10.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p10.Image")));
-            this.Pl3p10.Location = new System.Drawing.Point(1853, 971);
+            this.Pl3p10.Location = new System.Drawing.Point(1847, 971);
             this.Pl3p10.Name = "Pl3p10";
             this.Pl3p10.Size = new System.Drawing.Size(30, 23);
             this.Pl3p10.TabIndex = 93;
@@ -1126,7 +1125,7 @@
             this.Pl3p9.FlatAppearance.BorderSize = 0;
             this.Pl3p9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p9.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p9.Image")));
-            this.Pl3p9.Location = new System.Drawing.Point(1826, 971);
+            this.Pl3p9.Location = new System.Drawing.Point(1820, 971);
             this.Pl3p9.Name = "Pl3p9";
             this.Pl3p9.Size = new System.Drawing.Size(30, 23);
             this.Pl3p9.TabIndex = 92;
@@ -1140,7 +1139,7 @@
             this.Pl3p8.FlatAppearance.BorderSize = 0;
             this.Pl3p8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p8.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p8.Image")));
-            this.Pl3p8.Location = new System.Drawing.Point(1801, 971);
+            this.Pl3p8.Location = new System.Drawing.Point(1795, 971);
             this.Pl3p8.Name = "Pl3p8";
             this.Pl3p8.Size = new System.Drawing.Size(30, 23);
             this.Pl3p8.TabIndex = 91;
@@ -1154,7 +1153,7 @@
             this.Pl3p7.FlatAppearance.BorderSize = 0;
             this.Pl3p7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p7.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p7.Image")));
-            this.Pl3p7.Location = new System.Drawing.Point(1774, 971);
+            this.Pl3p7.Location = new System.Drawing.Point(1768, 971);
             this.Pl3p7.Name = "Pl3p7";
             this.Pl3p7.Size = new System.Drawing.Size(30, 23);
             this.Pl3p7.TabIndex = 90;
@@ -1168,7 +1167,7 @@
             this.Pl3p6.FlatAppearance.BorderSize = 0;
             this.Pl3p6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p6.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p6.Image")));
-            this.Pl3p6.Location = new System.Drawing.Point(1748, 971);
+            this.Pl3p6.Location = new System.Drawing.Point(1742, 971);
             this.Pl3p6.Name = "Pl3p6";
             this.Pl3p6.Size = new System.Drawing.Size(30, 23);
             this.Pl3p6.TabIndex = 89;
@@ -1182,7 +1181,7 @@
             this.Pl3p5.FlatAppearance.BorderSize = 0;
             this.Pl3p5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p5.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p5.Image")));
-            this.Pl3p5.Location = new System.Drawing.Point(1721, 971);
+            this.Pl3p5.Location = new System.Drawing.Point(1715, 971);
             this.Pl3p5.Name = "Pl3p5";
             this.Pl3p5.Size = new System.Drawing.Size(30, 23);
             this.Pl3p5.TabIndex = 88;
@@ -1196,7 +1195,7 @@
             this.Pl3p4.FlatAppearance.BorderSize = 0;
             this.Pl3p4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p4.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p4.Image")));
-            this.Pl3p4.Location = new System.Drawing.Point(1696, 971);
+            this.Pl3p4.Location = new System.Drawing.Point(1690, 971);
             this.Pl3p4.Name = "Pl3p4";
             this.Pl3p4.Size = new System.Drawing.Size(30, 23);
             this.Pl3p4.TabIndex = 87;
@@ -1210,7 +1209,7 @@
             this.Pl3p3.FlatAppearance.BorderSize = 0;
             this.Pl3p3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p3.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p3.Image")));
-            this.Pl3p3.Location = new System.Drawing.Point(1670, 971);
+            this.Pl3p3.Location = new System.Drawing.Point(1664, 971);
             this.Pl3p3.Name = "Pl3p3";
             this.Pl3p3.Size = new System.Drawing.Size(30, 23);
             this.Pl3p3.TabIndex = 86;
@@ -1224,7 +1223,7 @@
             this.Pl3p2.FlatAppearance.BorderSize = 0;
             this.Pl3p2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p2.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p2.Image")));
-            this.Pl3p2.Location = new System.Drawing.Point(1643, 971);
+            this.Pl3p2.Location = new System.Drawing.Point(1637, 971);
             this.Pl3p2.Name = "Pl3p2";
             this.Pl3p2.Size = new System.Drawing.Size(30, 23);
             this.Pl3p2.TabIndex = 85;
@@ -1238,7 +1237,7 @@
             this.Pl3p1.FlatAppearance.BorderSize = 0;
             this.Pl3p1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Pl3p1.Image = ((System.Drawing.Image)(resources.GetObject("Pl3p1.Image")));
-            this.Pl3p1.Location = new System.Drawing.Point(1617, 971);
+            this.Pl3p1.Location = new System.Drawing.Point(1611, 971);
             this.Pl3p1.Name = "Pl3p1";
             this.Pl3p1.Size = new System.Drawing.Size(30, 23);
             this.Pl3p1.TabIndex = 84;
@@ -1393,7 +1392,7 @@
         private System.Windows.Forms.Button CustomButton27;
         private System.Windows.Forms.Button CustomButton26;
         private System.Windows.Forms.Button CustomButton25;
-        public System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Label InfoLabel;
         private System.Windows.Forms.Button SettingsButton;
         public System.Windows.Forms.Label TotalScoreLabel;
         public System.Windows.Forms.Button Player1Avatar;

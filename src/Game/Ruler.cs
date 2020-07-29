@@ -3,11 +3,13 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Mime;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
 using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
+using PuzzleTag.Notification;
 using PuzzleTag.UI;
 
 namespace PuzzleTag.Game
@@ -21,18 +23,21 @@ namespace PuzzleTag.Game
         private TotalScore totalScore;
         private PlayersScoreStorage scoreStorage;
         private Player currentPlayer;
+        private Players players;
         private bool isGameStarted;
         private int moveCount;
         private int openCardDelay;
 
         public Ruler(
             CustomButtonsManager buttonManager, 
-            ButtonsCollection buttonCollectio, 
-            ImageLibraryManager libManager)
+            ButtonsCollection buttonCollection, 
+            ImageLibraryManager libManager,
+            Players players)
         {
             this.buttonManager = buttonManager;
             this.libManager = libManager;
-            this.buttonsCollection = buttonCollectio;
+            this.buttonsCollection = buttonCollection;
+            this.players = players;
             openCardDelay = Convert.ToInt32(Settings.Delay) * 1000;
         }
 
@@ -52,10 +57,15 @@ namespace PuzzleTag.Game
         public void StopGame()
         {
             IsGameStarted = false;
-            totalScore.UpdateScore();
-            this.currentPlayer = null;
+            totalScore?.UpdateScore();
+
+            if (currentPlayer != null)
+            {
+                currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
+                this.currentPlayer = null;
+            }
+            
             this.scoreStorage = null;
-            UI.Update.ClearInfoLabel();
         }
 
         public Player CurrentPlayer => currentPlayer;
@@ -91,7 +101,7 @@ namespace PuzzleTag.Game
                     {
                         WaitNextMove = true;
                         var successMove = Result();
-                        UI.Update.UpdateInfoLabel($"{CurrentPlayer.Name.ToUpper()} ходит");
+                        //UI.Update.UpdateInfoLabel($"{CurrentPlayer.Name.ToUpper()} ходит");
                         UpdateScore();
                         DelayAndClose(successMove);
                     }
@@ -119,7 +129,9 @@ namespace PuzzleTag.Game
         private async void DelayAndClose(bool isSuccessMove)
         {
             WaitNextMove = true;
+            var prev = currentPlayer;
             currentPlayer = this.moveQueue.NextPlayer();
+            
             await Task.Delay(openCardDelay);
 
             if (isSuccessMove)
@@ -136,7 +148,10 @@ namespace PuzzleTag.Game
 
             if (!GameFinished)
             {
-                UI.Update.UpdateInfoLabel($"{CurrentPlayer?.Name.ToUpper()} ходит");
+                prev.AvaButton.FlatAppearance.BorderSize = 0;
+
+                currentPlayer.AvaButton.FlatAppearance.BorderColor = Color.DarkOrange;
+                currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
             }
             
             ClearMove();
@@ -147,17 +162,48 @@ namespace PuzzleTag.Game
         {
             if (buttonManager.ExistingButtonsOnBoard() == 0)
             {
+                var inGamePlayers = players.GetPlayers().Where(n => n.InGame).ToList();
+
+                //Player first = inGamePlayers[0];
+                Player winner = inGamePlayers[0];
+                bool drawn = false;
+
+                foreach (var player in inGamePlayers)
+                {
+                    if (player.DiscoveredCards > winner.DiscoveredCards)
+                    {
+                        winner = player;
+                        drawn = false;
+                    }
+                    if(player != winner && player.DiscoveredCards == winner.DiscoveredCards)
+                    {
+                        drawn = true;
+                    }
+                }
+
                 GameFinished = true;
                 StopGame();
-                ShowWinnerScreen();
+
+                if (!drawn)
+                {
+                    ShowWinnerScreen(winner);
+                }
+                else
+                {
+                    var popUp = new TimedPopUp();
+                    popUp.Set("Ничья !");
+                    popUp.Show();
+                }
             }
         }
 
-        private void ShowWinnerScreen()
+        public void ShowWinnerScreen(Player winner)
         {
             var winForm = new WinnerForm();
-            var winnerImage = libManager.GetImageCollection().FirstOrDefault(n => n.SpecialName == "WinnerImage");
+            var winnerImage = libManager.GetWinnerImage();
             winForm.BackgroundImage = winnerImage?.Image;
+            winForm.WinnerAvatar.BackgroundImage = winner.Avatar;
+            winForm.WinnerAvatar.BackgroundImageLayout = ImageLayout.Stretch;
             winForm.ShowDialog();
         }
 
