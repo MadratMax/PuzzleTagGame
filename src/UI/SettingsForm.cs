@@ -288,9 +288,8 @@ namespace PuzzleTag
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SoundPlayer.PlayShuffleSound();
             GameState.Category = CategoryComboBox.Text;
-
-            //this.Invoke((Action)(() => baseForm.InfoLabel.Text = "Initializing..."));
             ChangeGameCategory();
         }
 

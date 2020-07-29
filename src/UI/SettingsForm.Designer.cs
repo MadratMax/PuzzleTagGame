@@ -57,7 +57,7 @@
             this.NewGameButton.FlatAppearance.BorderSize = 0;
             this.NewGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NewGameButton.Image = ((System.Drawing.Image)(resources.GetObject("NewGameButton.Image")));
-            this.NewGameButton.Location = new System.Drawing.Point(108, 274);
+            this.NewGameButton.Location = new System.Drawing.Point(119, 280);
             this.NewGameButton.Margin = new System.Windows.Forms.Padding(0);
             this.NewGameButton.Name = "NewGameButton";
             this.NewGameButton.Size = new System.Drawing.Size(99, 78);
@@ -132,14 +132,13 @@
             this.BackToMainButton.FlatAppearance.BorderSize = 0;
             this.BackToMainButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackToMainButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BackToMainButton.Image = ((System.Drawing.Image)(resources.GetObject("BackToMainButton.Image")));
             this.BackToMainButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.BackToMainButton.Location = new System.Drawing.Point(614, 403);
             this.BackToMainButton.Name = "BackToMainButton";
             this.BackToMainButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BackToMainButton.Size = new System.Drawing.Size(99, 35);
             this.BackToMainButton.TabIndex = 6;
-            this.BackToMainButton.Text = "назад";
+            this.BackToMainButton.Text = "скрыть";
             this.BackToMainButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BackToMainButton.UseVisualStyleBackColor = true;
             this.BackToMainButton.Click += new System.EventHandler(this.BackToMainButton_Click);
