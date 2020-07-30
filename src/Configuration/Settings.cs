@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-namespace PuzzleTag.Configuration
+﻿namespace PuzzleTag.Configuration
 {
     class Settings
     {

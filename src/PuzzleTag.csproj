@@ -122,6 +122,10 @@
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\Players.cs" />
     <Compile Include="Game\TotalScore.cs" />
+    <Compile Include="ImageCollection\CustomLibrary\Api.cs" />
+    <Compile Include="ImageCollection\CustomLibrary\CustomImageCollectionConfigurator.cs" />
+    <Compile Include="ImageCollection\CustomLibrary\ImageProvider.cs" />
+    <Compile Include="ImageCollection\CustomLibrary\UrlBuilder.cs" />
     <Compile Include="ImageCollection\Library\CustomImage.cs" />
     <Compile Include="ImageCollection\Library\ImageLibrary.cs" />
     <Compile Include="SoundMaster\SoundPlayer.cs" />
