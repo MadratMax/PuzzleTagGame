@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PuzzleTag.FileManager.Library;
 
 namespace PuzzleTag.ImageCollection.CustomLibrary
@@ -20,7 +16,7 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
             this.imageProvider = new ImageProvider(serviceApiUrl);
         }
 
-        public List<CustomImage> GetImagesByCategory(string category)
+        public List<CustomImage> GenerateImageCollectionByCategory(string category)
         {
             var collection = new List<Image>(16);
             Image image = null;
@@ -35,7 +31,7 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
             {
                 var newImage = new CustomImage
                 {
-                    Name = image.GetHashCode().ToString(),
+                    Name = $"{category}_{collection.IndexOf(customImage)}",
                     Category = category,
                     Image = image
                 };

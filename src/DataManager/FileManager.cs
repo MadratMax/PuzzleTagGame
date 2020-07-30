@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using PuzzleTag.FileManager.Library;
 
 namespace PuzzleTag.FileManager
 {
@@ -8,7 +9,7 @@ namespace PuzzleTag.FileManager
     {
         public FileManager()
         {
-
+            
         }
 
         public bool IsDirectoryExist(string dir)
@@ -60,6 +61,18 @@ namespace PuzzleTag.FileManager
             var name = new FileInfo(file).Name;
 
             return name;
+        }
+
+        public void SaveImageCollection(string libraryPath, string category, List<CustomImage> imageCollection)
+        {
+            var newCollectionPath = Path.Combine(libraryPath, category);
+            Directory.CreateDirectory(newCollectionPath);
+
+            foreach (var customImage in imageCollection)
+            {
+                var imageFile = Path.Combine(newCollectionPath, customImage.Name);
+                customImage.Image.Save(imageFile);
+            }
         }
     }
 }
