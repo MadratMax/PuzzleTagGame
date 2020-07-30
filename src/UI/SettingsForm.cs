@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows.Forms;
@@ -424,11 +425,11 @@ namespace PuzzleTag
             //TODO remove
             var sourceApiUrl = "https://source.unsplash.com/";
 
-            this.Invoke((Action) (() => baseForm.ShowStatusMessage("ИЩУ КАРТИНКИ...")));
+            this.Invoke((Action) (() => baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ {newCollectionName.ToUpper()}...")));
             new CustomImageCollectionConfigurator(sourceApiUrl, libManager).GenerateImageCollectionByCategory(newCollectionName, 180, 190);
             this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
             this.Invoke((Action)(() => buttonManager.HideButtonImages()));
-            CategoryComboBox.DataSource = libManager.GetCategories();
+            this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
             this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
             this.Invoke((Action)(() => baseForm.HideStatusMessage()));
         }
