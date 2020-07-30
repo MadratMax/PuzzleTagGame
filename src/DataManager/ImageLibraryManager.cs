@@ -28,9 +28,23 @@ namespace PuzzleTag.FileManager
             this.imageLib = new ImageLibrary();
         }
 
+        public ImageLibrary ImageLibrary => imageLib;
+
+        public string LibraryPath => libraryPath;
+
         public bool IsLibraryExist()
         {
             return fileManager.IsDirectoryExist(libraryPath);
+        }
+
+        public void AddCategory(string category)
+        {
+            imageLib.AddCategory(category);
+        }
+
+        public List<string> GetCategories()
+        {
+            return imageLib.GetCategories();
         }
 
         public List<CustomImage> GetImageCollection()
@@ -101,6 +115,17 @@ namespace PuzzleTag.FileManager
                 this.imageCollection.Add(collection[i]);
                 this.imageCollection.Add(collection[i]);
             }
+        }
+
+        public void InitializeNewCollection(List<CustomImage> newImageCollection)
+        {
+            for (int i = 0; i < newImageCollection.Count; i++)
+            {
+                this.imageCollection.Add(newImageCollection[i]);
+                this.imageCollection.Add(newImageCollection[i]);
+            }
+
+            InitializeCategories();
         }
 
         private void SetMainScreenImage()

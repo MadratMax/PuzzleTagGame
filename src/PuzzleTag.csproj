@@ -66,6 +66,7 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.6.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.1.6\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
@@ -143,6 +144,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generators\NumberGenerator.cs" />
+    <Compile Include="UI\NewCollectionDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\NewCollectionDialogForm.Designer.cs">
+      <DependentUpon>NewCollectionDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -168,6 +175,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\NewCollectionDialogForm.resx">
+      <DependentUpon>NewCollectionDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>

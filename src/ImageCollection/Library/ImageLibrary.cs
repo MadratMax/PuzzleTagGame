@@ -62,6 +62,14 @@ namespace PuzzleTag.FileManager.Library
             return closedCardImage;
         }
 
+        public void AddCategory(string category)
+        {
+            if (!categories.Contains(category))
+            {
+                categories.Add(category);
+            }
+        }
+
         public List<string> GetCategories()
         {
             return categories;

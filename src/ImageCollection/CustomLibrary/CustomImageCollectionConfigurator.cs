@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using PuzzleTag.FileManager;
 using PuzzleTag.FileManager.Library;
 
 namespace PuzzleTag.ImageCollection.CustomLibrary
@@ -7,39 +8,39 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
     class CustomImageCollectionConfigurator
     {
         private ImageProvider imageProvider;
-        private ImageLibrary imageLib;
+        private ImageLibraryManager libManager;
 
         public CustomImageCollectionConfigurator(
-            string serviceApiUrl, 
-            ImageLibrary imageLib)
+            string serviceApiUrl,
+            ImageLibraryManager libManager)
         {
             this.imageProvider = new ImageProvider(serviceApiUrl);
+            this.libManager = libManager;
         }
 
-        public List<CustomImage> GenerateImageCollectionByCategory(string category)
+        public List<CustomImage> GenerateImageCollectionByCategory(string category, int weidth, int height)
         {
-            var collection = new List<Image>(16);
+            var newImageCollection = new List<CustomImage>(16);
             Image image = null;
 
-            for (int i = 0; i < collection.Count; i++)
+            for (int i = 0; i < newImageCollection.Capacity; i++)
             {
-                image = imageProvider.GetImageByCategory(category);
-                collection.Add(image);
-            }
+                image = imageProvider.SetDefaultSize(weidth, height).GetImageByCategory(category);
 
-            foreach (var customImage in collection)
-            {
                 var newImage = new CustomImage
                 {
-                    Name = $"{category}_{collection.IndexOf(customImage)}",
+                    Name = $"{category}_{i}",
                     Category = category,
                     Image = image
                 };
 
-                imageLib.AddImageToLib(newImage);
+                newImageCollection.Add(newImage);
             }
 
-            return imageLib.GetCollection();
+            libManager.AddCategory(category);
+            libManager.InitializeNewCollection(newImageCollection);
+
+            return libManager.GetImageCollection();
         }
     }
 }

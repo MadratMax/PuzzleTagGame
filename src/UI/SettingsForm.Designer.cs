@@ -48,6 +48,7 @@
             this.RemovePlayer2Button = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.AddCollectionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameButton
@@ -280,6 +281,19 @@
             // 
             this.toolTip1.ToolTipTitle = "Start game";
             // 
+            // AddCollectionButton
+            // 
+            this.AddCollectionButton.FlatAppearance.BorderSize = 0;
+            this.AddCollectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.AddCollectionButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddCollectionButton.Location = new System.Drawing.Point(296, 59);
+            this.AddCollectionButton.Name = "AddCollectionButton";
+            this.AddCollectionButton.Size = new System.Drawing.Size(101, 35);
+            this.AddCollectionButton.TabIndex = 52;
+            this.AddCollectionButton.Text = "добавить";
+            this.AddCollectionButton.UseVisualStyleBackColor = true;
+            this.AddCollectionButton.Click += new System.EventHandler(this.AddCollectionButton_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -287,6 +301,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.AddCollectionButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RemovePlayer2Button);
             this.Controls.Add(this.RemovePlayer3Button);
@@ -338,5 +353,6 @@
         private System.Windows.Forms.Button RemovePlayer2Button;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button AddCollectionButton;
     }
 }

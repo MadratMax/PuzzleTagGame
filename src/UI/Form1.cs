@@ -9,6 +9,7 @@ using PuzzleTag.FileManager;
 using PuzzleTag.Game;
 using PuzzleTag.Notification;
 using PuzzleTag.SoundMaster;
+using PuzzleTag.UI;
 
 namespace PuzzleTag
 {
@@ -43,7 +44,7 @@ namespace PuzzleTag
             InitializeGameData();
             InitPlayers();
             InitGameRules();
-            
+
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
             UI.Update.MainFormUI = this;
         }
@@ -76,14 +77,14 @@ namespace PuzzleTag
             SoundPlayer.CannotOpenCardSound = cannotOpenCardSoundFile;
         }
 
-        private void ShowStatusMessage(string message)
+        public void ShowStatusMessage(string message)
         {
             messageBar = new TimedPopUp();
             messageBar.Set(message, FormStartPosition.CenterScreen);
             messageBar.Show(autoHide:false);
         }
 
-        private void HideStatusMessage()
+        public void HideStatusMessage()
         {
             messageBar?.HideForm();
         }

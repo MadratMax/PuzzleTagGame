@@ -9,12 +9,15 @@ using PuzzleTag.Configuration;
 using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
+using PuzzleTag.ImageCollection.CustomLibrary;
 using PuzzleTag.SoundMaster;
+using PuzzleTag.UI;
 
 namespace PuzzleTag
 {
     partial class SettingsForm : Form
     {
+        private NewCollectionDialogForm newCollectionDialogForm;
         private Ruler ruler;
         private Players players;
         private CustomButtonsManager buttonManager;
@@ -28,7 +31,12 @@ namespace PuzzleTag
         private Player player2;
         private Player player3;
 
-        public SettingsForm(Ruler ruler, Players players, CustomButtonsManager buttonManager, ImageLibraryManager libManager, PuzzleTag baseForm)
+        public SettingsForm(
+            Ruler ruler, 
+            Players players, 
+            CustomButtonsManager buttonManager, 
+            ImageLibraryManager libManager, 
+            PuzzleTag baseForm)
         {
             this.ruler = ruler;
             this.players = players;
@@ -57,7 +65,7 @@ namespace PuzzleTag
             Player1ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Player2ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Player3ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.Invoke((Action)(() => CategoryComboBox.DataSource = GameState.Categories));
+            this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories()));
         }
 
         private void BackToMainButton_Click(object sender, EventArgs e)
@@ -394,6 +402,35 @@ namespace PuzzleTag
         private void Player3ComboBox_MouseClick(object sender, MouseEventArgs e)
         {
             SoundPlayer.PlaySelectItemSound();
+        }
+
+        private void AddCollectionButton_Click(object sender, EventArgs e)
+        {
+            if (newCollectionDialogForm == null)
+            {
+                newCollectionDialogForm = new NewCollectionDialogForm();
+            }
+
+            SoundPlayer.PlaySettingsSound();
+            newCollectionDialogForm.StartPosition = FormStartPosition.Manual;
+            newCollectionDialogForm.Location = this.Location;
+            newCollectionDialogForm.StartPosition = FormStartPosition.CenterParent;
+            newCollectionDialogForm.BackgroundImageLayout = ImageLayout.Stretch;
+            this.Enabled = false;
+            newCollectionDialogForm.ShowDialog(this);
+            this.Enabled = true;
+            var newCollectionName = newCollectionDialogForm.CollectionName;
+
+            //TODO remove
+            var sourceApiUrl = "https://source.unsplash.com/";
+
+            this.Invoke((Action) (() => baseForm.ShowStatusMessage("ИЩУ КАРТИНКИ...")));
+            new CustomImageCollectionConfigurator(sourceApiUrl, libManager).GenerateImageCollectionByCategory(newCollectionName, 180, 190);
+            this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
+            this.Invoke((Action)(() => buttonManager.HideButtonImages()));
+            CategoryComboBox.DataSource = libManager.GetCategories();
+            this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
+            this.Invoke((Action)(() => baseForm.HideStatusMessage()));
         }
     }
 }

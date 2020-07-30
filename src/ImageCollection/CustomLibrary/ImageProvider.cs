@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Net;
 
@@ -46,7 +47,14 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
 
             using (var ms = new MemoryStream(image))
             {
-                return Image.FromStream(ms);
+                try
+                {
+                    return Image.FromStream(ms);
+                }
+                catch (Exception e)
+                {
+                    return null;
+                }
             }
         }
 
