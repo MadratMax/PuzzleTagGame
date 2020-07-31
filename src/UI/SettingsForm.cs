@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -11,6 +12,7 @@ using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
 using PuzzleTag.ImageCollection.CustomLibrary;
+using PuzzleTag.Notification;
 using PuzzleTag.SoundMaster;
 using PuzzleTag.UI;
 
@@ -20,6 +22,8 @@ namespace PuzzleTag
     {
         private NewCollectionDialogForm newCollectionDialogForm;
         private Ruler ruler;
+        private CustomImageCollectionConfigurator customImageCollectionConfigurator;
+        private FileManager.FileManager fileManager;
         private Players players;
         private CustomButtonsManager buttonManager;
         private ImageLibraryManager libManager;
@@ -36,11 +40,15 @@ namespace PuzzleTag
             Ruler ruler, 
             Players players, 
             CustomButtonsManager buttonManager, 
-            ImageLibraryManager libManager, 
-            PuzzleTag baseForm)
+            ImageLibraryManager libManager,
+            FileManager.FileManager fileManager,
+            PuzzleTag baseForm,
+            CustomImageCollectionConfigurator customImageCollectionConfigurator)
         {
+            this.customImageCollectionConfigurator = customImageCollectionConfigurator;
             this.ruler = ruler;
             this.players = players;
+            this.fileManager = fileManager;
             this.scoreStorage = new PlayersScoreStorage();
             this.buttonManager = buttonManager;
             this.libManager = libManager;
@@ -66,7 +74,11 @@ namespace PuzzleTag
             Player1ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Player2ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             Player3ComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories()));
+
+            if (CategoryComboBox.DataSource == null)
+            {
+                this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories()));
+            }
         }
 
         private void BackToMainButton_Click(object sender, EventArgs e)
@@ -298,15 +310,26 @@ namespace PuzzleTag
             SoundPlayer.PlayShuffleSound();
             GameState.Category = CategoryComboBox.Text;
             ChangeGameCategory();
+            InitSaveCollectionButton();
+        }
+
+        private void InitSaveCollectionButton()
+        {
+            var libPath = libManager.LibraryPath;
+            var collectionPath = Path.Combine(libPath, CategoryComboBox.Text);
+
+            SaveCollectionButton.Enabled = false;
+
+            if (!fileManager.IsDirectoryExist(collectionPath))
+            {
+                SaveCollectionButton.Enabled = true;
+            }
         }
 
         private void ChangeGameCategory()
         {
-            Thread.CurrentThread.IsBackground = false;
             buttonManager.AssignImages(GameState.Category);
             buttonManager.HideButtonImages();
-
-            //this.Invoke((Action)(() => baseForm.InfoLabel.Text = ""));
         }
 
         private void RemovePlayer1Button_Click(object sender, EventArgs e)
@@ -420,18 +443,45 @@ namespace PuzzleTag
             this.Enabled = false;
             newCollectionDialogForm.ShowDialog(this);
             this.Enabled = true;
+            newCollectionDialogForm.NewCollectionTextBox.Focus();
             var newCollectionName = newCollectionDialogForm.CollectionName;
 
-            //TODO remove
-            var sourceApiUrl = "https://source.unsplash.com/";
+            if (!string.IsNullOrEmpty(newCollectionName) && newCollectionName?.Length > 2)
+            {
+                this.Invoke((Action)(() => baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ '{newCollectionName?.ToUpper()}' ...")));
+                this.Invoke((Action)(() => this.Enabled = false));
 
-            this.Invoke((Action) (() => baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ {newCollectionName.ToUpper()}...")));
-            new CustomImageCollectionConfigurator(sourceApiUrl, libManager).GenerateImageCollectionByCategory(newCollectionName, 180, 190);
-            this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
-            this.Invoke((Action)(() => buttonManager.HideButtonImages()));
-            this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
-            this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
-            this.Invoke((Action)(() => baseForm.HideStatusMessage()));
+                new Thread(() => {
+                    Thread.CurrentThread.IsBackground = false;
+                    customImageCollectionConfigurator.GenerateImageCollectionByCategory(newCollectionName, 180, 190);
+                    this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
+                    this.Invoke((Action)(() => buttonManager.HideButtonImages()));
+                    this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
+                    this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
+                    this.Invoke((Action)(() => newCollectionDialogForm.ResetCollectionName()));
+                    this.Invoke((Action)(() => baseForm.HideStatusMessage()));
+                    this.Invoke((Action)(() => this.Enabled = true));
+                }).Start();
+            }
+        }
+
+        private void SaveCollectionButton_Click(object sender, EventArgs e)
+        {
+            var libPath = libManager.LibraryPath;
+            var newCollectionName = CategoryComboBox.Text;
+            var collectionPath = Path.Combine(libPath, newCollectionName);
+
+            SaveCollectionButton.Enabled = false;
+
+            if (!fileManager.IsDirectoryExist(collectionPath))
+            {
+                var imageCollection = libManager.GetImageCollectionByCategory(newCollectionName);
+                fileManager.SaveImageCollection(libPath, newCollectionName, imageCollection);
+
+                var popUp = new TimedPopUp();
+                popUp.Set("СОХРАНЕНО");
+                popUp.Show();
+            }
         }
     }
 }

@@ -4,6 +4,8 @@ namespace PuzzleTag.FileManager.Library
 {
     class CustomImage
     {
+        private Image image;
+
         public string Name;
 
         public string SpecialName;
@@ -12,6 +14,19 @@ namespace PuzzleTag.FileManager.Library
 
         public string Category;
 
-        public Image Image;
+        public Image Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                Id = value.GetHashCode();
+                image = value;
+            }
+        }
+
+        public bool AllowUpdate;
     }
 }

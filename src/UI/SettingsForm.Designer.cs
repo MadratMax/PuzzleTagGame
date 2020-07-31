@@ -49,6 +49,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.AddCollectionButton = new System.Windows.Forms.Button();
+            this.SaveCollectionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameButton
@@ -73,7 +74,7 @@
             this.ExitButton.FlatAppearance.BorderSize = 0;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(614, 229);
+            this.ExitButton.Location = new System.Drawing.Point(612, 218);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(177, 35);
             this.ExitButton.TabIndex = 2;
@@ -88,7 +89,7 @@
             this.ShowCardsButton.FlatAppearance.BorderSize = 0;
             this.ShowCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShowCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShowCardsButton.Location = new System.Drawing.Point(614, 108);
+            this.ShowCardsButton.Location = new System.Drawing.Point(612, 97);
             this.ShowCardsButton.Name = "ShowCardsButton";
             this.ShowCardsButton.Size = new System.Drawing.Size(177, 35);
             this.ShowCardsButton.TabIndex = 3;
@@ -103,7 +104,7 @@
             this.HideCardsButton.FlatAppearance.BorderSize = 0;
             this.HideCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HideCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HideCardsButton.Location = new System.Drawing.Point(614, 149);
+            this.HideCardsButton.Location = new System.Drawing.Point(612, 138);
             this.HideCardsButton.Name = "HideCardsButton";
             this.HideCardsButton.Size = new System.Drawing.Size(177, 35);
             this.HideCardsButton.TabIndex = 4;
@@ -118,7 +119,7 @@
             this.ShuffleCards.FlatAppearance.BorderSize = 0;
             this.ShuffleCards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShuffleCards.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShuffleCards.Location = new System.Drawing.Point(614, 190);
+            this.ShuffleCards.Location = new System.Drawing.Point(612, 179);
             this.ShuffleCards.Name = "ShuffleCards";
             this.ShuffleCards.Size = new System.Drawing.Size(177, 35);
             this.ShuffleCards.TabIndex = 5;
@@ -134,7 +135,7 @@
             this.BackToMainButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackToMainButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BackToMainButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BackToMainButton.Location = new System.Drawing.Point(614, 403);
+            this.BackToMainButton.Location = new System.Drawing.Point(612, 392);
             this.BackToMainButton.Name = "BackToMainButton";
             this.BackToMainButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.BackToMainButton.Size = new System.Drawing.Size(99, 35);
@@ -286,13 +287,28 @@
             this.AddCollectionButton.FlatAppearance.BorderSize = 0;
             this.AddCollectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddCollectionButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddCollectionButton.Location = new System.Drawing.Point(296, 59);
+            this.AddCollectionButton.Location = new System.Drawing.Point(612, 56);
             this.AddCollectionButton.Name = "AddCollectionButton";
-            this.AddCollectionButton.Size = new System.Drawing.Size(101, 35);
+            this.AddCollectionButton.Size = new System.Drawing.Size(177, 35);
             this.AddCollectionButton.TabIndex = 52;
-            this.AddCollectionButton.Text = "добавить";
+            this.AddCollectionButton.Text = "Найти картинки";
+            this.AddCollectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.AddCollectionButton.UseVisualStyleBackColor = true;
             this.AddCollectionButton.Click += new System.EventHandler(this.AddCollectionButton_Click);
+            // 
+            // SaveCollectionButton
+            // 
+            this.SaveCollectionButton.FlatAppearance.BorderSize = 0;
+            this.SaveCollectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SaveCollectionButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveCollectionButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveCollectionButton.Image")));
+            this.SaveCollectionButton.Location = new System.Drawing.Point(291, 60);
+            this.SaveCollectionButton.Name = "SaveCollectionButton";
+            this.SaveCollectionButton.Size = new System.Drawing.Size(48, 35);
+            this.SaveCollectionButton.TabIndex = 53;
+            this.SaveCollectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.SaveCollectionButton.UseVisualStyleBackColor = true;
+            this.SaveCollectionButton.Click += new System.EventHandler(this.SaveCollectionButton_Click);
             // 
             // SettingsForm
             // 
@@ -301,6 +317,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.SaveCollectionButton);
             this.Controls.Add(this.AddCollectionButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.RemovePlayer2Button);
@@ -354,5 +371,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button AddCollectionButton;
+        private System.Windows.Forms.Button SaveCollectionButton;
     }
 }

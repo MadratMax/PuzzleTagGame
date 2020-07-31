@@ -44,17 +44,19 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
             var response = Api.GetResponse(request);
 
             byte[] image = GetImage(response);
-
-            using (var ms = new MemoryStream(image))
+            var stream = new MemoryStream(image);
+            
+            try
             {
-                try
-                {
-                    return Image.FromStream(ms);
-                }
-                catch (Exception e)
-                {
-                    return null;
-                }
+                return Image.FromStream(stream);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+            finally
+            {
+                //stream.Close();
             }
         }
 

@@ -52,6 +52,21 @@ namespace PuzzleTag.Collection
             }
         }
 
+        public void RefreshButtonImage(CustomButton customButton, CustomImage newImage)
+        {
+            var buttons = buttonsCollection.GetAllButtons();
+            var oldImageId = customButton.ImageId;
+
+            foreach (var button in buttons)
+            {
+                if (button.Value.ImageId == oldImageId)
+                {
+                    button.Value.SetImage(newImage.Image);
+                    button.Value.ShowImage();
+                }
+            }
+        }
+
         public void ShowButtonImages()
         {
             var buttons = buttonsCollection.GetAllButtons();

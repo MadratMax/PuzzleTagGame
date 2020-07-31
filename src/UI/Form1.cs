@@ -7,6 +7,7 @@ using PuzzleTag.Configuration;
 using PuzzleTag.Controls;
 using PuzzleTag.FileManager;
 using PuzzleTag.Game;
+using PuzzleTag.ImageCollection.CustomLibrary;
 using PuzzleTag.Notification;
 using PuzzleTag.SoundMaster;
 using PuzzleTag.UI;
@@ -26,6 +27,7 @@ namespace PuzzleTag
         private SettingsForm gameSettings;
         private TimedPopUp messageBar;
         private FileManager.FileManager fileManager;
+        private CustomImageCollectionConfigurator customImageCollectionConfigurator;
 
         public PuzzleTag()
         {
@@ -44,6 +46,9 @@ namespace PuzzleTag
             InitializeGameData();
             InitPlayers();
             InitGameRules();
+
+            var sourceApiUrl = "https://source.unsplash.com/";
+            customImageCollectionConfigurator = new CustomImageCollectionConfigurator(sourceApiUrl, libManager);
 
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
             UI.Update.MainFormUI = this;
@@ -162,9 +167,22 @@ namespace PuzzleTag
                 }
                 else
                 {
-                    SoundPlayer.PlayCannotOpenCardSound();
-                    messageBar.Set("Нажмите ESC чтобы войти в меню");
-                    messageBar.Show(3000, true);
+                    var card = buttonManager.ButtonsCollection().GetCustomButtonByName(control.Name);
+                    var imageCollection = libManager.GetImageCollection();
+                    var customImage = imageCollection.FirstOrDefault(n => n.Image == card.Image);
+
+                    if (customImage != null && customImage.AllowUpdate)
+                    {
+                        var newImage = customImageCollectionConfigurator.UpdateImage(customImage);
+                        buttonManager.RefreshButtonImage(card, newImage);
+                        SoundPlayer.PlayButtonSound();
+                    }
+                    else
+                    {
+                        SoundPlayer.PlayCannotOpenCardSound();
+                        messageBar.Set("Нажмите ESC чтобы войти в меню");
+                        messageBar.Show(3000, true);
+                    }
                 }
             }
         }
@@ -191,7 +209,14 @@ namespace PuzzleTag
         {
             if (gameSettings == null)
             {
-                gameSettings = new SettingsForm(ruler, players, buttonManager, libManager, this);
+                gameSettings = new SettingsForm(
+                    ruler, 
+                    players, 
+                    buttonManager, 
+                    libManager, 
+                    fileManager,
+                    this,
+                    customImageCollectionConfigurator);
             }
 
             SoundPlayer.PlaySettingsSound();

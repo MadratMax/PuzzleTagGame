@@ -52,6 +52,24 @@ namespace PuzzleTag.FileManager
             return imageCollection;
         }
 
+        public void RemoveImageFromCollection(CustomImage customImage)
+        {
+            var modifiedCollection = imageCollection;
+
+            for(int i = 0; i < imageCollection.Count; i++)
+            {
+                var image = imageCollection[i];
+                var removed = image.Id == customImage.Id;
+                if (removed)
+                {
+                    modifiedCollection.Remove(image);
+                    i--;
+                }
+            }
+
+            imageCollection = modifiedCollection;
+        }
+
         public CustomImage GetClosedCardImage()
         {
             return imageLib.GetClosedCardImage();
@@ -121,7 +139,6 @@ namespace PuzzleTag.FileManager
         {
             for (int i = 0; i < newImageCollection.Count; i++)
             {
-                this.imageCollection.Add(newImageCollection[i]);
                 this.imageCollection.Add(newImageCollection[i]);
             }
 

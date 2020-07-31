@@ -9,6 +9,7 @@ namespace PuzzleTag.Controls
         private Image buttonImage;
         private Image closedCardImage;
         private bool closed;
+        private int imageId;
 
         public CustomButton(Button button)
         {
@@ -32,6 +33,8 @@ namespace PuzzleTag.Controls
         }
 
         public int Id { get; set; }
+
+        public int ImageId => imageId;
 
         public Size Size { get => button.Size; set => button.Size = value; }
 
@@ -79,6 +82,7 @@ namespace PuzzleTag.Controls
         public void SetImage(Image image)
         {
             buttonImage = image;
+            imageId = image.GetHashCode();
         }
 
         public void SetClosedCardImage(Image image)

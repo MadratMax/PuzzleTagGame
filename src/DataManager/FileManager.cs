@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using PuzzleTag.FileManager.Library;
@@ -71,7 +72,9 @@ namespace PuzzleTag.FileManager
             foreach (var customImage in imageCollection)
             {
                 var imageFile = Path.Combine(newCollectionPath, customImage.Name);
-                customImage.Image.Save(imageFile);
+                
+                customImage.Image.Save(imageFile, ImageFormat.Jpeg);
+                customImage.AllowUpdate = false;
             }
         }
     }

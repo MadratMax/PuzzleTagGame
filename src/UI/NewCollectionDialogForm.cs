@@ -12,11 +12,12 @@ namespace PuzzleTag.UI
 
         public NewCollectionDialogForm()
         {
-            this.libManager = libManager;
             InitializeComponent();
         }
 
         public string CollectionName => collectionName;
+
+        public string ResetCollectionName() => collectionName = null;
 
         private void NewCollectionTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -68,6 +69,24 @@ namespace PuzzleTag.UI
         private void CloseButton_Click(object sender, EventArgs e)
         {
             BackToSettings();
+        }
+
+        private void NewCollectionTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (!string.IsNullOrEmpty(NewCollectionTextBox.Text))
+                {
+                    collectionName = NewCollectionTextBox.Text;
+                }
+
+                BackToSettings();
+            }
+        }
+
+        private void NewCollectionDialogForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }
