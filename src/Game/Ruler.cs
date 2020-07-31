@@ -158,10 +158,14 @@ namespace PuzzleTag.Game
 
             if (!GameFinished)
             {
-                prev.AvaButton.FlatAppearance.BorderSize = 0;
+                if(prev != null)
+                    prev.AvaButton.FlatAppearance.BorderSize = 0;
 
-                currentPlayer.AvaButton.FlatAppearance.BorderColor = Color.DarkOrange;
-                currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
+                if (currentPlayer != null)
+                {
+                    currentPlayer.AvaButton.FlatAppearance.BorderColor = Color.DarkOrange;
+                    currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
+                }
             }
             
             ClearMove();

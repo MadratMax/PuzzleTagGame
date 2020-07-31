@@ -295,6 +295,7 @@
             this.AddCollectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.AddCollectionButton.UseVisualStyleBackColor = true;
             this.AddCollectionButton.Click += new System.EventHandler(this.AddCollectionButton_Click);
+            this.AddCollectionButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // SaveCollectionButton
             // 

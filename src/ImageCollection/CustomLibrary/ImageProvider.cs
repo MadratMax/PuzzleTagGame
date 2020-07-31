@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using PuzzleTag.SoundMaster;
 
 namespace PuzzleTag.ImageCollection.CustomLibrary
 {
@@ -45,13 +47,18 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
 
             byte[] image = GetImage(response);
             var stream = new MemoryStream(image);
-            
+
             try
             {
-                return Image.FromStream(stream);
+                Image imageFromStream = Image.FromStream(stream);
+                
+                SoundPlayer.PlayNewImageAddedSound();
+
+                return imageFromStream;
             }
             catch (Exception e)
             {
+                SoundPlayer.PlayFailedImageSound();
                 return null;
             }
             finally

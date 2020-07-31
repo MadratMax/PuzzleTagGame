@@ -14,6 +14,9 @@
         public static string OpenCloseCardsSound;
         public static string RemovePlayerSound;
         public static string CannotOpenCardSound;
+        public static string SaveSound;
+        public static string NewImageSound;
+        public static string FailedImageSound;
 
         public static void PlaySound(string soundFile)
         {
@@ -33,6 +36,12 @@
             player?.Play();
         }
 
+        public static void PlayFailedImageSound()
+        {
+            player = new System.Media.SoundPlayer(FailedImageSound);
+            player?.Play();
+        }
+
         public static void PlayOpenCloseCardsSound()
         {
             player = new System.Media.SoundPlayer(OpenCloseCardsSound);
@@ -42,6 +51,18 @@
         public static void PlayCannotOpenCardSound()
         {
             player = new System.Media.SoundPlayer(CannotOpenCardSound);
+            player?.Play();
+        }
+
+        public static void PlayNewImageAddedSound()
+        {
+            player = new System.Media.SoundPlayer(NewImageSound);
+            player?.Play();
+        }
+
+        public static void PlaySaveSound()
+        {
+            player = new System.Media.SoundPlayer(SaveSound);
             player?.Play();
         }
 

@@ -47,7 +47,7 @@ namespace PuzzleTag
             InitPlayers();
             InitGameRules();
 
-            var sourceApiUrl = "https://source.unsplash.com/";
+            var sourceApiUrl = Settings.Api;
             customImageCollectionConfigurator = new CustomImageCollectionConfigurator(sourceApiUrl, libManager);
 
             this.appSize = new int[] {this.Size.Width, this.Size.Height};
@@ -68,6 +68,9 @@ namespace PuzzleTag
             var openCloseCardsSoundFile = fileManager.GetFiles(Settings.OpenCloseCardsSound).FirstOrDefault();
             var removePlayerSoundFile = fileManager.GetFiles(Settings.RemovePlayerSound).FirstOrDefault();
             var cannotOpenCardSoundFile = fileManager.GetFiles(Settings.CannotOpenCardSound).FirstOrDefault();
+            var saveSoundFile = fileManager.GetFiles(Settings.SaveSound).FirstOrDefault();
+            var newImageSoundFile = fileManager.GetFiles(Settings.NewImageSound).FirstOrDefault();
+            var failedImageSoundFile = fileManager.GetFiles(Settings.FailedImageSound).FirstOrDefault();
 
             SoundPlayer.ButtonSound = buttonSoundFile;
             SoundPlayer.SettingsSound = settingSoundFile;
@@ -80,10 +83,14 @@ namespace PuzzleTag
             SoundPlayer.OpenCloseCardsSound = openCloseCardsSoundFile;
             SoundPlayer.RemovePlayerSound = removePlayerSoundFile;
             SoundPlayer.CannotOpenCardSound = cannotOpenCardSoundFile;
+            SoundPlayer.SaveSound = saveSoundFile;
+            SoundPlayer.NewImageSound = newImageSoundFile;
+            SoundPlayer.FailedImageSound = failedImageSoundFile;
         }
 
         public void ShowStatusMessage(string message)
         {
+            messageBar = null;
             messageBar = new TimedPopUp();
             messageBar.Set(message, FormStartPosition.CenterScreen);
             messageBar.Show(autoHide:false);

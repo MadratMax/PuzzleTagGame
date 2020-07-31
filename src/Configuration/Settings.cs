@@ -12,9 +12,17 @@
 
         public static string Delay = SettingsManager.GetSettingsValue("settings", "open-card-delay");
 
+        public static string Api = SettingsManager.GetSettingsValue("settings", "image-lib-api");
+
         public static string ButtonSound = SettingsManager.GetSettingsValue("settings", "sounds", "button-sound");
 
         public static string SettingsSound = SettingsManager.GetSettingsValue("settings", "sounds", "settings-sound");
+
+        public static string SaveSound = SettingsManager.GetSettingsValue("settings", "sounds", "save-sound");
+
+        public static string NewImageSound = SettingsManager.GetSettingsValue("settings", "sounds", "new-image-sound");
+
+        public static string FailedImageSound = SettingsManager.GetSettingsValue("settings", "sounds", "failed-image-sound");
 
         public static string WinSound = SettingsManager.GetSettingsValue("settings", "sounds", "win-game-sound");
 

@@ -240,6 +240,9 @@ namespace PuzzleTag
             player2PrizeImagesList = null;
             player3PrizeImagesList = null;
             players.RemovePlayersFromGame();
+            Player1ComboBox.SelectedIndex = -1;
+            Player2ComboBox.SelectedIndex = -1;
+            Player3ComboBox.SelectedIndex = -1;
         }
 
         private void BlockSettings()
@@ -257,8 +260,8 @@ namespace PuzzleTag
         private void UnblockSettings()
         {
             Player1ComboBox.Enabled = true;
-            Player2ComboBox.Enabled = true;
-            Player3ComboBox.Enabled = true;
+            Player2ComboBox.Enabled = false;
+            Player3ComboBox.Enabled = false;
             RemovePlayer1Button.Enabled = true;
             RemovePlayer2Button.Enabled = true;
             RemovePlayer3Button.Enabled = true;
@@ -293,11 +296,19 @@ namespace PuzzleTag
 
         private void ShuffleCards_Click(object sender, EventArgs e)
         {
-            SoundPlayer.PlayShuffleSound();
-            ruler?.StopGame();
-            RemovePlayersFromGame();
-            Shuffle();
-            UnblockSettings();
+            ResetGame();
+        }
+
+        private void ResetGame()
+        {
+            if (ruler != null && ruler.IsGameStarted)
+            {
+                SoundPlayer.PlayShuffleSound();
+                ruler?.StopGame();
+                RemovePlayersFromGame();
+                Shuffle();
+                UnblockSettings();
+            }
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
@@ -430,6 +441,8 @@ namespace PuzzleTag
 
         private void AddCollectionButton_Click(object sender, EventArgs e)
         {
+            ResetGame();
+
             if (newCollectionDialogForm == null)
             {
                 newCollectionDialogForm = new NewCollectionDialogForm();
@@ -441,26 +454,27 @@ namespace PuzzleTag
             newCollectionDialogForm.StartPosition = FormStartPosition.CenterParent;
             newCollectionDialogForm.BackgroundImageLayout = ImageLayout.Stretch;
             this.Enabled = false;
-            newCollectionDialogForm.ShowDialog(this);
-            this.Enabled = true;
             newCollectionDialogForm.NewCollectionTextBox.Focus();
+            newCollectionDialogForm.ShowDialog(this);
             var newCollectionName = newCollectionDialogForm.CollectionName;
+            this.Enabled = true;
 
             if (!string.IsNullOrEmpty(newCollectionName) && newCollectionName?.Length > 2)
             {
-                this.Invoke((Action)(() => baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ '{newCollectionName?.ToUpper()}' ...")));
-                this.Invoke((Action)(() => this.Enabled = false));
-
+                this.Enabled = false;
+                baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ '{newCollectionName.ToUpper()}' ...");
+                
                 new Thread(() => {
-                    Thread.CurrentThread.IsBackground = false;
-                    customImageCollectionConfigurator.GenerateImageCollectionByCategory(newCollectionName, 180, 190);
+                    Thread.CurrentThread.IsBackground = true;
+                    this.Invoke((Action)(() => customImageCollectionConfigurator.GenerateImageCollectionByCategory(newCollectionName, 180, 190)));
                     this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
                     this.Invoke((Action)(() => buttonManager.HideButtonImages()));
                     this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
                     this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
                     this.Invoke((Action)(() => newCollectionDialogForm.ResetCollectionName()));
-                    this.Invoke((Action)(() => baseForm.HideStatusMessage()));
                     this.Invoke((Action)(() => this.Enabled = true));
+                    this.Invoke((Action)(() => baseForm.HideStatusMessage()));
+                    SoundPlayer.PlayShuffleSound();
                 }).Start();
             }
         }
@@ -480,6 +494,7 @@ namespace PuzzleTag
 
                 var popUp = new TimedPopUp();
                 popUp.Set("СОХРАНЕНО");
+                SoundPlayer.PlaySaveSound();
                 popUp.Show();
             }
         }
