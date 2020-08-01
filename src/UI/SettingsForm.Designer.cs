@@ -50,6 +50,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.AddCollectionButton = new System.Windows.Forms.Button();
             this.SaveCollectionButton = new System.Windows.Forms.Button();
+            this.CustomPaintButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameButton
@@ -74,7 +75,7 @@
             this.ExitButton.FlatAppearance.BorderSize = 0;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(612, 218);
+            this.ExitButton.Location = new System.Drawing.Point(612, 233);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(177, 35);
             this.ExitButton.TabIndex = 2;
@@ -89,7 +90,7 @@
             this.ShowCardsButton.FlatAppearance.BorderSize = 0;
             this.ShowCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShowCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShowCardsButton.Location = new System.Drawing.Point(612, 97);
+            this.ShowCardsButton.Location = new System.Drawing.Point(612, 112);
             this.ShowCardsButton.Name = "ShowCardsButton";
             this.ShowCardsButton.Size = new System.Drawing.Size(177, 35);
             this.ShowCardsButton.TabIndex = 3;
@@ -104,7 +105,7 @@
             this.HideCardsButton.FlatAppearance.BorderSize = 0;
             this.HideCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HideCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HideCardsButton.Location = new System.Drawing.Point(612, 138);
+            this.HideCardsButton.Location = new System.Drawing.Point(612, 153);
             this.HideCardsButton.Name = "HideCardsButton";
             this.HideCardsButton.Size = new System.Drawing.Size(177, 35);
             this.HideCardsButton.TabIndex = 4;
@@ -119,7 +120,7 @@
             this.ShuffleCards.FlatAppearance.BorderSize = 0;
             this.ShuffleCards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShuffleCards.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShuffleCards.Location = new System.Drawing.Point(612, 179);
+            this.ShuffleCards.Location = new System.Drawing.Point(612, 194);
             this.ShuffleCards.Name = "ShuffleCards";
             this.ShuffleCards.Size = new System.Drawing.Size(177, 35);
             this.ShuffleCards.TabIndex = 5;
@@ -311,6 +312,21 @@
             this.SaveCollectionButton.UseVisualStyleBackColor = true;
             this.SaveCollectionButton.Click += new System.EventHandler(this.SaveCollectionButton_Click);
             // 
+            // CustomPaintButton
+            // 
+            this.CustomPaintButton.FlatAppearance.BorderSize = 0;
+            this.CustomPaintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CustomPaintButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomPaintButton.Location = new System.Drawing.Point(612, 15);
+            this.CustomPaintButton.Name = "CustomPaintButton";
+            this.CustomPaintButton.Size = new System.Drawing.Size(177, 35);
+            this.CustomPaintButton.TabIndex = 54;
+            this.CustomPaintButton.Text = "Рисовать";
+            this.CustomPaintButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CustomPaintButton.UseVisualStyleBackColor = true;
+            this.CustomPaintButton.Click += new System.EventHandler(this.CustomPaintButton_Click);
+            this.CustomPaintButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -318,6 +334,7 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.CustomPaintButton);
             this.Controls.Add(this.SaveCollectionButton);
             this.Controls.Add(this.AddCollectionButton);
             this.Controls.Add(this.label1);
@@ -373,5 +390,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button AddCollectionButton;
         private System.Windows.Forms.Button SaveCollectionButton;
+        private System.Windows.Forms.Button CustomPaintButton;
     }
 }

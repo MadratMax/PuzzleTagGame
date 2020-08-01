@@ -2,7 +2,10 @@
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using PuzzleTag.FileManager.Library;
+using PuzzleTag.Notification;
+using PuzzleTag.SoundMaster;
 
 namespace PuzzleTag.FileManager
 {
@@ -64,7 +67,22 @@ namespace PuzzleTag.FileManager
             return name;
         }
 
-        public void SaveImageCollection(string libraryPath, string category, List<CustomImage> imageCollection)
+        public void SaveNewCollection(List<CustomImage> imageCollection, string collectionName, string libPath)
+        {
+            var collectionPath = Path.Combine(libPath, collectionName);
+
+            if (!IsDirectoryExist(collectionPath)) {
+                
+                SaveImageCollection(libPath, collectionName, imageCollection);
+
+                var popUp = new TimedPopUp();
+                popUp.Set("СОХРАНЕНО");
+                SoundPlayer.PlaySaveSound();
+                popUp.Show();
+            }
+        }
+
+        private void SaveImageCollection(string libraryPath, string category, List<CustomImage> imageCollection)
         {
             var newCollectionPath = Path.Combine(libraryPath, category);
             Directory.CreateDirectory(newCollectionPath);

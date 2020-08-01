@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,6 +11,7 @@ using PuzzleTag.Collection;
 using PuzzleTag.Configuration;
 using PuzzleTag.DataManager;
 using PuzzleTag.FileManager;
+using PuzzleTag.FileManager.Library;
 using PuzzleTag.Game;
 using PuzzleTag.ImageCollection.CustomLibrary;
 using PuzzleTag.Notification;
@@ -21,6 +23,7 @@ namespace PuzzleTag
     partial class SettingsForm : Form
     {
         private NewCollectionDialogForm newCollectionDialogForm;
+        private PaintForm paintForm;
         private Ruler ruler;
         private CustomImageCollectionConfigurator customImageCollectionConfigurator;
         private FileManager.FileManager fileManager;
@@ -296,12 +299,12 @@ namespace PuzzleTag
 
         private void ShuffleCards_Click(object sender, EventArgs e)
         {
-            ResetGame();
+            ResetGame(true);
         }
 
-        private void ResetGame()
+        private void ResetGame(bool forced = false)
         {
-            if (ruler != null && ruler.IsGameStarted)
+            if (forced || (ruler != null && ruler.IsGameStarted))
             {
                 SoundPlayer.PlayShuffleSound();
                 ruler?.StopGame();
@@ -481,21 +484,67 @@ namespace PuzzleTag
 
         private void SaveCollectionButton_Click(object sender, EventArgs e)
         {
+            var collectionName = CategoryComboBox.Text;
             var libPath = libManager.LibraryPath;
-            var newCollectionName = CategoryComboBox.Text;
-            var collectionPath = Path.Combine(libPath, newCollectionName);
-
+            var imageCollection = libManager.GetImageCollectionByCategory(collectionName);
+            fileManager.SaveNewCollection(imageCollection, collectionName, libPath);
             SaveCollectionButton.Enabled = false;
+        }
 
-            if (!fileManager.IsDirectoryExist(collectionPath))
+        private void CustomPaintButton_Click(object sender, EventArgs e)
+        {
+            SoundPlayer.PlaySettingsSound();
+
+            var collectionNameDialog = new CustomCollectionNameDialogForm();
+            collectionNameDialog.StartPosition = FormStartPosition.Manual;
+            collectionNameDialog.Location = this.Location;
+            collectionNameDialog.StartPosition = FormStartPosition.CenterParent;
+            collectionNameDialog.BackgroundImageLayout = ImageLayout.Stretch;
+            this.Enabled = false;
+            collectionNameDialog.ShowDialog(this);
+            this.Enabled = true;
+
+            var newCollectionName = collectionNameDialog.GetCollectionName();
+
+            if (!string.IsNullOrEmpty(newCollectionName))
             {
-                var imageCollection = libManager.GetImageCollectionByCategory(newCollectionName);
-                fileManager.SaveImageCollection(libPath, newCollectionName, imageCollection);
+                var collectionPath = Path.Combine(libManager.LibraryPath, newCollectionName);
+                if (fileManager.IsDirectoryExist(collectionPath))
+                {
+                    var popUpMessage = new TimedPopUp();
+                    popUpMessage.Set("Коллекция с таким именем уже существует");
+                    popUpMessage.ShowError(3000);
+                    this.Invoke((Action)(() => this.Enabled = true));
+                    return;
+                }
 
-                var popUp = new TimedPopUp();
-                popUp.Set("СОХРАНЕНО");
-                SoundPlayer.PlaySaveSound();
-                popUp.Show();
+                collectionNameDialog.Dispose();
+                collectionNameDialog = null;
+                paintForm = new PaintForm(this, baseForm, newCollectionName);
+
+                new Thread(() =>
+                {
+                    this.Invoke((Action) (() => paintForm.StartPosition = FormStartPosition.Manual));
+                    this.Invoke((Action)(() => paintForm.Location = this.Location));
+                    this.Invoke((Action)(() => paintForm.StartPosition = FormStartPosition.CenterParent));
+                    this.Invoke((Action)(() => paintForm.BackgroundImageLayout = ImageLayout.Stretch));
+                    this.Invoke((Action)(() => this.Enabled = false));
+                    this.Invoke((Action)(() => paintForm.ShowDialog(this)));
+                    List<CustomImage> newCollection = paintForm.GetCollection();
+                    SaveCustomImageCollection(newCollectionName, newCollection);
+                    paintForm.Dispose();
+                    paintForm = null;
+                    this.Invoke((Action) (() => this.Enabled = true));
+                }).Start();
+            }
+        }
+
+        private void SaveCustomImageCollection(string collectionName, List<CustomImage> imageCollection)
+        {
+            if (imageCollection != null && imageCollection.Count == 16)
+            {
+                string libPath = libManager.LibraryPath;
+                fileManager.SaveNewCollection(imageCollection, collectionName, libPath);
             }
         }
     }
