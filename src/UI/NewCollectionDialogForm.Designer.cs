@@ -51,9 +51,9 @@
             this.NewCollectionLabel.AutoSize = true;
             this.NewCollectionLabel.Location = new System.Drawing.Point(75, 20);
             this.NewCollectionLabel.Name = "NewCollectionLabel";
-            this.NewCollectionLabel.Size = new System.Drawing.Size(200, 17);
+            this.NewCollectionLabel.Size = new System.Drawing.Size(203, 17);
             this.NewCollectionLabel.TabIndex = 1;
-            this.NewCollectionLabel.Text = "Введите название категории";
+            this.NewCollectionLabel.Text = "Введите название коллекции";
             // 
             // GenerateCollectionButton
             // 

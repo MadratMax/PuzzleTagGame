@@ -52,7 +52,6 @@ namespace PuzzleTag
             this.ruler = ruler;
             this.players = players;
             this.fileManager = fileManager;
-            this.scoreStorage = new PlayersScoreStorage();
             this.buttonManager = buttonManager;
             this.libManager = libManager;
             this.baseForm = baseForm;
@@ -94,12 +93,13 @@ namespace PuzzleTag
             if (Player1ComboBox.Text != string.Empty)
             {
                 SoundPlayer.PlayStartGameSound();
-                Shuffle();
                 AddPlayersToGame();
-                InitPlayerScores();
-                InitAvatars();
                 var moveQueue = new MoveQueue(players);
                 var totalScore = new TotalScore(players);
+                this.scoreStorage = new PlayersScoreStorage();
+                Shuffle();
+                InitPlayerScores();
+                InitAvatars();
                 ruler.StartGame(moveQueue, totalScore, scoreStorage);
                 BlockSettings();
                 BackToMain();
@@ -235,10 +235,10 @@ namespace PuzzleTag
 
         private void RemovePlayersFromGame()
         {
-            scoreStorage.DisposeScore(player1);
-            scoreStorage.DisposeScore(player2);
-            scoreStorage.DisposeScore(player3);
-            scoreStorage.DisposeData();
+            scoreStorage?.DisposeScore(player1);
+            scoreStorage?.DisposeScore(player2);
+            scoreStorage?.DisposeScore(player3);
+            scoreStorage?.DisposeData();
             player1PrizeImagesList = null;
             player2PrizeImagesList = null;
             player3PrizeImagesList = null;
@@ -257,6 +257,7 @@ namespace PuzzleTag
             RemovePlayer1Button.Enabled = false;
             RemovePlayer2Button.Enabled = false;
             RemovePlayer3Button.Enabled = false;
+            RemoveCollectionButton.Enabled = false;
             NewGameButton.Enabled = false;
         }
 
@@ -268,6 +269,7 @@ namespace PuzzleTag
             RemovePlayer1Button.Enabled = true;
             RemovePlayer2Button.Enabled = true;
             RemovePlayer3Button.Enabled = true;
+            RemoveCollectionButton.Enabled = true;
             CategoryComboBox.Enabled = true;
             NewGameButton.Enabled = true;
         }
@@ -299,7 +301,26 @@ namespace PuzzleTag
 
         private void ShuffleCards_Click(object sender, EventArgs e)
         {
-            ResetGame(true);
+            var confirm = GetConfirmStatus("Сбросить игру?");
+
+            if (confirm.Yes)
+                ResetGame(true);
+
+            confirm.Dispose();
+            this.Enabled = true;
+        }
+
+        private ConfirmDialogForm GetConfirmStatus(string confirmMessage)
+        {
+            var confirm = new ConfirmDialogForm(confirmMessage);
+            SoundPlayer.PlaySettingsSound();
+            confirm.StartPosition = FormStartPosition.Manual;
+            confirm.Location = this.Location;
+            confirm.StartPosition = FormStartPosition.CenterParent;
+            confirm.BackgroundImageLayout = ImageLayout.Stretch;
+            this.Enabled = false;
+            confirm.ShowDialog(this);
+            return confirm;
         }
 
         private void ResetGame(bool forced = false)
@@ -316,15 +337,19 @@ namespace PuzzleTag
 
         private void ExitButton_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            var confirm = GetConfirmStatus("Выйти?");
+
+            if (confirm.Yes)
+                Application.Exit();
+
+            confirm.Dispose();
+            this.Enabled = true;
         }
 
         private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             SoundPlayer.PlayShuffleSound();
-            GameState.Category = CategoryComboBox.Text;
             ChangeGameCategory();
-            InitSaveCollectionButton();
         }
 
         private void InitSaveCollectionButton()
@@ -342,8 +367,10 @@ namespace PuzzleTag
 
         private void ChangeGameCategory()
         {
+            GameState.Category = CategoryComboBox.Text;
             buttonManager.AssignImages(GameState.Category);
             buttonManager.HideButtonImages();
+            InitSaveCollectionButton();
         }
 
         private void RemovePlayer1Button_Click(object sender, EventArgs e)
@@ -405,10 +432,14 @@ namespace PuzzleTag
             if (Player1ComboBox.SelectedIndex != -1)
             {
                 Player2ComboBox.Enabled = true;
+                NewGameButton.Enabled = true;
+                StartGameLabel.Enabled = true;
             }
             else
             {
                 Player2ComboBox.Enabled = false;
+                NewGameButton.Enabled = false;
+                StartGameLabel.Enabled = false;
             }
         }
 
@@ -444,42 +475,61 @@ namespace PuzzleTag
 
         private void AddCollectionButton_Click(object sender, EventArgs e)
         {
-            ResetGame();
+            bool needReset = false;
+            ConfirmDialogForm confirm = null;
 
-            if (newCollectionDialogForm == null)
+            if (ruler.IsGameStarted)
             {
-                newCollectionDialogForm = new NewCollectionDialogForm();
+                confirm = GetConfirmStatus("Сбросить игру?");
+                needReset = confirm.Yes;
+            }
+            else
+            {
+                needReset = true;
             }
 
-            SoundPlayer.PlaySettingsSound();
-            newCollectionDialogForm.StartPosition = FormStartPosition.Manual;
-            newCollectionDialogForm.Location = this.Location;
-            newCollectionDialogForm.StartPosition = FormStartPosition.CenterParent;
-            newCollectionDialogForm.BackgroundImageLayout = ImageLayout.Stretch;
-            this.Enabled = false;
-            newCollectionDialogForm.NewCollectionTextBox.Focus();
-            newCollectionDialogForm.ShowDialog(this);
-            var newCollectionName = newCollectionDialogForm.CollectionName;
-            this.Enabled = true;
-
-            if (!string.IsNullOrEmpty(newCollectionName) && newCollectionName?.Length > 2)
+            if (needReset)
             {
+                ResetGame();
+
+                if (newCollectionDialogForm == null)
+                {
+                    newCollectionDialogForm = new NewCollectionDialogForm();
+                }
+
+                SoundPlayer.PlaySettingsSound();
+                newCollectionDialogForm.StartPosition = FormStartPosition.Manual;
+                newCollectionDialogForm.Location = this.Location;
+                newCollectionDialogForm.StartPosition = FormStartPosition.CenterParent;
+                newCollectionDialogForm.BackgroundImageLayout = ImageLayout.Stretch;
                 this.Enabled = false;
-                baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ '{newCollectionName.ToUpper()}' ...");
-                
-                new Thread(() => {
-                    Thread.CurrentThread.IsBackground = true;
-                    this.Invoke((Action)(() => customImageCollectionConfigurator.GenerateImageCollectionByCategory(newCollectionName, 180, 190)));
-                    this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
-                    this.Invoke((Action)(() => buttonManager.HideButtonImages()));
-                    this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
-                    this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
-                    this.Invoke((Action)(() => newCollectionDialogForm.ResetCollectionName()));
-                    this.Invoke((Action)(() => this.Enabled = true));
-                    this.Invoke((Action)(() => baseForm.HideStatusMessage()));
-                    SoundPlayer.PlayShuffleSound();
-                }).Start();
+                newCollectionDialogForm.NewCollectionTextBox.Focus();
+                newCollectionDialogForm.ShowDialog(this);
+                var newCollectionName = newCollectionDialogForm.CollectionName;
+                this.Enabled = true;
+
+                if (!string.IsNullOrEmpty(newCollectionName) && newCollectionName?.Length > 2)
+                {
+                    this.Invoke((Action)(() => this.Enabled = false));
+
+                    new Thread(() => {
+                        Thread.CurrentThread.IsBackground = true;
+                        this.Invoke((Action)(() => baseForm.ShowStatusMessage($"ПОИСК ИЗОБРАЖЕНИЙ ПО КАТЕГОРИИ '{newCollectionName.ToUpper()}' ...")));
+                        this.Invoke((Action)(() => customImageCollectionConfigurator.GenerateImageCollectionByCategory(baseForm, newCollectionName, 180, 190)));
+                        this.Invoke((Action)(() => buttonManager.AssignImages(newCollectionName)));
+                        this.Invoke((Action)(() => buttonManager.HideButtonImages()));
+                        this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
+                        this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
+                        this.Invoke((Action)(() => newCollectionDialogForm.ResetCollectionName()));
+                        this.Invoke((Action)(() => this.Enabled = true));
+                        this.Invoke((Action)(() => baseForm.HideStatusMessage()));
+                        SoundPlayer.PlayShuffleSound();
+                    }).Start();
+                }
             }
+
+            confirm?.Dispose();
+            this.Enabled = true;
         }
 
         private void SaveCollectionButton_Click(object sender, EventArgs e)
@@ -495,57 +545,101 @@ namespace PuzzleTag
         {
             SoundPlayer.PlaySettingsSound();
 
-            var collectionNameDialog = new CustomCollectionNameDialogForm();
-            collectionNameDialog.StartPosition = FormStartPosition.Manual;
-            collectionNameDialog.Location = this.Location;
-            collectionNameDialog.StartPosition = FormStartPosition.CenterParent;
-            collectionNameDialog.BackgroundImageLayout = ImageLayout.Stretch;
-            this.Enabled = false;
-            collectionNameDialog.ShowDialog(this);
-            this.Enabled = true;
+            bool needReset = false;
+            ConfirmDialogForm confirm = null;
 
-            var newCollectionName = collectionNameDialog.GetCollectionName();
-
-            if (!string.IsNullOrEmpty(newCollectionName))
+            if (ruler.IsGameStarted)
             {
-                var collectionPath = Path.Combine(libManager.LibraryPath, newCollectionName);
-                if (fileManager.IsDirectoryExist(collectionPath))
-                {
-                    var popUpMessage = new TimedPopUp();
-                    popUpMessage.Set("Коллекция с таким именем уже существует");
-                    popUpMessage.ShowError(3000);
-                    this.Invoke((Action)(() => this.Enabled = true));
-                    return;
-                }
-
-                collectionNameDialog.Dispose();
-                collectionNameDialog = null;
-                paintForm = new PaintForm(this, baseForm, newCollectionName);
-
-                new Thread(() =>
-                {
-                    this.Invoke((Action) (() => paintForm.StartPosition = FormStartPosition.Manual));
-                    this.Invoke((Action)(() => paintForm.Location = this.Location));
-                    this.Invoke((Action)(() => paintForm.StartPosition = FormStartPosition.CenterParent));
-                    this.Invoke((Action)(() => paintForm.BackgroundImageLayout = ImageLayout.Stretch));
-                    this.Invoke((Action)(() => this.Enabled = false));
-                    this.Invoke((Action)(() => paintForm.ShowDialog(this)));
-                    List<CustomImage> newCollection = paintForm.GetCollection();
-                    SaveCustomImageCollection(newCollectionName, newCollection);
-                    paintForm.Dispose();
-                    paintForm = null;
-                    this.Invoke((Action) (() => this.Enabled = true));
-                }).Start();
+                confirm = GetConfirmStatus("Сбросить игру?");
+                needReset = confirm.Yes;
             }
+            else
+            {
+                needReset = true;
+            }
+
+            if (needReset)
+            {
+                ResetGame();
+
+                var collectionNameDialog = new CustomCollectionNameDialogForm();
+                collectionNameDialog.StartPosition = FormStartPosition.Manual;
+                collectionNameDialog.Location = this.Location;
+                collectionNameDialog.StartPosition = FormStartPosition.CenterParent;
+                collectionNameDialog.BackgroundImageLayout = ImageLayout.Stretch;
+                this.Enabled = false;
+                collectionNameDialog.ShowDialog(this);
+                this.Enabled = true;
+
+                var newCollectionName = collectionNameDialog.GetCollectionName();
+
+                if (!string.IsNullOrEmpty(newCollectionName))
+                {
+                    var collectionPath = Path.Combine(libManager.LibraryPath, newCollectionName);
+                    if (fileManager.IsDirectoryExist(collectionPath))
+                    {
+                        var popUpMessage = new TimedPopUp();
+                        popUpMessage.Set("Коллекция с таким именем уже существует");
+                        popUpMessage.ShowError(3000);
+                        this.Invoke((Action)(() => this.Enabled = true));
+                        return;
+                    }
+
+                    collectionNameDialog.Dispose();
+                    collectionNameDialog = null;
+                    paintForm = new PaintForm(this, baseForm, newCollectionName);
+
+                    new Thread(() =>
+                    {
+                        this.Invoke((Action)(() => paintForm.StartPosition = FormStartPosition.Manual));
+                        this.Invoke((Action)(() => paintForm.Location = this.Location));
+                        this.Invoke((Action)(() => paintForm.StartPosition = FormStartPosition.CenterParent));
+                        this.Invoke((Action)(() => paintForm.BackgroundImageLayout = ImageLayout.Stretch));
+                        this.Invoke((Action)(() => this.Enabled = false));
+                        this.Invoke((Action)(() => paintForm.ShowDialog(this)));
+                        List<CustomImage> newCollection = paintForm.GetCollection();
+                        SaveCustomImageCollection(newCollectionName, newCollection);
+                        this.Invoke((Action)(() => CategoryComboBox.DataSource = libManager.GetCategories().ToList()));
+                        this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = CategoryComboBox.FindStringExact(newCollectionName)));
+                        paintForm.Dispose();
+                        paintForm = null;
+                        this.Invoke((Action)(() => this.Enabled = true));
+                    }).Start();
+                }
+            }
+
+            confirm?.Dispose();
+            this.Enabled = true;
         }
 
         private void SaveCustomImageCollection(string collectionName, List<CustomImage> imageCollection)
         {
-            if (imageCollection != null && imageCollection.Count == 16)
+            if (imageCollection != null && imageCollection.Count == 32)
             {
                 string libPath = libManager.LibraryPath;
                 fileManager.SaveNewCollection(imageCollection, collectionName, libPath);
+                libManager.AddCategory(collectionName);
+                libManager.InitializeNewCollection(imageCollection);
             }
+        }
+
+        private void RemoveCollectionButton_Click(object sender, EventArgs e)
+        {
+            var confirm = GetConfirmStatus("Удалить коллекцию?");
+
+            if (confirm.Yes)
+            {
+                var collectionName = CategoryComboBox.Text;
+                libManager.RemoveCategory(collectionName);
+                var categories = libManager.GetCategories();
+                this.Invoke((Action)(() => CategoryComboBox.DataSource = categories.ToList()));
+                this.Invoke((Action)(() => CategoryComboBox.Refresh()));
+                this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = 0));
+                fileManager.DeleteCollection(collectionName, libManager.LibraryPath);
+            }
+
+            confirm.Dispose();
+            this.Enabled = true;
         }
     }
 }

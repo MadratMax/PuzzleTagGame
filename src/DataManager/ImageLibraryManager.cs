@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using PuzzleTag.Configuration;
 using PuzzleTag.FileManager.Library;
@@ -40,6 +41,11 @@ namespace PuzzleTag.FileManager
         public void AddCategory(string category)
         {
             imageLib.AddCategory(category);
+        }
+
+        public void RemoveCategory(string category)
+        {
+            imageLib.RemoveCategory(category);
         }
 
         public List<string> GetCategories()
@@ -110,14 +116,18 @@ namespace PuzzleTag.FileManager
 
                 foreach (var file in files)
                 {
+                    FileStream bitmapFile = new FileStream(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    Image image = new Bitmap(bitmapFile);
+
                     var newImage = new CustomImage
                     {
                         Name = fileManager.GetFileName(file),
                         Category = fileManager.GetDirName(file),
-                        Image = Image.FromFile(file)
+                        Image = image
                     };
 
                     imageLib.AddImageToLib(newImage);
+                    bitmapFile.Close();
                 }
             }
 
@@ -145,18 +155,29 @@ namespace PuzzleTag.FileManager
             InitializeCategories();
         }
 
+        public void Dispose()
+        {
+            imageCollection = null;
+            imageLib = null;
+
+        }
+
         private void SetMainScreenImage()
         {
             var mainImage = fileManager.GetFiles(Settings.MainImagePath).FirstOrDefault();
+            FileStream bitmapFile = new FileStream(mainImage, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            Image image = new Bitmap(bitmapFile);
+
             var newCustomImage = new CustomImage
             {
                 Name = fileManager.GetFileName(mainImage),
                 SpecialName = "MainImage",
                 Category = fileManager.GetDirName(mainImage),
-                Image = Image.FromFile(mainImage)
+                Image = image
             };
 
             imageLib.SetMainImage(newCustomImage);
+            bitmapFile.Close();
         }
 
         private void InitializeCategories()
@@ -167,28 +188,36 @@ namespace PuzzleTag.FileManager
         private void SetWinnerImage()
         {
             var winnerImage = fileManager.GetFiles(Settings.WinnerImagePath).FirstOrDefault();
+            FileStream bitmapFile = new FileStream(winnerImage, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            Image image = new Bitmap(bitmapFile);
+
             var newCustomImage = new CustomImage
             {
                 Name = fileManager.GetFileName(winnerImage),
                 SpecialName = "WinnerImage",
                 Category = fileManager.GetDirName(winnerImage),
-                Image = Image.FromFile(winnerImage)
+                Image = image
             };
 
             imageLib.SetWinnerImage(newCustomImage);
+            bitmapFile.Close();
         }
 
         private void SetClosedCardImage()
         {
             var closedCardImage = fileManager.GetFiles(Settings.ClosedCardImagePath).FirstOrDefault();
+            FileStream bitmapFile = new FileStream(closedCardImage, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            Image image = new Bitmap(bitmapFile);
+
             var newCustomImage = new CustomImage
             {
                 Name = fileManager.GetFileName(closedCardImage),
                 Category = fileManager.GetDirName(closedCardImage),
-                Image = Image.FromFile(closedCardImage)
+                Image = image
             };
 
             imageLib.SetClosedCardImage(newCustomImage);
+            bitmapFile.Close();
         }
     }
 }

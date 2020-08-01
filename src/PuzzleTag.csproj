@@ -105,6 +105,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UI\ConfirmDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ConfirmDialogForm.Designer.cs">
+      <DependentUpon>ConfirmDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlsCollection\ButtonsCollection.cs" />
     <Compile Include="ControlsCollection\CustomButtonsManager.cs" />
     <Compile Include="DataManager\PlayersScoreStorage.cs" />
@@ -145,7 +151,7 @@
     </Compile>
     <Compile Include="Game\Ruler.cs" />
     <Compile Include="Generators\ButtonGenerator.cs" />
-    <Compile Include="Notification\TimedPopUp.cs">
+    <Compile Include="UI\Notification\TimedPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -176,6 +182,9 @@
     <Compile Include="UI\WinnerForm.Designer.cs">
       <DependentUpon>WinnerForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\ConfirmDialogForm.resx">
+      <DependentUpon>ConfirmDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\CustomCollectionNameDialogForm.resx">
       <DependentUpon>CustomCollectionNameDialogForm.cs</DependentUpon>
     </EmbeddedResource>

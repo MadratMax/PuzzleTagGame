@@ -37,7 +37,7 @@ namespace PuzzleTag.Notification
             }
         }
 
-        async new public void ShowError(int waitTime = 2000, bool autoHide = true)
+        async new public void ShowError(int waitTime = 3000, bool autoHide = true)
         {
             SoundPlayer.PlayFailedImageSound();
             base.Show();

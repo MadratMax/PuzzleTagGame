@@ -57,6 +57,15 @@ namespace PuzzleTag.UI
         private void CustomCollectionNameDialogForm_Load(object sender, EventArgs e)
         {
             SaveCollectionNameButton.Enabled = false;
+            SetupKeyDownEvents(this);
+        }
+
+        private void SetupKeyDownEvents(CustomCollectionNameDialogForm customCollectionNameDialogForm)
+        {
+            foreach (Control control in customCollectionNameDialogForm.Controls)
+            {
+                control.KeyDown += CustomCollectionNameDialogForm_KeyDown;
+            }
         }
 
         private void CustomCollectionNameDialogForm_KeyDown(object sender, KeyEventArgs e)
@@ -64,6 +73,10 @@ namespace PuzzleTag.UI
             if (e.KeyCode == Keys.Enter)
             {
                 SaveCollectionNameButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Escape)
+            {
+                BackToSettings();
             }
         }
     }

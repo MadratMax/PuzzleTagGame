@@ -96,6 +96,13 @@ namespace PuzzleTag
             messageBar.Show(autoHide:false);
         }
 
+        public void UpdateStatusMessage(string updateMessage)
+        {
+            messageBar?.HideForm();
+            messageBar?.Set(updateMessage, FormStartPosition.CenterScreen);
+            messageBar?.Show(autoHide: false);
+        }
+
         public void HideStatusMessage()
         {
             messageBar?.HideForm();
@@ -232,6 +239,16 @@ namespace PuzzleTag
             gameSettings.StartPosition = FormStartPosition.CenterParent;
             gameSettings.BackgroundImageLayout = ImageLayout.Stretch;
             gameSettings.ShowDialog(this);
+        }
+
+        private void PuzzleTag_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            gameSettings.Dispose();
+            libManager.Dispose();
+            buttonManager.Dispose();
+            this.Dispose();
+            //var collectionName = "car";
+            //fileManager.DeleteCollection(collectionName, libManager.LibraryPath);
         }
     }
 }

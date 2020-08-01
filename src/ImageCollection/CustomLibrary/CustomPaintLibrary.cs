@@ -33,7 +33,10 @@ namespace PuzzleTag.ImageCollection.CustomLibrary
 
         public List<CustomImage> GetCollection()
         {
-            return imageList;
+            var increasedImageList = imageList.Concat(imageList)
+                //.Concat(imageList)
+                .ToList();
+            return increasedImageList;
         }
 
         public bool IsImageExistWithNumber(int index)

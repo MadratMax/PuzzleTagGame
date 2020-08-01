@@ -70,6 +70,14 @@ namespace PuzzleTag.FileManager.Library
             }
         }
 
+        public void RemoveCategory(string category)
+        {
+            if (categories.Contains(category))
+            {
+                categories.Remove(category);
+            }
+        }
+
         public List<string> GetCategories()
         {
             return categories;

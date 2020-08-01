@@ -107,9 +107,11 @@ namespace PuzzleTag.UI
         {
             SavePicture();
 
-            if (pictureLib.GetCollection().Count == 16)
+            var collection = pictureLib.GetCollection();
+
+            if (collection.Count == 32)
             {
-                imageCollection = pictureLib.GetCollection();
+                imageCollection = collection;
                 BackToSettings();
             }
             else

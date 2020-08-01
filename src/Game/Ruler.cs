@@ -71,6 +71,7 @@ namespace PuzzleTag.Game
             }
             
             this.scoreStorage = null;
+            ResetMoveCount();
         }
 
         public Player CurrentPlayer => currentPlayer;
@@ -253,6 +254,11 @@ namespace PuzzleTag.Game
                     moveCount = value;
                 }
             }
+        }
+
+        private void ResetMoveCount()
+        {
+            moveCount = 0;
         }
 
         private CustomButton FirstCard;
