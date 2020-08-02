@@ -34,6 +34,7 @@
             this.RightButton = new System.Windows.Forms.Button();
             this.PicNumberTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
+            this.BrushSizeComboBox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,13 +109,27 @@
             this.CloseButton.UseVisualStyleBackColor = false;
             this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
+            // BrushSizeComboBox
+            // 
+            this.BrushSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.BrushSizeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BrushSizeComboBox.Items.AddRange(new object[] {
+            "---",
+            "---"});
+            this.BrushSizeComboBox.Location = new System.Drawing.Point(14, 491);
+            this.BrushSizeComboBox.Name = "BrushSizeComboBox";
+            this.BrushSizeComboBox.Size = new System.Drawing.Size(121, 24);
+            this.BrushSizeComboBox.TabIndex = 12;
+            this.BrushSizeComboBox.SelectedIndexChanged += new System.EventHandler(this.BrushSizeComboBox_SelectedIndexChanged);
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(609, 590);
+            this.ClientSize = new System.Drawing.Size(605, 586);
             this.ControlBox = false;
+            this.Controls.Add(this.BrushSizeComboBox);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.PicNumberTextBox);
             this.Controls.Add(this.RightButton);
@@ -140,5 +155,6 @@
         private System.Windows.Forms.Button RightButton;
         private System.Windows.Forms.TextBox PicNumberTextBox;
         private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.ComboBox BrushSizeComboBox;
     }
 }

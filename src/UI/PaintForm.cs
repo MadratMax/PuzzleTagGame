@@ -20,6 +20,7 @@ namespace PuzzleTag.UI
         private List<CustomImage> imageCollection;
         private Bitmap picture;
         private CustomPaintLibrary pictureLib;
+        private Painter.Painter painter;
         private int picNum = 1;
 
 
@@ -37,16 +38,6 @@ namespace PuzzleTag.UI
             this.pictureLib = new CustomPaintLibrary();
         }
 
-        public PaintForm GetLastPaint()
-        {
-            return paintPanelImage;
-        }
-
-        public Graphics GetLastImage()
-        {
-            return graph;
-        }
-
         public List<CustomImage> GetCollection()
         {
             return imageCollection;
@@ -54,10 +45,8 @@ namespace PuzzleTag.UI
 
         private void PaintPanel_Paint(object sender, PaintEventArgs e)
         {
-            graph = Graphics.FromImage(PictureBox.Image);
-            graph.DrawEllipse(Pens.Red, pointX, pointY, 3, 2);
-
-            PictureBox.Refresh();
+            painter.Paint(pointY, pointY);
+            painter.RefreshPicture();
         }
 
         private void PaintPanel_MouseMove(object sender, MouseEventArgs e)
@@ -70,16 +59,10 @@ namespace PuzzleTag.UI
             }
         }
 
-        private void SavePaintButton_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void SavePicture()
         {
-            PictureBox.Refresh();
-
-            this.PictureBox.DrawToBitmap(picture, new Rectangle(0, 0, this.PictureBox.Width, this.PictureBox.Height));
+            painter.RefreshPicture();
+            painter.CreateImage(PictureBox);
 
             var pictureName = PicNumberTextBox.Text;
 
@@ -126,7 +109,7 @@ namespace PuzzleTag.UI
         {
             Invoke((Action)(() => settingsForm.Hide()));
             Invoke((Action)(() => baseForm.Enabled = false));
-            
+            this.painter = new Painter.Painter(this.PictureBox);
             InitControls();
             InitEmptyPictureBox();
         }
@@ -135,7 +118,7 @@ namespace PuzzleTag.UI
         {
             if (initialImage == null)
             {
-                picture = new Bitmap(PictureBox.Width, PictureBox.Height);
+                picture = painter.InitEmptyPicture();
             }
             else
             {
@@ -184,6 +167,11 @@ namespace PuzzleTag.UI
         private void CloseButton_Click(object sender, EventArgs e)
         {
             BackToSettings();
+        }
+
+        private void BrushSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
