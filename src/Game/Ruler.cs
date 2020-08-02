@@ -183,13 +183,13 @@ namespace PuzzleTag.Game
             await Task.Delay(90);
             //currentPlayer.AvaButton.Enabled = true;
             currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
-            await Task.Delay(150);
+            await Task.Delay(110);
             //currentPlayer.AvaButton.Enabled = false;
             currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
             await Task.Delay(90);
             //currentPlayer.AvaButton.Enabled = true;
             currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
-            await Task.Delay(150);
+            await Task.Delay(110);
             //currentPlayer.AvaButton.Enabled = false;
             currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
             await Task.Delay(90);

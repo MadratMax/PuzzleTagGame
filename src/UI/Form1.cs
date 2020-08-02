@@ -88,12 +88,15 @@ namespace PuzzleTag
             SoundPlayer.FailedImageSound = failedImageSoundFile;
         }
 
-        public void ShowStatusMessage(string message)
+        public void ShowStatusMessage(string message, bool error = false, bool autoHide = false)
         {
+            if(error)
+                SoundPlayer.PlayFailedImageSound();
+
             messageBar = null;
             messageBar = new TimedPopUp();
             messageBar.Set(message, FormStartPosition.CenterScreen);
-            messageBar.Show(autoHide:false);
+            messageBar.Show(autoHide:autoHide);
         }
 
         public void UpdateStatusMessage(string updateMessage)

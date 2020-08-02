@@ -236,7 +236,7 @@ namespace PuzzleTag.UI
 
         private void BrushSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            painter.ChangePenSize(new Size(BrushSizeComboBox.SelectedIndex+1, 0));
+            painter.ChangePenSize(new Size(BrushSizeComboBox.SelectedIndex+2, 0));
         }
 
         private void ColorButton_Click(object sender, EventArgs e)

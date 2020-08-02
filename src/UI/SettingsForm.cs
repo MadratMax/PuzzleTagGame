@@ -573,6 +573,12 @@ namespace PuzzleTag
 
                 var newCollectionName = collectionNameDialog.GetCollectionName();
 
+                if (libManager.GetCategories().Contains(newCollectionName))
+                {
+                    baseForm.ShowStatusMessage("Коллекция с таким названием уже существует", error:true, true);
+                    return;
+                }
+
                 if (!string.IsNullOrEmpty(newCollectionName))
                 {
                     var collectionPath = Path.Combine(libManager.LibraryPath, newCollectionName);

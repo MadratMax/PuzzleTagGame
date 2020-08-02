@@ -62,10 +62,10 @@
             this.NewGameButton.FlatAppearance.BorderSize = 0;
             this.NewGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NewGameButton.Image = ((System.Drawing.Image)(resources.GetObject("NewGameButton.Image")));
-            this.NewGameButton.Location = new System.Drawing.Point(137, 299);
+            this.NewGameButton.Location = new System.Drawing.Point(138, 290);
             this.NewGameButton.Margin = new System.Windows.Forms.Padding(0);
             this.NewGameButton.Name = "NewGameButton";
-            this.NewGameButton.Size = new System.Drawing.Size(99, 78);
+            this.NewGameButton.Size = new System.Drawing.Size(108, 90);
             this.NewGameButton.TabIndex = 0;
             this.toolTip1.SetToolTip(this.NewGameButton, "Начать игру");
             this.NewGameButton.UseVisualStyleBackColor = false;
@@ -336,7 +336,7 @@
             // 
             this.StartGameLabel.AutoSize = true;
             this.StartGameLabel.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StartGameLabel.Location = new System.Drawing.Point(164, 287);
+            this.StartGameLabel.Location = new System.Drawing.Point(170, 284);
             this.StartGameLabel.Name = "StartGameLabel";
             this.StartGameLabel.Size = new System.Drawing.Size(48, 20);
             this.StartGameLabel.TabIndex = 55;
