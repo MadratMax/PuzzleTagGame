@@ -166,11 +166,35 @@ namespace PuzzleTag.Game
                 {
                     currentPlayer.AvaButton.FlatAppearance.BorderColor = Color.DarkOrange;
                     currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
+                    currentPlayer.AvaButton.Focus();
+
+                    Flickering();
                 }
             }
             
             ClearMove();
             WaitNextMove = false;
+        }
+
+        private async void Flickering()
+        {
+            //currentPlayer.AvaButton.Enabled = false;
+            currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
+            await Task.Delay(100);
+            //currentPlayer.AvaButton.Enabled = true;
+            currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
+            await Task.Delay(150);
+            //currentPlayer.AvaButton.Enabled = false;
+            currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
+            await Task.Delay(100);
+            //currentPlayer.AvaButton.Enabled = true;
+            currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
+            await Task.Delay(150);
+            //currentPlayer.AvaButton.Enabled = false;
+            currentPlayer.AvaButton.FlatAppearance.BorderSize = 0;
+            await Task.Delay(100);
+            //currentPlayer.AvaButton.Enabled = true;
+            currentPlayer.AvaButton.FlatAppearance.BorderSize = 4;
         }
 
         private void CheckGameStatus()

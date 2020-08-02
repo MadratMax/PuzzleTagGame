@@ -625,6 +625,7 @@ namespace PuzzleTag
 
         private void RemoveCollectionButton_Click(object sender, EventArgs e)
         {
+            SoundPlayer.PlayRemovePlayerSound();
             var confirm = GetConfirmStatus("Удалить коллекцию?");
 
             if (confirm.Yes)
