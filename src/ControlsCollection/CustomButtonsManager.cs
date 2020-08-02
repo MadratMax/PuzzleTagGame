@@ -33,8 +33,7 @@ namespace PuzzleTag.Collection
         {
             var buttons = buttonsCollection.GetAllButtons();
             var categorizedImageCollection = libManager.GetImageCollectionByCategory(categoryName);
-            int imageIndex = 0;
-
+            
             if (categorizedImageCollection != null)
             {
                 ValidateAndSet(categorizedImageCollection, categoryName, buttons);
@@ -106,6 +105,17 @@ namespace PuzzleTag.Collection
         public int ExistingButtonsOnBoard()
         {
             return buttonsCollection.GetAllButtons().Count(n => n.Value.Visible);
+        }
+
+        public void Dispose()
+        {
+            foreach (var customButton in GetAllButtons())
+            {
+                customButton.Image.Dispose();
+            }
+
+            buttonsCollection = null;
+            libManager = null;
         }
 
         private void ValidateAndSet(List<CustomImage> collection, string category, IDictionary<int, CustomButton> buttons)

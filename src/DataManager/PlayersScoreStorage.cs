@@ -41,7 +41,7 @@ namespace PuzzleTag.DataManager
             {
                 var scoreModel = playerScoreList?.FirstOrDefault(n => n.Player == player);
 
-                for (int i = 0; i < scoreModel.Scores.Count; i++)
+                for (int i = 0; i < scoreModel?.Scores.Count; i++)
                 {
                     UpdateScoreItem(player, i, false);
                 }

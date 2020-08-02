@@ -1,4 +1,10 @@
-﻿namespace PuzzleTag.SoundMaster
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Windows.Forms;
+using PuzzleTag.FileManager.Library;
+
+namespace PuzzleTag.SoundMaster
 {
     class SoundPlayer
     {
@@ -20,92 +26,87 @@
 
         public static void PlaySound(string soundFile)
         {
-            player = new System.Media.SoundPlayer(soundFile);
-            player?.Play();
+            Play(soundFile);
         }
 
         public static void PlayButtonSound()
         {
-            player = new System.Media.SoundPlayer(ButtonSound);
-            player?.Play();
+            Play(ButtonSound);
         }
 
         public static void PlayCloseCardSound()
         {
-            player = new System.Media.SoundPlayer(CloseCardSound);
-            player?.Play();
+            Play(CloseCardSound);
         }
 
         public static void PlayFailedImageSound()
         {
-            player = new System.Media.SoundPlayer(FailedImageSound);
-            player?.Play();
+            Play(FailedImageSound);
         }
 
         public static void PlayOpenCloseCardsSound()
         {
-            player = new System.Media.SoundPlayer(OpenCloseCardsSound);
-            player?.Play();
+            Play(OpenCloseCardsSound);
         }
 
         public static void PlayCannotOpenCardSound()
         {
-            player = new System.Media.SoundPlayer(CannotOpenCardSound);
-            player?.Play();
+            Play(CannotOpenCardSound);
         }
 
         public static void PlayNewImageAddedSound()
         {
-            player = new System.Media.SoundPlayer(NewImageSound);
-            player?.Play();
+            Play(NewImageSound);
         }
 
         public static void PlaySaveSound()
         {
-            player = new System.Media.SoundPlayer(SaveSound);
-            player?.Play();
+            Play(SaveSound);
         }
 
         public static void PlayShuffleSound()
         {
-            player = new System.Media.SoundPlayer(ShuffleSound);
-            player?.Play();
+            Play(ShuffleSound);
         }
 
         public static void PlayRemovePlayerSound()
         {
-            player = new System.Media.SoundPlayer(RemovePlayerSound);
-            player?.Play();
+            Play(RemovePlayerSound);
         }
 
         public static void PlayScoreSound()
         {
-            player = new System.Media.SoundPlayer(ScoreSound);
-            player?.Play();
+            Play(ScoreSound);
         }
 
         public static void PlaySettingsSound()
         {
-            player = new System.Media.SoundPlayer(SettingsSound);
-            player?.Play();
+            Play(SettingsSound);
         }
 
         public static void PlaySelectItemSound()
         {
-            player = new System.Media.SoundPlayer(SelectSound);
-            player?.Play();
+            Play(SelectSound);
         }
 
         public static void PlayStartGameSound()
         {
-            player = new System.Media.SoundPlayer(StartGameSound);
-            player?.Play();
+            Play(StartGameSound);
         }
 
         public static void PlayWinSound()
         {
-            player = new System.Media.SoundPlayer(WinSound);
-            player?.Play();
+            Play(WinSound);
+        }
+
+        private static void Play(string sound)
+        {
+            new Thread(() =>
+            {
+                player = new System.Media.SoundPlayer(sound);
+                player?.Play();
+
+            }).Start();
         }
     }
 }

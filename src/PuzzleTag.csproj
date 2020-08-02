@@ -105,6 +105,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Painter\Painter.cs" />
+    <Compile Include="UI\ConfirmDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ConfirmDialogForm.Designer.cs">
+      <DependentUpon>ConfirmDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlsCollection\ButtonsCollection.cs" />
     <Compile Include="ControlsCollection\CustomButtonsManager.cs" />
     <Compile Include="DataManager\PlayersScoreStorage.cs" />
@@ -125,11 +132,18 @@
     <Compile Include="Game\TotalScore.cs" />
     <Compile Include="ImageCollection\CustomLibrary\Api.cs" />
     <Compile Include="ImageCollection\CustomLibrary\CustomImageCollectionConfigurator.cs" />
+    <Compile Include="ImageCollection\CustomLibrary\CustomPaintLibrary.cs" />
     <Compile Include="ImageCollection\CustomLibrary\ImageProvider.cs" />
     <Compile Include="ImageCollection\CustomLibrary\UrlBuilder.cs" />
     <Compile Include="ImageCollection\Library\CustomImage.cs" />
     <Compile Include="ImageCollection\Library\ImageLibrary.cs" />
     <Compile Include="SoundMaster\SoundPlayer.cs" />
+    <Compile Include="UI\CustomCollectionNameDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\CustomCollectionNameDialogForm.Designer.cs">
+      <DependentUpon>CustomCollectionNameDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,7 +152,7 @@
     </Compile>
     <Compile Include="Game\Ruler.cs" />
     <Compile Include="Generators\ButtonGenerator.cs" />
-    <Compile Include="Notification\TimedPopUp.cs">
+    <Compile Include="UI\Notification\TimedPopUp.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -149,6 +163,12 @@
     </Compile>
     <Compile Include="UI\NewCollectionDialogForm.Designer.cs">
       <DependentUpon>NewCollectionDialogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\PaintForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\PaintForm.Designer.cs">
+      <DependentUpon>PaintForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SettingsForm.cs">
       <SubType>Form</SubType>
@@ -163,6 +183,12 @@
     <Compile Include="UI\WinnerForm.Designer.cs">
       <DependentUpon>WinnerForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\ConfirmDialogForm.resx">
+      <DependentUpon>ConfirmDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\CustomCollectionNameDialogForm.resx">
+      <DependentUpon>CustomCollectionNameDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,6 +203,9 @@
     </Compile>
     <EmbeddedResource Include="UI\NewCollectionDialogForm.resx">
       <DependentUpon>NewCollectionDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\PaintForm.resx">
+      <DependentUpon>PaintForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

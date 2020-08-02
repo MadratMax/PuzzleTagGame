@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using PuzzleTag.FileManager.Library;
+using PuzzleTag.Notification;
+using PuzzleTag.SoundMaster;
 
 namespace PuzzleTag.FileManager
 {
@@ -64,17 +68,60 @@ namespace PuzzleTag.FileManager
             return name;
         }
 
-        public void SaveImageCollection(string libraryPath, string category, List<CustomImage> imageCollection)
+        public void SaveNewCollection(List<CustomImage> imageCollection, string collectionName, string libPath)
+        {
+            var collectionPath = Path.Combine(libPath, collectionName);
+
+            if (!IsDirectoryExist(collectionPath)) {
+                
+                SaveImageCollection(libPath, collectionName, imageCollection);
+
+                var popUp = new TimedPopUp();
+                popUp.Set("СОХРАНЕНО");
+                SoundPlayer.PlaySaveSound();
+                popUp.Show();
+            }
+        }
+
+        public void DeleteCollection(string collectionName, string libPath)
+        {
+            var collectionPath = Path.Combine(libPath, collectionName);
+
+            if (IsDirectoryExist(collectionPath))
+            {
+                try
+                {
+                    Directory.Delete(collectionPath, true);
+                    var popUp = new TimedPopUp();
+                    popUp.Set($"Удалено");
+                    popUp.Show();
+                }
+                catch (Exception e)
+                {
+                    var popUp = new TimedPopUp();
+                    popUp.Set($"Failed to delete file. {e.Message}");
+                    popUp.ShowError();
+                }
+            }
+        }
+
+        private void SaveImageCollection(string libraryPath, string category, List<CustomImage> imageCollection)
         {
             var newCollectionPath = Path.Combine(libraryPath, category);
+            var idList = new List<int>();
             Directory.CreateDirectory(newCollectionPath);
 
             foreach (var customImage in imageCollection)
             {
-                var imageFile = Path.Combine(newCollectionPath, customImage.Name);
-                
-                customImage.Image.Save(imageFile, ImageFormat.Jpeg);
-                customImage.AllowUpdate = false;
+                if (!idList.Contains(customImage.Id))
+                {
+                    idList.Add(customImage.Id);
+
+                    var imageFile = Path.Combine(newCollectionPath, customImage.Name);
+
+                    customImage.Image.Save(imageFile, ImageFormat.Jpeg);
+                    customImage.AllowUpdate = false;
+                }
             }
         }
     }

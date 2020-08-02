@@ -50,6 +50,9 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.AddCollectionButton = new System.Windows.Forms.Button();
             this.SaveCollectionButton = new System.Windows.Forms.Button();
+            this.CustomPaintButton = new System.Windows.Forms.Button();
+            this.StartGameLabel = new System.Windows.Forms.Label();
+            this.RemoveCollectionButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NewGameButton
@@ -59,7 +62,7 @@
             this.NewGameButton.FlatAppearance.BorderSize = 0;
             this.NewGameButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NewGameButton.Image = ((System.Drawing.Image)(resources.GetObject("NewGameButton.Image")));
-            this.NewGameButton.Location = new System.Drawing.Point(119, 280);
+            this.NewGameButton.Location = new System.Drawing.Point(137, 299);
             this.NewGameButton.Margin = new System.Windows.Forms.Padding(0);
             this.NewGameButton.Name = "NewGameButton";
             this.NewGameButton.Size = new System.Drawing.Size(99, 78);
@@ -74,7 +77,7 @@
             this.ExitButton.FlatAppearance.BorderSize = 0;
             this.ExitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ExitButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ExitButton.Location = new System.Drawing.Point(612, 218);
+            this.ExitButton.Location = new System.Drawing.Point(612, 299);
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(177, 35);
             this.ExitButton.TabIndex = 2;
@@ -89,7 +92,7 @@
             this.ShowCardsButton.FlatAppearance.BorderSize = 0;
             this.ShowCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShowCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShowCardsButton.Location = new System.Drawing.Point(612, 97);
+            this.ShowCardsButton.Location = new System.Drawing.Point(612, 178);
             this.ShowCardsButton.Name = "ShowCardsButton";
             this.ShowCardsButton.Size = new System.Drawing.Size(177, 35);
             this.ShowCardsButton.TabIndex = 3;
@@ -104,7 +107,7 @@
             this.HideCardsButton.FlatAppearance.BorderSize = 0;
             this.HideCardsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.HideCardsButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HideCardsButton.Location = new System.Drawing.Point(612, 138);
+            this.HideCardsButton.Location = new System.Drawing.Point(612, 219);
             this.HideCardsButton.Name = "HideCardsButton";
             this.HideCardsButton.Size = new System.Drawing.Size(177, 35);
             this.HideCardsButton.TabIndex = 4;
@@ -119,7 +122,7 @@
             this.ShuffleCards.FlatAppearance.BorderSize = 0;
             this.ShuffleCards.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ShuffleCards.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ShuffleCards.Location = new System.Drawing.Point(612, 179);
+            this.ShuffleCards.Location = new System.Drawing.Point(612, 260);
             this.ShuffleCards.Name = "ShuffleCards";
             this.ShuffleCards.Size = new System.Drawing.Size(177, 35);
             this.ShuffleCards.TabIndex = 5;
@@ -135,13 +138,12 @@
             this.BackToMainButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BackToMainButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BackToMainButton.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.BackToMainButton.Location = new System.Drawing.Point(612, 392);
+            this.BackToMainButton.Location = new System.Drawing.Point(699, 1);
             this.BackToMainButton.Name = "BackToMainButton";
             this.BackToMainButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.BackToMainButton.Size = new System.Drawing.Size(99, 35);
+            this.BackToMainButton.Size = new System.Drawing.Size(99, 31);
             this.BackToMainButton.TabIndex = 6;
             this.BackToMainButton.Text = "скрыть";
-            this.BackToMainButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.BackToMainButton.UseVisualStyleBackColor = true;
             this.BackToMainButton.Click += new System.EventHandler(this.BackToMainButton_Click);
             this.BackToMainButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
@@ -199,7 +201,7 @@
             this.Player1ComboBox.FormattingEnabled = true;
             this.Player1ComboBox.Location = new System.Drawing.Point(108, 114);
             this.Player1ComboBox.Name = "Player1ComboBox";
-            this.Player1ComboBox.Size = new System.Drawing.Size(121, 32);
+            this.Player1ComboBox.Size = new System.Drawing.Size(177, 32);
             this.Player1ComboBox.TabIndex = 45;
             this.Player1ComboBox.SelectedIndexChanged += new System.EventHandler(this.Player1ComboBox_SelectedIndexChanged);
             this.Player1ComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
@@ -213,7 +215,7 @@
             this.Player2ComboBox.FormattingEnabled = true;
             this.Player2ComboBox.Location = new System.Drawing.Point(108, 159);
             this.Player2ComboBox.Name = "Player2ComboBox";
-            this.Player2ComboBox.Size = new System.Drawing.Size(121, 32);
+            this.Player2ComboBox.Size = new System.Drawing.Size(177, 32);
             this.Player2ComboBox.TabIndex = 46;
             this.Player2ComboBox.SelectedIndexChanged += new System.EventHandler(this.Player2ComboBox_SelectedIndexChanged);
             this.Player2ComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
@@ -227,7 +229,7 @@
             this.Player3ComboBox.FormattingEnabled = true;
             this.Player3ComboBox.Location = new System.Drawing.Point(108, 203);
             this.Player3ComboBox.Name = "Player3ComboBox";
-            this.Player3ComboBox.Size = new System.Drawing.Size(121, 32);
+            this.Player3ComboBox.Size = new System.Drawing.Size(177, 32);
             this.Player3ComboBox.TabIndex = 47;
             this.Player3ComboBox.SelectedIndexChanged += new System.EventHandler(this.Player3ComboBox_SelectedIndexChanged);
             this.Player3ComboBox.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Player3ComboBox_MouseClick);
@@ -236,37 +238,40 @@
             // 
             this.RemovePlayer1Button.FlatAppearance.BorderSize = 0;
             this.RemovePlayer1Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemovePlayer1Button.Location = new System.Drawing.Point(235, 116);
+            this.RemovePlayer1Button.Location = new System.Drawing.Point(301, 116);
             this.RemovePlayer1Button.Name = "RemovePlayer1Button";
             this.RemovePlayer1Button.Size = new System.Drawing.Size(32, 24);
             this.RemovePlayer1Button.TabIndex = 48;
             this.RemovePlayer1Button.Text = "x";
             this.RemovePlayer1Button.UseVisualStyleBackColor = true;
             this.RemovePlayer1Button.Click += new System.EventHandler(this.RemovePlayer1Button_Click);
+            this.RemovePlayer1Button.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // RemovePlayer3Button
             // 
             this.RemovePlayer3Button.FlatAppearance.BorderSize = 0;
             this.RemovePlayer3Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemovePlayer3Button.Location = new System.Drawing.Point(235, 205);
+            this.RemovePlayer3Button.Location = new System.Drawing.Point(301, 205);
             this.RemovePlayer3Button.Name = "RemovePlayer3Button";
             this.RemovePlayer3Button.Size = new System.Drawing.Size(32, 24);
             this.RemovePlayer3Button.TabIndex = 49;
             this.RemovePlayer3Button.Text = "x";
             this.RemovePlayer3Button.UseVisualStyleBackColor = true;
             this.RemovePlayer3Button.Click += new System.EventHandler(this.RemovePlayer3Button_Click);
+            this.RemovePlayer3Button.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // RemovePlayer2Button
             // 
             this.RemovePlayer2Button.FlatAppearance.BorderSize = 0;
             this.RemovePlayer2Button.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RemovePlayer2Button.Location = new System.Drawing.Point(235, 161);
+            this.RemovePlayer2Button.Location = new System.Drawing.Point(301, 161);
             this.RemovePlayer2Button.Name = "RemovePlayer2Button";
             this.RemovePlayer2Button.Size = new System.Drawing.Size(32, 24);
             this.RemovePlayer2Button.TabIndex = 50;
             this.RemovePlayer2Button.Text = "x";
             this.RemovePlayer2Button.UseVisualStyleBackColor = true;
             this.RemovePlayer2Button.Click += new System.EventHandler(this.RemovePlayer2Button_Click);
+            this.RemovePlayer2Button.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // label1
             // 
@@ -287,11 +292,11 @@
             this.AddCollectionButton.FlatAppearance.BorderSize = 0;
             this.AddCollectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.AddCollectionButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AddCollectionButton.Location = new System.Drawing.Point(612, 56);
+            this.AddCollectionButton.Location = new System.Drawing.Point(612, 122);
             this.AddCollectionButton.Name = "AddCollectionButton";
             this.AddCollectionButton.Size = new System.Drawing.Size(177, 35);
             this.AddCollectionButton.TabIndex = 52;
-            this.AddCollectionButton.Text = "Найти картинки";
+            this.AddCollectionButton.Text = "Генерация коллекции";
             this.AddCollectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.AddCollectionButton.UseVisualStyleBackColor = true;
             this.AddCollectionButton.Click += new System.EventHandler(this.AddCollectionButton_Click);
@@ -310,6 +315,45 @@
             this.SaveCollectionButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.SaveCollectionButton.UseVisualStyleBackColor = true;
             this.SaveCollectionButton.Click += new System.EventHandler(this.SaveCollectionButton_Click);
+            this.SaveCollectionButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
+            // 
+            // CustomPaintButton
+            // 
+            this.CustomPaintButton.FlatAppearance.BorderSize = 0;
+            this.CustomPaintButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CustomPaintButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CustomPaintButton.Location = new System.Drawing.Point(612, 81);
+            this.CustomPaintButton.Name = "CustomPaintButton";
+            this.CustomPaintButton.Size = new System.Drawing.Size(177, 35);
+            this.CustomPaintButton.TabIndex = 54;
+            this.CustomPaintButton.Text = "Рисовать";
+            this.CustomPaintButton.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.CustomPaintButton.UseVisualStyleBackColor = true;
+            this.CustomPaintButton.Click += new System.EventHandler(this.CustomPaintButton_Click);
+            this.CustomPaintButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
+            // 
+            // StartGameLabel
+            // 
+            this.StartGameLabel.AutoSize = true;
+            this.StartGameLabel.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StartGameLabel.Location = new System.Drawing.Point(164, 287);
+            this.StartGameLabel.Name = "StartGameLabel";
+            this.StartGameLabel.Size = new System.Drawing.Size(48, 20);
+            this.StartGameLabel.TabIndex = 55;
+            this.StartGameLabel.Text = "Старт";
+            // 
+            // RemoveCollectionButton
+            // 
+            this.RemoveCollectionButton.FlatAppearance.BorderSize = 0;
+            this.RemoveCollectionButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RemoveCollectionButton.Location = new System.Drawing.Point(345, 66);
+            this.RemoveCollectionButton.Name = "RemoveCollectionButton";
+            this.RemoveCollectionButton.Size = new System.Drawing.Size(32, 24);
+            this.RemoveCollectionButton.TabIndex = 56;
+            this.RemoveCollectionButton.Text = "x";
+            this.RemoveCollectionButton.UseVisualStyleBackColor = true;
+            this.RemoveCollectionButton.Click += new System.EventHandler(this.RemoveCollectionButton_Click);
+            this.RemoveCollectionButton.MouseEnter += new System.EventHandler(this.ShowCardsButton_MouseEnter);
             // 
             // SettingsForm
             // 
@@ -318,6 +362,9 @@
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.RemoveCollectionButton);
+            this.Controls.Add(this.StartGameLabel);
+            this.Controls.Add(this.CustomPaintButton);
             this.Controls.Add(this.SaveCollectionButton);
             this.Controls.Add(this.AddCollectionButton);
             this.Controls.Add(this.label1);
@@ -373,5 +420,8 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button AddCollectionButton;
         private System.Windows.Forms.Button SaveCollectionButton;
+        private System.Windows.Forms.Button CustomPaintButton;
+        private System.Windows.Forms.Label StartGameLabel;
+        private System.Windows.Forms.Button RemoveCollectionButton;
     }
 }

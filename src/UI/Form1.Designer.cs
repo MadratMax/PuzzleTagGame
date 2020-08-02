@@ -1351,6 +1351,7 @@
             this.Name = "PuzzleTag";
             this.Text = "PuzzleTag";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PuzzleTag_FormClosed);
             this.Load += new System.EventHandler(this.PuzzleTag_Load);
             this.ResizeEnd += new System.EventHandler(this.PuzzleTag_ResizeEnd);
             this.ResumeLayout(false);

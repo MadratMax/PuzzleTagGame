@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PuzzleTag.SoundMaster;
 
 namespace PuzzleTag.Notification
 {
@@ -27,6 +28,18 @@ namespace PuzzleTag.Notification
 
         async new public void Show(int waitTime = 2000, bool autoHide = true)
         {
+            base.Show();
+
+            if (autoHide)
+            {
+                await Task.Delay(waitTime);
+                this.Hide();
+            }
+        }
+
+        async new public void ShowError(int waitTime = 3000, bool autoHide = true)
+        {
+            SoundPlayer.PlayFailedImageSound();
             base.Show();
 
             if (autoHide)
