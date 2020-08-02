@@ -21,8 +21,8 @@ namespace PuzzleTag.Painter
         private PictureBox pictureBox;
         private int X;
         private int Y;
-        private int width;
-        private int height;
+        private int toolWidth = 2;
+        private int toolHeight = 2;
         private Image image;
 
         public Painter(PictureBox pictureBox)
@@ -35,10 +35,9 @@ namespace PuzzleTag.Painter
                 );
 
             this.brush = new SolidBrush(Color.Black);
+            ChangeBrushSize(new Size(this.toolWidth, this.toolHeight));
 
             this.pictureBox = pictureBox;
-            this.brushSize.Width = 2;
-            this.brushSize.Height = 2;
             InitEmptyPicture();
         }
 
@@ -50,11 +49,15 @@ namespace PuzzleTag.Painter
 
         public void ChangeBrushSize(Size size)
         {
-            this.brushSize = size;
+            this.toolWidth = size.Width;
+            this.toolHeight = size.Height;
+            this.brushSize = new Size(this.toolWidth, this.toolHeight);
         }
 
         public void ChangePenSize(Size size)
         {
+            this.toolWidth = size.Width;
+            this.toolHeight = size.Height;
             this.pen.Width = size.Width;
         }
 
@@ -87,9 +90,20 @@ namespace PuzzleTag.Painter
             pictureBox.Refresh();
         }
 
-        public void Paint(int oldX, int oldY, int startPointX, int startPointY)
+        public void Paint(int oldX, int oldY, int startPointX, int startPointY, bool pointOnly = false)
         {
             graph = Graphics.FromImage(image);
+
+            if (pointOnly)
+            {
+                if (startPointX == oldX && startPointY == oldY)
+                {
+                    //graph.FillEllipse(brush, startPointX - 2, startPointY - 2, toolWidth, toolHeight);
+                    //RefreshPicture();
+                    //return;
+                }
+            }
+
             graph.DrawLine(pen, oldX, oldY, startPointX, startPointY);
 
             RefreshPicture();

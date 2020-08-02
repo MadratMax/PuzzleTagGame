@@ -36,7 +36,6 @@
             this.CloseButton = new System.Windows.Forms.Button();
             this.BrushSizeComboBox = new System.Windows.Forms.ComboBox();
             this.ColorButton = new System.Windows.Forms.Button();
-            this.ToolComboBox = new System.Windows.Forms.ComboBox();
             this.ClearButton = new System.Windows.Forms.Button();
             this.ColorIndicator = new System.Windows.Forms.Button();
             this.BrushSizeLabel = new System.Windows.Forms.Label();
@@ -71,7 +70,7 @@
             // 
             this.LeftButton.FlatAppearance.BorderSize = 0;
             this.LeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LeftButton.Location = new System.Drawing.Point(212, 461);
+            this.LeftButton.Location = new System.Drawing.Point(213, 461);
             this.LeftButton.Name = "LeftButton";
             this.LeftButton.Size = new System.Drawing.Size(33, 23);
             this.LeftButton.TabIndex = 8;
@@ -83,7 +82,7 @@
             // 
             this.RightButton.FlatAppearance.BorderSize = 0;
             this.RightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RightButton.Location = new System.Drawing.Point(298, 461);
+            this.RightButton.Location = new System.Drawing.Point(297, 461);
             this.RightButton.Name = "RightButton";
             this.RightButton.Size = new System.Drawing.Size(33, 23);
             this.RightButton.TabIndex = 9;
@@ -108,7 +107,7 @@
             this.CloseButton.FlatAppearance.BorderSize = 0;
             this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.Location = new System.Drawing.Point(550, 1);
+            this.CloseButton.Location = new System.Drawing.Point(535, 1);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(30, 32);
             this.CloseButton.TabIndex = 11;
@@ -133,8 +132,15 @@
             "10",
             "11",
             "12",
-            "13"});
-            this.BrushSizeComboBox.Location = new System.Drawing.Point(14, 491);
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20"});
+            this.BrushSizeComboBox.Location = new System.Drawing.Point(14, 535);
             this.BrushSizeComboBox.Name = "BrushSizeComboBox";
             this.BrushSizeComboBox.Size = new System.Drawing.Size(121, 24);
             this.BrushSizeComboBox.TabIndex = 12;
@@ -152,27 +158,13 @@
             this.ColorButton.UseVisualStyleBackColor = true;
             this.ColorButton.Click += new System.EventHandler(this.ColorButton_Click);
             // 
-            // ToolComboBox
-            // 
-            this.ToolComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ToolComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ToolComboBox.Items.AddRange(new object[] {
-            "Brush",
-            "Pen",
-            "Lastic"});
-            this.ToolComboBox.Location = new System.Drawing.Point(14, 536);
-            this.ToolComboBox.Name = "ToolComboBox";
-            this.ToolComboBox.Size = new System.Drawing.Size(121, 24);
-            this.ToolComboBox.TabIndex = 14;
-            this.ToolComboBox.SelectedIndexChanged += new System.EventHandler(this.ToolComboBox_SelectedIndexChanged);
-            // 
             // ClearButton
             // 
             this.ClearButton.FlatAppearance.BorderSize = 0;
             this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ClearButton.Location = new System.Drawing.Point(416, 530);
+            this.ClearButton.Location = new System.Drawing.Point(416, 535);
             this.ClearButton.Name = "ClearButton";
-            this.ClearButton.Size = new System.Drawing.Size(99, 34);
+            this.ClearButton.Size = new System.Drawing.Size(99, 29);
             this.ClearButton.TabIndex = 15;
             this.ClearButton.Text = "Очистить";
             this.ClearButton.UseVisualStyleBackColor = true;
@@ -183,9 +175,9 @@
             this.ColorIndicator.BackColor = System.Drawing.Color.Black;
             this.ColorIndicator.FlatAppearance.BorderSize = 0;
             this.ColorIndicator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ColorIndicator.Location = new System.Drawing.Point(212, 535);
+            this.ColorIndicator.Location = new System.Drawing.Point(216, 535);
             this.ColorIndicator.Name = "ColorIndicator";
-            this.ColorIndicator.Size = new System.Drawing.Size(37, 24);
+            this.ColorIndicator.Size = new System.Drawing.Size(24, 24);
             this.ColorIndicator.TabIndex = 16;
             this.ColorIndicator.UseVisualStyleBackColor = false;
             this.ColorIndicator.Click += new System.EventHandler(this.ColorIndicator_Click);
@@ -193,7 +185,7 @@
             // BrushSizeLabel
             // 
             this.BrushSizeLabel.AutoSize = true;
-            this.BrushSizeLabel.Location = new System.Drawing.Point(13, 471);
+            this.BrushSizeLabel.Location = new System.Drawing.Point(13, 515);
             this.BrushSizeLabel.Name = "BrushSizeLabel";
             this.BrushSizeLabel.Size = new System.Drawing.Size(109, 17);
             this.BrushSizeLabel.TabIndex = 17;
@@ -204,12 +196,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(573, 571);
+            this.ClientSize = new System.Drawing.Size(561, 559);
             this.ControlBox = false;
             this.Controls.Add(this.BrushSizeLabel);
             this.Controls.Add(this.ColorIndicator);
             this.Controls.Add(this.ClearButton);
-            this.Controls.Add(this.ToolComboBox);
             this.Controls.Add(this.ColorButton);
             this.Controls.Add(this.BrushSizeComboBox);
             this.Controls.Add(this.CloseButton);
@@ -240,7 +231,6 @@
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.ComboBox BrushSizeComboBox;
         private System.Windows.Forms.Button ColorButton;
-        private System.Windows.Forms.ComboBox ToolComboBox;
         private System.Windows.Forms.Button ClearButton;
         private System.Windows.Forms.Button ColorIndicator;
         private System.Windows.Forms.Label BrushSizeLabel;

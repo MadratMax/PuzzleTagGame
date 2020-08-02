@@ -105,9 +105,12 @@ namespace PuzzleTag.UI
             if (e.Button != MouseButtons.Left)
                 return;
 
+            pointX = e.X;
+            pointY = e.Y;
             oldX = e.X;
             oldY = e.Y;
             this.draw = true;
+            painter.Paint(oldX, oldY, pointX, pointY, pointOnly:true);
         }
 
         private void SaveImage()
@@ -159,6 +162,7 @@ namespace PuzzleTag.UI
         private void InitControls()
         {
             PicNumberTextBox.Text = picNum.ToString();
+            BrushSizeComboBox.SelectedIndex = 0;
         }
 
         private void RightButton_Click(object sender, EventArgs e)
@@ -236,7 +240,8 @@ namespace PuzzleTag.UI
 
         private void BrushSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            painter.ChangePenSize(new Size(BrushSizeComboBox.SelectedIndex+2, 0));
+            painter.ChangePenSize(new Size(BrushSizeComboBox.SelectedIndex+2, BrushSizeComboBox.SelectedIndex + 2));
+            painter.ChangeBrushSize(new Size(BrushSizeComboBox.SelectedIndex + 2, BrushSizeComboBox.SelectedIndex + 2));
         }
 
         private void ColorButton_Click(object sender, EventArgs e)
