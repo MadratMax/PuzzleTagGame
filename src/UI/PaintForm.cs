@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using PuzzleTag.FileManager.Library;
 using PuzzleTag.ImageCollection.CustomLibrary;
 using PuzzleTag.Notification;
+using PuzzleTag.SoundMaster;
 
 namespace PuzzleTag.UI
 {
@@ -13,6 +14,8 @@ namespace PuzzleTag.UI
         private bool draw;
         private int pointX = 0;
         private int pointY = 0;
+        private int oldX;
+        private int oldY;
         private PaintForm paintPanelImage;
         private SettingsForm settingsForm;
         private string newCollectionName;
@@ -21,6 +24,7 @@ namespace PuzzleTag.UI
         private List<CustomImage> imageCollection;
         private CustomPaintLibrary paintLibrary;
         private Painter.Painter painter;
+        private List<Point> points;
         private int picNum = 1;
 
 
@@ -31,6 +35,7 @@ namespace PuzzleTag.UI
             this.newCollectionName = newCollectionName;
             InitializeComponent();
             InitPictureLibrary();
+            points = new List<Point>();
             draw = true;
         }
 
@@ -38,6 +43,7 @@ namespace PuzzleTag.UI
         {
             Invoke((Action)(() => settingsForm.Hide()));
             Invoke((Action)(() => baseForm.Enabled = false));
+            
             this.painter = new Painter.Painter(this.PictureBox);
 
             //TODO remove
@@ -78,7 +84,9 @@ namespace PuzzleTag.UI
         {
             if (draw)
             {
-                painter.Paint(pointX, pointY);
+                painter.Paint(oldX, oldY, pointX, pointY);
+                oldX = pointX;
+                oldY = pointY;
             }
         }
 
@@ -90,6 +98,16 @@ namespace PuzzleTag.UI
                 pointY = e.Y;
                 PaintPanel_Paint(this, null);
             }
+        }
+
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button != MouseButtons.Left)
+                return;
+
+            oldX = e.X;
+            oldY = e.Y;
+            this.draw = true;
         }
 
         private void SaveImage()
@@ -187,12 +205,38 @@ namespace PuzzleTag.UI
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            BackToSettings();
+            SoundPlayer.PlaySettingsSound();
+
+            bool needReset = false;
+
+            var confirm = GetConfirmStatus("Выйти из редактора без сохранения?");
+            needReset = confirm.Yes;
+
+            if (needReset)
+            {
+                BackToSettings();
+            }
+
+            confirm?.Dispose();
+            this.Enabled = true;
+        }
+
+        private ConfirmDialogForm GetConfirmStatus(string confirmMessage)
+        {
+            var confirm = new ConfirmDialogForm(confirmMessage);
+            SoundPlayer.PlaySettingsSound();
+            confirm.StartPosition = FormStartPosition.Manual;
+            confirm.Location = this.Location;
+            confirm.StartPosition = FormStartPosition.CenterParent;
+            confirm.BackgroundImageLayout = ImageLayout.Stretch;
+            this.Enabled = false;
+            confirm.ShowDialog(this);
+            return confirm;
         }
 
         private void BrushSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            painter.ChangePenSize(new Size(BrushSizeComboBox.SelectedIndex+1, 0));
         }
 
         private void ColorButton_Click(object sender, EventArgs e)
@@ -206,6 +250,7 @@ namespace PuzzleTag.UI
             if (answer == DialogResult.OK)
             {
                 painter.ChangeColor(colorDialog.Color);
+                ColorIndicator.BackColor = colorDialog.Color;
             }
 
             this.Enabled = true;
@@ -217,16 +262,24 @@ namespace PuzzleTag.UI
             
         }
 
-        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
-        {
-            this.draw = true;
-            pointX = e.X;
-            pointY = e.Y;
-        }
-
         private void ClearButton_Click(object sender, EventArgs e)
         {
             painter.Clear();
+        }
+
+        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
+        {
+            points.Clear();
+        }
+
+        private void ColorIndicator_Click(object sender, EventArgs e)
+        {
+            ColorButton.PerformClick();
+        }
+
+        private void PaintForm_MouseMove(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

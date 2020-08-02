@@ -38,6 +38,8 @@
             this.ColorButton = new System.Windows.Forms.Button();
             this.ToolComboBox = new System.Windows.Forms.ComboBox();
             this.ClearButton = new System.Windows.Forms.Button();
+            this.ColorIndicator = new System.Windows.Forms.Button();
+            this.BrushSizeLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,17 +51,17 @@
             this.PictureBox.Size = new System.Drawing.Size(511, 443);
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
-            this.PictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintPanel_Paint);
             this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintPanel_MouseMove);
             // 
             // SaveButton
             // 
+            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveButton.FlatAppearance.BorderSize = 0;
             this.SaveButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.SaveButton.Location = new System.Drawing.Point(414, 462);
+            this.SaveButton.Location = new System.Drawing.Point(416, 462);
             this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(105, 55);
+            this.SaveButton.Size = new System.Drawing.Size(105, 53);
             this.SaveButton.TabIndex = 1;
             this.SaveButton.Text = "Сохранить и выйти";
             this.SaveButton.UseVisualStyleBackColor = true;
@@ -69,7 +71,7 @@
             // 
             this.LeftButton.FlatAppearance.BorderSize = 0;
             this.LeftButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.LeftButton.Location = new System.Drawing.Point(212, 462);
+            this.LeftButton.Location = new System.Drawing.Point(212, 461);
             this.LeftButton.Name = "LeftButton";
             this.LeftButton.Size = new System.Drawing.Size(33, 23);
             this.LeftButton.TabIndex = 8;
@@ -81,7 +83,7 @@
             // 
             this.RightButton.FlatAppearance.BorderSize = 0;
             this.RightButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.RightButton.Location = new System.Drawing.Point(299, 462);
+            this.RightButton.Location = new System.Drawing.Point(298, 461);
             this.RightButton.Name = "RightButton";
             this.RightButton.Size = new System.Drawing.Size(33, 23);
             this.RightButton.TabIndex = 9;
@@ -101,11 +103,12 @@
             // 
             // CloseButton
             // 
+            this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.CloseButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.CloseButton.FlatAppearance.BorderSize = 0;
             this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.Location = new System.Drawing.Point(553, 1);
+            this.CloseButton.Location = new System.Drawing.Point(550, 1);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(30, 32);
             this.CloseButton.TabIndex = 11;
@@ -118,8 +121,19 @@
             this.BrushSizeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BrushSizeComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BrushSizeComboBox.Items.AddRange(new object[] {
-            "---",
-            "---"});
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13"});
             this.BrushSizeComboBox.Location = new System.Drawing.Point(14, 491);
             this.BrushSizeComboBox.Name = "BrushSizeComboBox";
             this.BrushSizeComboBox.Size = new System.Drawing.Size(121, 24);
@@ -130,9 +144,9 @@
             // 
             this.ColorButton.FlatAppearance.BorderSize = 0;
             this.ColorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ColorButton.Location = new System.Drawing.Point(157, 532);
+            this.ColorButton.Location = new System.Drawing.Point(139, 529);
             this.ColorButton.Name = "ColorButton";
-            this.ColorButton.Size = new System.Drawing.Size(99, 34);
+            this.ColorButton.Size = new System.Drawing.Size(110, 34);
             this.ColorButton.TabIndex = 13;
             this.ColorButton.Text = "Цвет";
             this.ColorButton.UseVisualStyleBackColor = true;
@@ -156,7 +170,7 @@
             // 
             this.ClearButton.FlatAppearance.BorderSize = 0;
             this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ClearButton.Location = new System.Drawing.Point(262, 530);
+            this.ClearButton.Location = new System.Drawing.Point(416, 530);
             this.ClearButton.Name = "ClearButton";
             this.ClearButton.Size = new System.Drawing.Size(99, 34);
             this.ClearButton.TabIndex = 15;
@@ -164,13 +178,36 @@
             this.ClearButton.UseVisualStyleBackColor = true;
             this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
             // 
+            // ColorIndicator
+            // 
+            this.ColorIndicator.BackColor = System.Drawing.Color.Black;
+            this.ColorIndicator.FlatAppearance.BorderSize = 0;
+            this.ColorIndicator.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ColorIndicator.Location = new System.Drawing.Point(212, 535);
+            this.ColorIndicator.Name = "ColorIndicator";
+            this.ColorIndicator.Size = new System.Drawing.Size(37, 24);
+            this.ColorIndicator.TabIndex = 16;
+            this.ColorIndicator.UseVisualStyleBackColor = false;
+            this.ColorIndicator.Click += new System.EventHandler(this.ColorIndicator_Click);
+            // 
+            // BrushSizeLabel
+            // 
+            this.BrushSizeLabel.AutoSize = true;
+            this.BrushSizeLabel.Location = new System.Drawing.Point(13, 471);
+            this.BrushSizeLabel.Name = "BrushSizeLabel";
+            this.BrushSizeLabel.Size = new System.Drawing.Size(109, 17);
+            this.BrushSizeLabel.TabIndex = 17;
+            this.BrushSizeLabel.Text = "Толщина кисти";
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(585, 566);
+            this.ClientSize = new System.Drawing.Size(573, 571);
             this.ControlBox = false;
+            this.Controls.Add(this.BrushSizeLabel);
+            this.Controls.Add(this.ColorIndicator);
             this.Controls.Add(this.ClearButton);
             this.Controls.Add(this.ToolComboBox);
             this.Controls.Add(this.ColorButton);
@@ -186,6 +223,7 @@
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Load += new System.EventHandler(this.PaintForm_Load);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintForm_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -204,5 +242,7 @@
         private System.Windows.Forms.Button ColorButton;
         private System.Windows.Forms.ComboBox ToolComboBox;
         private System.Windows.Forms.Button ClearButton;
+        private System.Windows.Forms.Button ColorIndicator;
+        private System.Windows.Forms.Label BrushSizeLabel;
     }
 }

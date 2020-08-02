@@ -5,6 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
+using Color = System.Drawing.Color;
+using Pen = System.Drawing.Pen;
 
 namespace PuzzleTag.Painter
 {
@@ -25,6 +28,12 @@ namespace PuzzleTag.Painter
         public Painter(PictureBox pictureBox)
         {
             this.pen = new Pen(Color.Black);
+            this.pen.SetLineCap(
+                System.Drawing.Drawing2D.LineCap.Round, 
+                System.Drawing.Drawing2D.LineCap.Round,
+                System.Drawing.Drawing2D.DashCap.Round
+                );
+
             this.brush = new SolidBrush(Color.Black);
 
             this.pictureBox = pictureBox;
@@ -42,6 +51,11 @@ namespace PuzzleTag.Painter
         public void ChangeBrushSize(Size size)
         {
             this.brushSize = size;
+        }
+
+        public void ChangePenSize(Size size)
+        {
+            this.pen.Width = size.Width;
         }
 
         public void ChangeTool(ITool tool)
@@ -73,12 +87,10 @@ namespace PuzzleTag.Painter
             pictureBox.Refresh();
         }
 
-        public void Paint(int startPointX, int startPointY)
+        public void Paint(int oldX, int oldY, int startPointX, int startPointY)
         {
             graph = Graphics.FromImage(image);
-            //graph.DrawEllipse(pen, startPointX, startPointY, brushSize.Width, brushSize.Height);
-
-            graph.FillRectangle(brush, new Rectangle(startPointX, startPointY, brushSize.Width, brushSize.Height));
+            graph.DrawLine(pen, oldX, oldY, startPointX, startPointY);
 
             RefreshPicture();
         }
@@ -93,6 +105,7 @@ namespace PuzzleTag.Painter
         {
             pictureBox.DrawToBitmap((Bitmap)image, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
             image = pictureBox.Image;
+            image = new Bitmap(image, new Size(180, 190));
         }
     }
 }
