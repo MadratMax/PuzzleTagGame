@@ -35,6 +35,9 @@
             this.PicNumberTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.BrushSizeComboBox = new System.Windows.Forms.ComboBox();
+            this.ColorButton = new System.Windows.Forms.Button();
+            this.ToolComboBox = new System.Windows.Forms.ComboBox();
+            this.ClearButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,6 +50,7 @@
             this.PictureBox.TabIndex = 0;
             this.PictureBox.TabStop = false;
             this.PictureBox.Paint += new System.Windows.Forms.PaintEventHandler(this.PaintPanel_Paint);
+            this.PictureBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseDown);
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PaintPanel_MouseMove);
             // 
             // SaveButton
@@ -101,7 +105,7 @@
             this.CloseButton.FlatAppearance.BorderSize = 0;
             this.CloseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseButton.Font = new System.Drawing.Font("Comic Sans MS", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CloseButton.Location = new System.Drawing.Point(572, 12);
+            this.CloseButton.Location = new System.Drawing.Point(553, 1);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(30, 32);
             this.CloseButton.TabIndex = 11;
@@ -122,13 +126,54 @@
             this.BrushSizeComboBox.TabIndex = 12;
             this.BrushSizeComboBox.SelectedIndexChanged += new System.EventHandler(this.BrushSizeComboBox_SelectedIndexChanged);
             // 
+            // ColorButton
+            // 
+            this.ColorButton.FlatAppearance.BorderSize = 0;
+            this.ColorButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ColorButton.Location = new System.Drawing.Point(157, 532);
+            this.ColorButton.Name = "ColorButton";
+            this.ColorButton.Size = new System.Drawing.Size(99, 34);
+            this.ColorButton.TabIndex = 13;
+            this.ColorButton.Text = "Цвет";
+            this.ColorButton.UseVisualStyleBackColor = true;
+            this.ColorButton.Click += new System.EventHandler(this.ColorButton_Click);
+            // 
+            // ToolComboBox
+            // 
+            this.ToolComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ToolComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ToolComboBox.Items.AddRange(new object[] {
+            "Brush",
+            "Pen",
+            "Lastic"});
+            this.ToolComboBox.Location = new System.Drawing.Point(14, 536);
+            this.ToolComboBox.Name = "ToolComboBox";
+            this.ToolComboBox.Size = new System.Drawing.Size(121, 24);
+            this.ToolComboBox.TabIndex = 14;
+            this.ToolComboBox.SelectedIndexChanged += new System.EventHandler(this.ToolComboBox_SelectedIndexChanged);
+            // 
+            // ClearButton
+            // 
+            this.ClearButton.FlatAppearance.BorderSize = 0;
+            this.ClearButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ClearButton.Location = new System.Drawing.Point(262, 530);
+            this.ClearButton.Name = "ClearButton";
+            this.ClearButton.Size = new System.Drawing.Size(99, 34);
+            this.ClearButton.TabIndex = 15;
+            this.ClearButton.Text = "Очистить";
+            this.ClearButton.UseVisualStyleBackColor = true;
+            this.ClearButton.Click += new System.EventHandler(this.ClearButton_Click);
+            // 
             // PaintForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(605, 586);
+            this.ClientSize = new System.Drawing.Size(585, 566);
             this.ControlBox = false;
+            this.Controls.Add(this.ClearButton);
+            this.Controls.Add(this.ToolComboBox);
+            this.Controls.Add(this.ColorButton);
             this.Controls.Add(this.BrushSizeComboBox);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.PicNumberTextBox);
@@ -156,5 +201,8 @@
         private System.Windows.Forms.TextBox PicNumberTextBox;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.ComboBox BrushSizeComboBox;
+        private System.Windows.Forms.Button ColorButton;
+        private System.Windows.Forms.ComboBox ToolComboBox;
+        private System.Windows.Forms.Button ClearButton;
     }
 }

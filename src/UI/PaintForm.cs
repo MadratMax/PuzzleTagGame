@@ -10,6 +10,7 @@ namespace PuzzleTag.UI
 {
     partial class PaintForm : Form
     {
+        private bool draw;
         private int pointX = 0;
         private int pointY = 0;
         private PaintForm paintPanelImage;
@@ -18,8 +19,7 @@ namespace PuzzleTag.UI
         private PuzzleTag baseForm;
         private Graphics graph;
         private List<CustomImage> imageCollection;
-        private Bitmap picture;
-        private CustomPaintLibrary pictureLib;
+        private CustomPaintLibrary paintLibrary;
         private Painter.Painter painter;
         private int picNum = 1;
 
@@ -31,11 +31,42 @@ namespace PuzzleTag.UI
             this.newCollectionName = newCollectionName;
             InitializeComponent();
             InitPictureLibrary();
+            draw = true;
+        }
+
+        private void PaintForm_Load(object sender, EventArgs e)
+        {
+            Invoke((Action)(() => settingsForm.Hide()));
+            Invoke((Action)(() => baseForm.Enabled = false));
+            this.painter = new Painter.Painter(this.PictureBox);
+
+            //TODO remove
+            this.painter.ChangeBrushSize(new Size(10, 10));
+
+            SetupKeyDownEvents(this);
+            InitControls();
+            InitEmptyPictureBox();
+        }
+
+        private void SetupKeyDownEvents(PaintForm paintForm)
+        {
+            foreach (Control control in paintForm.Controls)
+            {
+                control.MouseDown += PaintFormControlsCollection_KeyDown;
+            }
+        }
+
+        private void PaintFormControlsCollection_KeyDown(object sender, MouseEventArgs e)
+        {
+            if (sender != PictureBox)
+            {
+                this.draw = false;
+            }
         }
 
         private void InitPictureLibrary()
         {
-            this.pictureLib = new CustomPaintLibrary();
+            this.paintLibrary = new CustomPaintLibrary();
         }
 
         public List<CustomImage> GetCollection()
@@ -45,8 +76,10 @@ namespace PuzzleTag.UI
 
         private void PaintPanel_Paint(object sender, PaintEventArgs e)
         {
-            painter.Paint(pointY, pointY);
-            painter.RefreshPicture();
+            if (draw)
+            {
+                painter.Paint(pointX, pointY);
+            }
         }
 
         private void PaintPanel_MouseMove(object sender, MouseEventArgs e)
@@ -59,23 +92,23 @@ namespace PuzzleTag.UI
             }
         }
 
-        private void SavePicture()
+        private void SaveImage()
         {
-            painter.RefreshPicture();
             painter.CreateImage(PictureBox);
 
-            var pictureName = PicNumberTextBox.Text;
+            var image = painter.Image();
+            var imageName = PicNumberTextBox.Text;
 
             var newPicture =
                 new CustomImage
                 {
-                    Name = $"{pictureName}.jpeg",
-                    Id = picture.GetHashCode(),
+                    Name = $"{imageName}.jpeg",
+                    Id = image.GetHashCode(),
                     Category = newCollectionName,
-                    Image = PictureBox.Image
+                    Image = image
                 };
             
-            pictureLib.AddPicture(newPicture, picNum);
+            paintLibrary.AddPicture(newPicture, picNum);
         }
 
         private void BackToSettings()
@@ -88,9 +121,9 @@ namespace PuzzleTag.UI
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            SavePicture();
+            SaveImage();
 
-            var collection = pictureLib.GetCollection();
+            var collection = paintLibrary.GetCollection();
 
             if (collection.Count == 32)
             {
@@ -105,30 +138,6 @@ namespace PuzzleTag.UI
             }
         }
 
-        private void PaintForm_Load(object sender, EventArgs e)
-        {
-            Invoke((Action)(() => settingsForm.Hide()));
-            Invoke((Action)(() => baseForm.Enabled = false));
-            this.painter = new Painter.Painter(this.PictureBox);
-            InitControls();
-            InitEmptyPictureBox();
-        }
-
-        private void InitEmptyPictureBox(Image initialImage = null)
-        {
-            if (initialImage == null)
-            {
-                picture = painter.InitEmptyPicture();
-            }
-            else
-            {
-                picture = (Bitmap)initialImage;
-            }
-
-            PictureBox.Image = picture;
-            Refresh();
-        }
-
         private void InitControls()
         {
             PicNumberTextBox.Text = picNum.ToString();
@@ -138,12 +147,12 @@ namespace PuzzleTag.UI
         {
             if (picNum != 16)
             {
-                SavePicture();
+                SaveImage();
 
                 picNum++;
                 PicNumberTextBox.Text = picNum.ToString();
 
-                var nextPicture = pictureLib.GetImageByNumber(picNum);
+                var nextPicture = paintLibrary.GetImageByNumber(picNum);
 
                 InitEmptyPictureBox(nextPicture?.Image);
             }
@@ -153,14 +162,26 @@ namespace PuzzleTag.UI
         {
             if (picNum != 1)
             {
-                SavePicture();
+                SaveImage();
 
                 picNum--;
                 PicNumberTextBox.Text = picNum.ToString();
 
-                var nextPicture = pictureLib.GetImageByNumber(picNum);
+                var nextPicture = paintLibrary.GetImageByNumber(picNum);
 
                 InitEmptyPictureBox(nextPicture?.Image);
+            }
+        }
+
+        private void InitEmptyPictureBox(Image initialImage = null)
+        {
+            if (initialImage == null)
+            {
+                painter.InitEmptyPicture();
+            }
+            else
+            {
+                painter.SetImage(initialImage);
             }
         }
 
@@ -172,6 +193,40 @@ namespace PuzzleTag.UI
         private void BrushSizeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void ColorButton_Click(object sender, EventArgs e)
+        {
+            var colorDialog = new ColorDialog();
+
+            this.Enabled = false;
+            this.SendToBack();
+            var answer = colorDialog.ShowDialog();
+
+            if (answer == DialogResult.OK)
+            {
+                painter.ChangeColor(colorDialog.Color);
+            }
+
+            this.Enabled = true;
+            this.BringToFront();
+        }
+
+        private void ToolComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PictureBox_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.draw = true;
+            pointX = e.X;
+            pointY = e.Y;
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            painter.Clear();
         }
     }
 }

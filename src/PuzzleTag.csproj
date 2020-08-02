@@ -105,6 +105,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Painter\Brush.cs" />
+    <Compile Include="Painter\BrushForm.cs" />
+    <Compile Include="Painter\ITool.cs" />
     <Compile Include="Painter\Painter.cs" />
     <Compile Include="UI\ConfirmDialogForm.cs">
       <SubType>Form</SubType>

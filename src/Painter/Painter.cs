@@ -11,27 +11,32 @@ namespace PuzzleTag.Painter
     class Painter
     {
         private Size brushSize;
-        private Pen color;
+        private SolidBrush brush;
+        private Pen pen;
+        private ITool tool;
         private Graphics graph;
         private PictureBox pictureBox;
         private int X;
         private int Y;
         private int width;
         private int height;
-        Bitmap picture;
         private Image image;
 
         public Painter(PictureBox pictureBox)
         {
+            this.pen = new Pen(Color.Black);
+            this.brush = new SolidBrush(Color.Black);
+
             this.pictureBox = pictureBox;
             this.brushSize.Width = 2;
             this.brushSize.Height = 2;
             InitEmptyPicture();
         }
 
-        public void ChangeColor(Pen color)
+        public void ChangeColor(Color color)
         {
-            this.color = color;
+            this.pen.Color = color;
+            this.brush.Color = color;
         }
 
         public void ChangeBrushSize(Size size)
@@ -39,16 +44,28 @@ namespace PuzzleTag.Painter
             this.brushSize = size;
         }
 
+        public void ChangeTool(ITool tool)
+        {
+            this.tool = tool;
+        }
+
         public Image Image()
         {
             return image;
         }
 
-        public Bitmap InitEmptyPicture()
+        public Image InitEmptyPicture()
         {
-            picture = new Bitmap(width, height);
+            image = new Bitmap(pictureBox.Width, pictureBox.Height);
+            SetImage(image);
+            return image;
+        }
 
-            return picture;
+        public void SetImage(Image image)
+        {
+            this.image = image;
+            pictureBox.Image = image;
+            RefreshPicture();
         }
 
         public void RefreshPicture()
@@ -59,14 +76,22 @@ namespace PuzzleTag.Painter
         public void Paint(int startPointX, int startPointY)
         {
             graph = Graphics.FromImage(image);
-            graph.DrawEllipse(color, startPointX, startPointY, brushSize.Width, brushSize.Height);
+            //graph.DrawEllipse(pen, startPointX, startPointY, brushSize.Width, brushSize.Height);
 
-            pictureBox.Refresh();
+            graph.FillRectangle(brush, new Rectangle(startPointX, startPointY, brushSize.Width, brushSize.Height));
+
+            RefreshPicture();
+        }
+
+        public void Clear()
+        {
+            image = InitEmptyPicture();
+            RefreshPicture();
         }
 
         public void CreateImage(PictureBox pictureBox)
         {
-            pictureBox.DrawToBitmap(picture, new Rectangle(0, 0, width, height));
+            pictureBox.DrawToBitmap((Bitmap)image, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
             image = pictureBox.Image;
         }
     }
