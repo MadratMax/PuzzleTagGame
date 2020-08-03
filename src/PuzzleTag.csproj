@@ -105,6 +105,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppSettingsValidator.cs" />
     <Compile Include="Painter\Brush.cs" />
     <Compile Include="Painter\BrushForm.cs" />
     <Compile Include="Painter\ITool.cs" />

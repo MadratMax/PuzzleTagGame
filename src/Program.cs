@@ -13,6 +13,7 @@ namespace PuzzleTag
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            AppSettingsValidator.CheckSettingsAndContinue();
             Application.Run(new PuzzleTag());
         }
     }

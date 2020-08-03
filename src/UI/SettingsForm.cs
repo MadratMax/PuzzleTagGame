@@ -641,7 +641,6 @@ namespace PuzzleTag
                 var categories = libManager.GetCategories();
                 this.Invoke((Action)(() => CategoryComboBox.DataSource = categories.ToList()));
                 this.Invoke((Action)(() => CategoryComboBox.Refresh()));
-                this.Invoke((Action)(() => CategoryComboBox.SelectedIndex = 0));
                 fileManager.DeleteCollection(collectionName, libManager.LibraryPath);
             }
 

@@ -112,9 +112,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label ConfirmTextLabel;
+        public System.Windows.Forms.Label ConfirmTextLabel;
         private System.Windows.Forms.Button BackGroundButton;
-        private System.Windows.Forms.Button NoButton;
-        private System.Windows.Forms.Button YesButton;
+        public System.Windows.Forms.Button NoButton;
+        public System.Windows.Forms.Button YesButton;
     }
 }

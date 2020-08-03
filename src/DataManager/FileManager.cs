@@ -4,6 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Forms;
 using PuzzleTag.FileManager.Library;
 using PuzzleTag.Notification;
 using PuzzleTag.SoundMaster;
@@ -30,7 +31,21 @@ namespace PuzzleTag.FileManager
 
         public List<string> GetSubDirectories(string dir)
         {
-            var subDirectories = Directory.GetDirectories(dir, "*.*", SearchOption.TopDirectoryOnly).ToList();
+            List<string> subDirectories;
+
+            try
+            {
+                subDirectories = Directory.GetDirectories(dir, "*.*", SearchOption.TopDirectoryOnly).ToList();
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                var popUp = new TimedPopUp();
+                popUp.Set("Images directory not found. Creating a new one...");
+                popUp.Show();
+                Directory.CreateDirectory(dir);
+                subDirectories = Directory.GetDirectories(dir, "*.*", SearchOption.TopDirectoryOnly).ToList();
+            }
+            
             
             return subDirectories;
         }
@@ -56,7 +71,19 @@ namespace PuzzleTag.FileManager
 
         public List<string> GetFiles(string dir)
         {
-            var files = Directory.GetFiles(dir).ToList();
+            List<string> files = null;
+
+            try
+            {
+                files = Directory.GetFiles(dir).ToList();
+            }
+            catch (DirectoryNotFoundException e)
+            {
+                var popUp = new TimedPopUp();
+                popUp.ShowCriticalError($"Cannot find directory: " +
+                                        $"\n{dir}" +
+                                        $"\nCreate the directory and restart app");
+            }
             
             return files;
         }
