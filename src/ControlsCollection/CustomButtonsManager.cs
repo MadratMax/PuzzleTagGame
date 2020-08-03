@@ -111,7 +111,7 @@ namespace PuzzleTag.Collection
         {
             foreach (var customButton in GetAllButtons())
             {
-                customButton.Image.Dispose();
+                customButton.Image?.Dispose();
             }
 
             buttonsCollection = null;

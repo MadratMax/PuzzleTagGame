@@ -27,7 +27,6 @@ namespace PuzzleTag.UI
         private List<Point> points;
         private int picNum = 1;
 
-
         public PaintForm(SettingsForm settingsForm, PuzzleTag baseForm, string newCollectionName)
         {
             this.settingsForm = settingsForm;
@@ -45,9 +44,7 @@ namespace PuzzleTag.UI
             Invoke((Action)(() => baseForm.Enabled = false));
             
             this.painter = new Painter.Painter(this.PictureBox);
-
-            //TODO remove
-            this.painter.ChangeBrushSize(new Size(10, 10));
+            this.painter.SaveLastImage();
 
             SetupKeyDownEvents(this);
             InitControls();
@@ -58,11 +55,24 @@ namespace PuzzleTag.UI
         {
             foreach (Control control in paintForm.Controls)
             {
-                control.MouseDown += PaintFormControlsCollection_KeyDown;
+                control.MouseDown += PaintFormControlsCollection_MouseDown;
+                control.KeyDown += PaintFormControlsCollection_KeyDown;
             }
         }
 
-        private void PaintFormControlsCollection_KeyDown(object sender, MouseEventArgs e)
+        private void PaintFormControlsCollection_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Left)
+            {
+                LeftButton.PerformClick();
+            }
+            if (e.KeyCode == Keys.Right)
+            {
+                RightButton.PerformClick();
+            }
+        }
+
+        private void PaintFormControlsCollection_MouseDown(object sender, MouseEventArgs e)
         {
             if (sender != PictureBox)
             {
@@ -115,7 +125,7 @@ namespace PuzzleTag.UI
 
         private void SaveImage()
         {
-            painter.CreateImage(PictureBox);
+            painter.CreateImage(PictureBox, painter.Image());
 
             var image = painter.Image();
             var imageName = PicNumberTextBox.Text;
@@ -176,6 +186,7 @@ namespace PuzzleTag.UI
             {
                 SaveImage();
 
+                painter.ResetHistory();
                 picNum++;
                 PicNumberTextBox.Text = picNum.ToString();
 
@@ -190,7 +201,7 @@ namespace PuzzleTag.UI
             if (picNum != 1)
             {
                 SaveImage();
-
+                painter.ResetHistory();
                 picNum--;
                 PicNumberTextBox.Text = picNum.ToString();
 
@@ -277,11 +288,6 @@ namespace PuzzleTag.UI
             painter.Clear();
         }
 
-        private void PictureBox_MouseUp(object sender, MouseEventArgs e)
-        {
-            points.Clear();
-        }
-
         private void ColorIndicator_Click(object sender, EventArgs e)
         {
             ColorButton.PerformClick();
@@ -290,6 +296,27 @@ namespace PuzzleTag.UI
         private void PaintForm_MouseMove(object sender, MouseEventArgs e)
         {
 
+        }
+
+        private void UndoButton_Click(object sender, EventArgs e)
+        {
+            painter.RestoreLastSavedImage();
+        }
+
+        private void PictureBox_MouseUp_1(object sender, MouseEventArgs e)
+        {
+            painter.SaveLastImage();
+        }
+
+        private void SaveLastButton_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            painter.ChangeColor(Color.White);
+            ColorIndicator.BackColor = Color.White;
         }
     }
 }

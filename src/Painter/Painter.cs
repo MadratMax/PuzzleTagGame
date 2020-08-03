@@ -24,9 +24,12 @@ namespace PuzzleTag.Painter
         private int toolWidth = 2;
         private int toolHeight = 2;
         private Image image;
+        private List<Image> history;
 
         public Painter(PictureBox pictureBox)
         {
+            this.history = new List<Image>();
+
             this.pen = new Pen(Color.Black);
             this.pen.SetLineCap(
                 System.Drawing.Drawing2D.LineCap.Round, 
@@ -71,6 +74,33 @@ namespace PuzzleTag.Painter
             return image;
         }
 
+        public void RestoreLastSavedImage()
+        {
+            if (history.Count >= 2)
+            {
+                var last = history[history.Count - 2];
+                var lastIndex = history.IndexOf(last);
+                SetImage(last);
+                history.RemoveAt(history.Count - 1);
+            }
+            else
+            {
+                InitEmptyPicture();
+            }
+        }
+
+        public void SaveLastImage()
+        {
+           var last = new Bitmap(image);
+           history.Add(last);
+        }
+
+        public void ResetHistory()
+        {
+            this.history.Clear();
+            this.history.Add(image);
+        }
+
         public Image InitEmptyPicture()
         {
             image = new Bitmap(pictureBox.Width, pictureBox.Height);
@@ -78,10 +108,10 @@ namespace PuzzleTag.Painter
             return image;
         }
 
-        public void SetImage(Image image)
+        public void SetImage(Image newImage)
         {
-            this.image = image;
-            pictureBox.Image = image;
+            this.image = newImage;
+            pictureBox.Image = this.image;
             RefreshPicture();
         }
 
@@ -115,9 +145,9 @@ namespace PuzzleTag.Painter
             RefreshPicture();
         }
 
-        public void CreateImage(PictureBox pictureBox)
+        public void CreateImage(PictureBox pictureBox, Image newImage)
         {
-            pictureBox.DrawToBitmap((Bitmap)image, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
+            pictureBox.DrawToBitmap((Bitmap)newImage, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
             image = pictureBox.Image;
         }
     }
