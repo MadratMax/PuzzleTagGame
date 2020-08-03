@@ -31,8 +31,6 @@ namespace PuzzleTag.Game
             foreach (var player in playersInGameList)
             {
                  totalScoreList.Add($"{player.Name} : {player.DiscoveredCards}");
-                 prizeList.Add(Image.FromFile(@"C:\Users\mgaydideev\Downloads\prize-icon.png"));
-                 prizeList.Add(Image.FromFile(@"C:\Users\mgaydideev\Downloads\prize-icon.png"));
             }
         }
 
