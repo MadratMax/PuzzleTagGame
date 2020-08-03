@@ -119,7 +119,6 @@ namespace PuzzleTag.Painter
         {
             pictureBox.DrawToBitmap((Bitmap)image, new Rectangle(0, 0, pictureBox.Width, pictureBox.Height));
             image = pictureBox.Image;
-            image = new Bitmap(image, new Size(180, 190));
         }
     }
 }

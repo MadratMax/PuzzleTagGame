@@ -148,6 +148,11 @@ namespace PuzzleTag.UI
 
             if (collection.Count == 32)
             {
+                foreach (var customImage in collection)
+                {
+                    customImage.Image = new Bitmap(customImage.Image, new Size(170, 180));
+                }
+
                 imageCollection = collection;
                 BackToSettings();
             }
