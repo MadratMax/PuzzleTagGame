@@ -575,7 +575,7 @@ namespace PuzzleTag
 
                 if (libManager.GetCategories().Contains(newCollectionName))
                 {
-                    baseForm.ShowStatusMessage("Коллекция с таким названием уже существует", error:true, true);
+                    baseForm.ShowStatusMessage($"Коллекция {newCollectionName} уже существует", error:true, true);
                     return;
                 }
 
@@ -585,7 +585,7 @@ namespace PuzzleTag
                     if (fileManager.IsDirectoryExist(collectionPath))
                     {
                         var popUpMessage = new TimedPopUp();
-                        popUpMessage.Set("Коллекция с таким именем уже существует");
+                        popUpMessage.Set($"Коллекция {newCollectionName} уже существует");
                         popUpMessage.ShowError(3000);
                         this.Invoke((Action)(() => this.Enabled = true));
                         return;
