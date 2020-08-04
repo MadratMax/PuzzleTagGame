@@ -110,6 +110,10 @@
     <Compile Include="Painter\BrushForm.cs" />
     <Compile Include="Painter\ITool.cs" />
     <Compile Include="Painter\Painter.cs" />
+    <Compile Include="Game\GameQueue\Node.cs" />
+    <Compile Include="Game\GameQueue\Nodes.cs" />
+    <Compile Include="Game\GameQueue\Queue.cs" />
+    <Compile Include="Game\GameQueue\QueueType.cs" />
     <Compile Include="UI\ConfirmDialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,7 +134,6 @@
     <Compile Include="Controls\IControl.cs" />
     <Compile Include="DataManager\FileManager.cs" />
     <Compile Include="DataManager\ImageLibraryManager.cs" />
-    <Compile Include="Game\MoveQueue.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\Players.cs" />
     <Compile Include="Game\TotalScore.cs" />

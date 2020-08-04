@@ -38,6 +38,7 @@ namespace PuzzleTag
         private Player player1;
         private Player player2;
         private Player player3;
+        private Queue<Player> queue;
 
         public SettingsForm(
             Ruler ruler, 
@@ -55,6 +56,7 @@ namespace PuzzleTag
             this.buttonManager = buttonManager;
             this.libManager = libManager;
             this.baseForm = baseForm;
+            this.queue = new Queue<Player>(QueueType.CircleFIFO);
             InitializeComponent();
             InitSettings();
         }
@@ -94,13 +96,13 @@ namespace PuzzleTag
             {
                 SoundPlayer.PlayStartGameSound();
                 AddPlayersToGame();
-                var moveQueue = new MoveQueue(players);
+
                 var totalScore = new TotalScore(players);
                 this.scoreStorage = new PlayersScoreStorage();
                 Shuffle();
                 InitPlayerScores();
                 InitAvatars();
-                ruler.StartGame(moveQueue, totalScore, scoreStorage);
+                ruler.StartGame(queue, totalScore, scoreStorage);
                 BlockSettings();
                 BackToMain();
 
@@ -231,6 +233,12 @@ namespace PuzzleTag
             players.AddPlayerToGame(player1, 1);
             players.AddPlayerToGame(player2, 2);
             players.AddPlayerToGame(player3, 3);
+
+            queue = null;
+            queue = new Queue<Player>(QueueType.CircleFIFO);
+            queue.Add(player1);
+            queue.Add(player2);
+            queue.Add(player3);
         }
 
         private void RemovePlayersFromGame()
