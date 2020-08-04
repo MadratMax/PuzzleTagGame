@@ -21,8 +21,6 @@ namespace PuzzleTag.Configuration
 
         public static Player Player3;
 
-        public static MoveQueue MoveQueue;
-
         public static Player CurrentPlayer;
     }
 }

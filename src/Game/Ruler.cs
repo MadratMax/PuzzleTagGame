@@ -19,7 +19,7 @@ namespace PuzzleTag.Game
         private CustomButtonsManager buttonManager;
         private ImageLibraryManager libManager;
         private ButtonsCollection buttonsCollection;
-        private MoveQueue moveQueue;
+        private Queue<Player> moveQueue;
         private TotalScore totalScore;
         private PlayersScoreStorage scoreStorage;
         private Player currentPlayer;
@@ -43,12 +43,12 @@ namespace PuzzleTag.Game
 
         public bool IsGameStarted;
 
-        public void StartGame(MoveQueue moveQueue, TotalScore totalScore, PlayersScoreStorage scoreStorage)
+        public void StartGame(Queue<Player> moveQueue, TotalScore totalScore, PlayersScoreStorage scoreStorage)
         {
             IsGameStarted = true;
             this.scoreStorage = scoreStorage;
             this.moveQueue = moveQueue;
-            this.currentPlayer = this.moveQueue.NextPlayer();
+            this.currentPlayer = this.moveQueue.Next().Node.Data;
             this.totalScore?.ResetScore();
             this.totalScore = totalScore;
             GameFinished = false;
@@ -140,7 +140,7 @@ namespace PuzzleTag.Game
         {
             WaitNextMove = true;
             var prev = currentPlayer;
-            currentPlayer = this.moveQueue.NextPlayer();
+            currentPlayer = (Player)this.moveQueue.Next().Node.Data;
             
             await Task.Delay(openCardDelay);
 
