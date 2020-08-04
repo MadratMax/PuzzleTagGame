@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
@@ -209,6 +210,14 @@ namespace PuzzleTag
             if (e.KeyCode == Keys.Escape)
             {
                 SettingsButton.PerformClick();
+            }
+
+            if (e.KeyCode == Keys.Left)
+            {
+                foreach (Control control in this.Controls)
+                {
+                    control.Location = new Point(control.Location.X-1, control.Location.Y-1);
+                }
             }
         }
 
